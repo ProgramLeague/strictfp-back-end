@@ -1,6 +1,5 @@
 package db;
 
-import db.obj.Blog;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,11 +15,11 @@ public interface DatabaseAdapterInterface {
 	@NotNull
 	DatabaseAdapterInterface getInstance();
 
-	boolean insert(@NotNull Blog input);
+	boolean insert(@NotNull String input);
 
-	boolean update(@NotNull Blog input);
+	boolean update(@NotNull String input);
 
-	boolean delete(@NotNull Blog input);
+	boolean delete(@NotNull String input);
 
 	@NotNull
 	List<Object> select(@NotNull @NonNls String sql);

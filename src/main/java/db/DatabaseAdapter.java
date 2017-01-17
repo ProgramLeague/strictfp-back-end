@@ -1,6 +1,5 @@
 package db;
 
-import db.obj.Blog;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +18,7 @@ public class DatabaseAdapter implements DatabaseAdapterInterface {
 	private DatabaseAdapter() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -32,20 +31,21 @@ public class DatabaseAdapter implements DatabaseAdapterInterface {
 	}
 
 	@Override
-	public synchronized boolean insert(@NotNull Blog input) {
+	public synchronized boolean insert(@NotNull String input) {
 		return false;
 	}
 
 	@Override
-	public synchronized boolean update(@NotNull Blog input) {
+	public synchronized boolean update(@NotNull String input) {
 		return false;
 	}
 
 	@Override
-	public synchronized boolean delete(@NotNull Blog input) {
+	public synchronized boolean delete(@NotNull String input) {
 		return false;
 	}
 
+	@NotNull
 	@Override
 	public List<Object> select(@NotNull @NonNls String sql) {
 		return null;
@@ -55,6 +55,7 @@ public class DatabaseAdapter implements DatabaseAdapterInterface {
 	public void execSQL(@NotNull @NonNls String sql) {
 	}
 
+	@NotNull
 	@Override
 	public List<Object> selectAll(@NotNull @NonNls String formName) {
 		return null;
