@@ -11,5 +11,6 @@ repositories {
 dependencies {
 	testCompile name: 'junit', group: 'junit', version: '4.11'
 	// https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all
+	compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
 	compile group: 'org.eclipse.jetty.aggregate', name: 'jetty-all', version: '9.4.0.v20161208'
 }

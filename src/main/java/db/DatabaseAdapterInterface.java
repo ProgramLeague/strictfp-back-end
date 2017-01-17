@@ -1,5 +1,9 @@
 package db;
 
+import db.obj.Blog;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -8,13 +12,16 @@ import java.util.List;
  * @author Eldath
  */
 public interface DatabaseAdapterInterface {
-	boolean insert(Object input);
 
-	boolean update(Object input);
+	boolean insertBlog(@NotNull Blog input);
 
-	boolean delete(Object input);
+	boolean updateBlog(@NotNull Blog input);
 
-	List<Object> select(String sql);
+	boolean deleteBlog(@NotNull Blog input);
 
-	List<Object> selectAll(String formName);
+	List<Object> select(@NotNull @NonNls String sql);
+
+	void execSQL(@NotNull @NonNls String sql);
+
+	List<Object> selectAll(@NotNull @NonNls String formName);
 }

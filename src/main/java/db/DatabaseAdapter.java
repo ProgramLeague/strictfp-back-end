@@ -1,5 +1,9 @@
 package db;
 
+import db.obj.Blog;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -12,27 +16,31 @@ public class DatabaseAdapter implements DatabaseAdapterInterface {
 	}
 
 	@Override
-	public boolean insert(Object input) {
+	public boolean insertBlog(@NotNull Blog input) {
 		return false;
 	}
 
 	@Override
-	public boolean update(Object input) {
+	public boolean updateBlog(@NotNull Blog input) {
 		return false;
 	}
 
 	@Override
-	public boolean delete(Object input) {
+	public boolean deleteBlog(@NotNull Blog input) {
 		return false;
 	}
 
 	@Override
-	public List<Object> select(String sql) {
+	public List<Object> select(@NotNull @NonNls String sql) {
 		return null;
 	}
 
 	@Override
-	public List<Object> selectAll(String formName) {
+	public void execSQL(@NotNull @NonNls String sql) {
+	}
+
+	@Override
+	public List<Object> selectAll(@NotNull @NonNls String formName) {
 		return null;
 	}
 }
