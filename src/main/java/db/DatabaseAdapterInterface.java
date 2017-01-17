@@ -3,6 +3,7 @@ package db;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,19 +14,19 @@ import java.util.List;
 public interface DatabaseAdapterInterface {
 
 	@NotNull
-	DatabaseAdapterInterface getInstance();
+	DatabaseAdapterInterface getInstance() throws SQLException;
 
-	boolean insert(@NotNull String input);
+	boolean insert(@NotNull String input) throws SQLException;
 
-	boolean update(@NotNull String input);
+	boolean update(@NotNull String input) throws SQLException;
 
-	boolean delete(@NotNull String input);
-
-	@NotNull
-	List<Object> select(@NotNull @NonNls String sql);
-
-	void execSQL(@NotNull @NonNls String sql);
+	boolean delete(@NotNull String input) throws SQLException;
 
 	@NotNull
-	List<Object> selectAll(@NotNull @NonNls String formName);
+	List<Object> select(@NotNull @NonNls String sql) throws SQLException;
+
+	void execSQL(@NotNull @NonNls String sql) throws SQLException;
+
+	@NotNull
+	List<Object> selectAll(@NotNull @NonNls String formName) throws SQLException;
 }
