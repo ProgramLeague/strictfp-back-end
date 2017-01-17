@@ -1,5 +1,6 @@
 package api;
 
+import db.DatabaseAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletException;
@@ -7,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.Vector;
 
 /**
  * Created by Eldath on 2017/1/17 0017.
@@ -27,21 +29,16 @@ public class TimeLine extends HttpServlet {
 			@NotNull HttpServletResponse response)
 			throws ServletException, IOException {
 		// 接受参数ܲ
-		String key = request.getParameter("keywords");
+		long start = Long.parseLong(request.getParameter("start"));
+		long end = Long.parseLong(request.getParameter("end"));
+		int timelineID = Integer.parseInt(request.getParameter("timelineid"));
+		LocalDate startDate = LocalDate.ofEpochDay(start);
+		LocalDate endDate = LocalDate.ofEpochDay(end);
+		DatabaseAdapter databaseAdapter = DatabaseAdapter.getInstance();
+		Vector<String> articles = new Vector<>();
 		// 业务逻辑
 		// 返回内容
 		response.setCharacterEncoding("utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
-		PrintWriter out = response.getWriter();
-		out.print("Welcome to Lifeba");
-		out.flush();
-		out.close();
-	}
-
-	@Override
-	protected void doPost(
-			@NotNull HttpServletRequest req,
-			@NotNull HttpServletResponse resp)
-			throws ServletException, IOException {
 	}
 }

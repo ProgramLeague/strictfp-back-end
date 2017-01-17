@@ -1,5 +1,6 @@
 package db;
 
+import db.obj.KeyAndValue;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,17 +13,14 @@ import java.util.List;
  */
 public interface DatabaseAdapterInterface {
 
-	@NotNull
-	DatabaseAdapterInterface getInstance();
+	boolean insert(@NotNull String formName, String... value);
 
-	boolean insert(@NotNull String input);
+	boolean update(@NotNull String formName, KeyAndValue where, KeyAndValue... toSet);
 
-	boolean update(@NotNull String input);
-
-	boolean delete(@NotNull String input);
+	boolean delete(@NotNull String formName, KeyAndValue where);
 
 	@NotNull
-	List<Object> select(@NotNull @NonNls String sql);
+	List<Object> select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName);
 
 	void execSQL(@NotNull @NonNls String sql);
 
