@@ -13,15 +13,20 @@ import java.util.List;
  */
 public interface DatabaseAdapterInterface {
 
-	boolean insertBlog(@NotNull Blog input);
+	@NotNull
+	DatabaseAdapterInterface getInstance();
 
-	boolean updateBlog(@NotNull Blog input);
+	boolean insert(@NotNull Blog input);
 
-	boolean deleteBlog(@NotNull Blog input);
+	boolean update(@NotNull Blog input);
 
+	boolean delete(@NotNull Blog input);
+
+	@NotNull
 	List<Object> select(@NotNull @NonNls String sql);
 
 	void execSQL(@NotNull @NonNls String sql);
 
+	@NotNull
 	List<Object> selectAll(@NotNull @NonNls String formName);
 }

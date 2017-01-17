@@ -3,6 +3,7 @@ package db;
 import db.obj.Blog;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -12,21 +13,36 @@ import java.util.List;
  * @author Eldath
  */
 public class DatabaseAdapter implements DatabaseAdapterInterface {
-	public DatabaseAdapter() {
+	@Nullable
+	private static DatabaseAdapter instance;
+
+	private DatabaseAdapter() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public boolean insertBlog(@NotNull Blog input) {
+	@NotNull
+	public DatabaseAdapterInterface getInstance() {
+		if (instance == null) instance = new DatabaseAdapter();
+		return instance;
+	}
+
+	@Override
+	public synchronized boolean insert(@NotNull Blog input) {
 		return false;
 	}
 
 	@Override
-	public boolean updateBlog(@NotNull Blog input) {
+	public synchronized boolean update(@NotNull Blog input) {
 		return false;
 	}
 
 	@Override
-	public boolean deleteBlog(@NotNull Blog input) {
+	public synchronized boolean delete(@NotNull Blog input) {
 		return false;
 	}
 
