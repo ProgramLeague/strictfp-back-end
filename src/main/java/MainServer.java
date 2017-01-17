@@ -1,27 +1,24 @@
-import api.timeline;
+import api.TimeLine;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
 /**
  * Created by Eldath on 2017/1/17 0017.
+ * <p>
+ * å®ç°äº†ä¸€ä¸ªAPIï¼Œå°±è¦åœ¨ä¸‹é¢é‚£é‡ŒåŠ ä¸Šã€‚
  *
- * ÊµÏÖÁËÒ»¸öAPI£¬¾ÍÒªÔÚÏÂÃæÄÇÀï¼ÓÉÏ¡£
  * @author Eldath
  */
 public class MainServer {
-    public static void main(String[] args) {
-        try {
-            Server server = new Server(80);
-            ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-            context.setContextPath("/api/v0");
-            server.setHandler(context);
-            // ÏñÏÂÃæÕâĞĞÒ»Ñù
-            context.addServlet(new ServletHolder(new timeline()), "/timeline");
-            server.start();
-            server.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public static void main(String[] args) throws Exception {
+		Server server = new Server(80);
+		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+		context.setContextPath("/api/v0");
+		server.setHandler(context);
+		// åƒä¸‹é¢è¿™è¡Œä¸€æ ·
+		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
+		server.start();
+		server.join();
+	}
 }
