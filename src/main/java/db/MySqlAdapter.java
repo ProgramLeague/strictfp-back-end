@@ -5,7 +5,10 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by Eldath on 2017/1/17 0017.
@@ -16,11 +19,20 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	@Nullable
 	private static MySqlAdapter instance;
 
+	@NotNull
+	@NonNls
+	private static final String URL = "";
+
+	@NotNull
+	private final Statement statement;
+
 	private MySqlAdapter() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			statement = DriverManager.getConnection(URL).createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException("database cannot connect error!");
 		}
 	}
 
@@ -32,7 +44,7 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 
 	@Override
 	public boolean insert(
-			@NotNull String formName,
+			@NotNull @NonNls String formName,
 			@NotNull @NonNls String... value) {
 		return false;
 	}
@@ -70,11 +82,15 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	}
 
 	@NotNull
-
 	@Override
-	public void execSQL(
+	public ResultSet execSQL(
 			@NotNull @NonNls String sql) {
-
+		try {
+			return statement.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("sql error!");
+		}
 	}
 
 	@NotNull

@@ -36,7 +36,7 @@ public interface DatabaseAdapterInterface {
 			@NotNull @NonNls String columnName,
 			@NotNull Pair where);
 
-	void execSQL(@NotNull @NonNls String sql);
+	ResultSet execSQL(@NotNull @NonNls String sql);
 
 	@NotNull
 	ResultSet selectAll(@NotNull @NonNls String formName);

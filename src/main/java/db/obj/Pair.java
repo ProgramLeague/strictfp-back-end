@@ -1,6 +1,7 @@
 package db.obj;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,9 +11,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Pair {
 	@NotNull
-	private String key, value;
+	@NonNls
+	private final String key, value;
 
-	public Pair(@NotNull String key, @NotNull String value) {
+	public Pair(
+			@NotNull @NonNls String key,
+			@NotNull @NonNls String value) {
 		this.key = key;
 		this.value = value;
 	}
