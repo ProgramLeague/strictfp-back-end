@@ -29,3 +29,5 @@ hs_err_pid*
 /.idea/uiDesigner.xml
 /.idea/modules.xml
 build/
+.idea/encodings.xml
+.idea/modules/
