@@ -4,6 +4,7 @@ import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -20,10 +21,12 @@ public interface DatabaseAdapterInterface {
 	boolean delete(@NotNull String formName, Pair where);
 
 	@NotNull
-	List<Object> select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName);
+	ResultSet select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName);
+	@NotNull
+	ResultSet select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName, KeyAndValue where);
 
 	void execSQL(@NotNull @NonNls String sql);
 
 	@NotNull
-	List<Object> selectAll(@NotNull @NonNls String formName);
+	ResultSet selectAll(@NotNull @NonNls String formName);
 }

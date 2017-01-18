@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -52,9 +53,17 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 
 	@NotNull
 	@Override
-	public List<Object> select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName) {
+	public ResultSet select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName) {
 		return null;
 	}
+
+	@NotNull
+	@Override
+	public ResultSet select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName, KeyAndValue where) {
+		return null;
+	}
+
+	@NotNull
 
 	@Override
 	public void execSQL(@NotNull @NonNls String sql) {
@@ -63,7 +72,7 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 
 	@NotNull
 	@Override
-	public List<Object> selectAll(@NotNull @NonNls String formName) {
+	public ResultSet selectAll(@NotNull @NonNls String formName) {
 		return null;
 	}
 }
