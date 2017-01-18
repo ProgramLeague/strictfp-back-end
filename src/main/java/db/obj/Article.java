@@ -10,12 +10,14 @@ public class Article {
 	private int up, down, chick, id;
 	private Writer writer;
 	private long publishTime;
+	private Tag[] tags;
 
-	public Article(int id, String content, long publishTime, Writer writer) {
-		this(id, content, publishTime, writer, 0, 0, 0);
+	public Article(int id, long publishTime, Writer writer, Tag[] tags, String content) {
+		this(id, publishTime, writer, tags, content, 0, 0, 0);
 	}
 
-	public Article(int id, String content, long publishTime, Writer writer, int up, int down, int chick) {
+	public Article(int id, long publishTime, Writer writer, Tag[] tags, String content, int up, int down, int chick) {
+		this.tags = tags;
 		this.id = id;
 		this.publishTime = publishTime;
 		this.content = content;
@@ -23,6 +25,10 @@ public class Article {
 		this.down = down;
 		this.chick = chick;
 		this.writer = writer;
+	}
+
+	public Tag[] getTags() {
+		return tags;
 	}
 
 	public int getId() {
