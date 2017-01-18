@@ -40,10 +40,14 @@ public class Writer {
 		return motto;
 	}
 
+	@NotNull
+	@Contract(pure = true)
 	public URL getAvatarURL() {
 		return avatarURL;
 	}
 
+	@NotNull
+	@Contract(pure = true)
 	public Gender getGender() {
 		return gender;
 	}
@@ -51,9 +55,15 @@ public class Writer {
 	/**
 	 * Created by Eldath on 2017/1/18 0018.
 	 *
-	 * @author Eldath
+	 * @author Eldath, ice1000
 	 */
 	enum Gender {
-		MALE, FEMALE, SECRECY
+		MALE,
+		FEMALE,
+		SECRECY,
+		MTF,
+		FTM,
+		NON,
+		BOTH
 	}
 }

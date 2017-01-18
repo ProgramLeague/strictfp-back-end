@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -33,6 +33,11 @@ public class TimeLine extends HttpServlet {
 		long start = Long.parseLong(request.getParameter("start"));
 		long end = Long.parseLong(request.getParameter("end"));
 		int timelineID = Integer.parseInt(request.getParameter("timelineid"));
+		LocalDate startDate = LocalDate.ofEpochDay(start);
+		LocalDate endDate = LocalDate.ofEpochDay(end);
+		MySqlAdapter db = MySqlAdapter.getInstance();
+		Vector<String> articles = new Vector<>();
+		ResultSet allArticles = db.selectAll("articles");
 		// 业务逻辑
 		// 返回内容
 		response.setCharacterEncoding("utf-8");

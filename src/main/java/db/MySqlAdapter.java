@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.ResultSet;
-import java.util.List;
 
 /**
  * Created by Eldath on 2017/1/17 0017.
@@ -40,7 +39,7 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 
 	@Override
 	public boolean update(
-			@NotNull String formName,
+			@NotNull @NonNls String formName,
 			@NotNull Pair where,
 			@NotNull Pair... toSet) {
 		return false;
@@ -71,6 +70,7 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	}
 
 	@NotNull
+
 	@Override
 	public void execSQL(
 			@NotNull @NonNls String sql) {
