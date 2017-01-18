@@ -7,19 +7,30 @@ package db.obj;
  */
 public class Article {
 	private String content;
-	private int up, down, chick;
+	private int up, down, chick, id;
 	private Writer writer;
+	private long publishTime;
 
-	public Article(String content, Writer writer) {
-		this(content, writer, 0, 0, 0);
+	public Article(int id, String content, long publishTime, Writer writer) {
+		this(id, content, publishTime, writer, 0, 0, 0);
 	}
 
-	public Article(String content, Writer writer, int up, int down, int chick) {
+	public Article(int id, String content, long publishTime, Writer writer, int up, int down, int chick) {
+		this.id = id;
+		this.publishTime = publishTime;
 		this.content = content;
 		this.up = up;
 		this.down = down;
 		this.chick = chick;
 		this.writer = writer;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public long getPublishTime() {
+		return publishTime;
 	}
 
 	public String getContent() {
