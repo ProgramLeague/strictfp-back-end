@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -36,6 +37,7 @@ public class TimeLine extends HttpServlet {
 		LocalDate endDate = LocalDate.ofEpochDay(end);
 		DatabaseAdapter databaseAdapter = DatabaseAdapter.getInstance();
 		Vector<String> articles = new Vector<>();
+		ArrayList allArticles = new ArrayList<>(databaseAdapter.selectAll("articles"));
 		// 业务逻辑
 		// 返回内容
 		response.setCharacterEncoding("utf-8");
