@@ -1,6 +1,6 @@
 package db;
 
-import db.obj.KeyAndValue;
+import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author Eldath
  */
-public class DatabaseAdapter implements DatabaseAdapterInterface {
+public class MySqlAdapter implements DatabaseAdapterInterface {
 	@Nullable
-	private static DatabaseAdapter instance;
+	private static MySqlAdapter instance;
 
-	private DatabaseAdapter() {
+	private MySqlAdapter() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (Exception e) {
@@ -25,23 +25,28 @@ public class DatabaseAdapter implements DatabaseAdapterInterface {
 	}
 
 	@NotNull
-	public static DatabaseAdapter getInstance() {
-		if (instance == null) instance = new DatabaseAdapter();
+	public static MySqlAdapter getInstance() {
+		if (instance == null) instance = new MySqlAdapter();
 		return instance;
 	}
 
 	@Override
-	public boolean insert(@NotNull String formName, String... value) {
+	public boolean insert(
+			@NotNull String formName,
+			@NotNull @NonNls String... value) {
 		return false;
 	}
 
 	@Override
-	public boolean update(@NotNull String formName, KeyAndValue where, KeyAndValue... toSet) {
+	public boolean update(
+			@NotNull String formName,
+			@NotNull Pair where,
+			@NotNull Pair... toSet) {
 		return false;
 	}
 
 	@Override
-	public boolean delete(@NotNull String formName, KeyAndValue where) {
+	public boolean delete(@NotNull String formName, Pair where) {
 		return false;
 	}
 

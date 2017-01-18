@@ -1,6 +1,6 @@
 package api;
 
-import db.DatabaseAdapter;
+import db.MySqlAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletException;
@@ -35,7 +35,7 @@ public class TimeLine extends HttpServlet {
 		int timelineID = Integer.parseInt(request.getParameter("timelineid"));
 		LocalDate startDate = LocalDate.ofEpochDay(start);
 		LocalDate endDate = LocalDate.ofEpochDay(end);
-		DatabaseAdapter databaseAdapter = DatabaseAdapter.getInstance();
+		MySqlAdapter databaseAdapter = MySqlAdapter.getInstance();
 		Vector<String> articles = new Vector<>();
 		ArrayList allArticles = new ArrayList<>(databaseAdapter.selectAll("articles"));
 		// 业务逻辑

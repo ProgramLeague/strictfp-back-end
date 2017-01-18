@@ -1,6 +1,6 @@
 package db;
 
-import db.obj.KeyAndValue;
+import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,9 +15,9 @@ public interface DatabaseAdapterInterface {
 
 	boolean insert(@NotNull String formName, String... value);
 
-	boolean update(@NotNull String formName, KeyAndValue where, KeyAndValue... toSet);
+	boolean update(@NotNull String formName, Pair where, Pair... toSet);
 
-	boolean delete(@NotNull String formName, KeyAndValue where);
+	boolean delete(@NotNull String formName, Pair where);
 
 	@NotNull
 	List<Object> select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName);
