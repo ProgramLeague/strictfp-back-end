@@ -47,32 +47,40 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	}
 
 	@Override
-	public boolean delete(@NotNull String formName, Pair where) {
+	public boolean delete(
+			@NotNull @NonNls String formName,
+			@NotNull Pair where) {
 		return false;
 	}
 
 	@NotNull
 	@Override
-	public ResultSet select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName) {
+	public ResultSet select(
+			@NotNull @NonNls String formName,
+			@NotNull @NonNls String columnName) {
 		return null;
 	}
 
 	@NotNull
 	@Override
-	public ResultSet select(@NotNull @NonNls String formName, @NotNull @NonNls String columnName, KeyAndValue where) {
+	public ResultSet select(
+			@NotNull @NonNls String formName,
+			@NotNull @NonNls String columnName,
+			@NotNull Pair where) {
 		return null;
 	}
 
 	@NotNull
-
 	@Override
-	public void execSQL(@NotNull @NonNls String sql) {
+	public void execSQL(
+			@NotNull @NonNls String sql) {
 
 	}
 
 	@NotNull
 	@Override
-	public ResultSet selectAll(@NotNull @NonNls String formName) {
+	public ResultSet selectAll(
+			@NotNull @NonNls String formName) {
 		return null;
 	}
 }
