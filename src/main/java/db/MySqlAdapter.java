@@ -53,7 +53,7 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	public boolean update(
 			@NotNull @NonNls String formName,
 			@NotNull Pair where,
-			@NotNull Pair... toSet) {
+			@NotNull Pair... after) {
 		return false;
 	}
 
@@ -68,21 +68,28 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	@Override
 	public ResultSet select(
 			@NotNull @NonNls String formName,
-			@NotNull @NonNls String columnName) {
-		return null;
-	}
-
-	@NotNull
-	@Override
-	public ResultSet select(
-			@NotNull @NonNls String formName,
 			@Nullable @NonNls String columnName,
 			@Nullable Pair... where) {
 		try {
-			return statement.executeQuery("SELECT " +
-					((columnName == null) ? "*" : columnName) +
-					" FROM " + formName + " WHERE "
-			);
+			StringBuilder stringBuilder = new StringBuilder()
+					.append("SELECT ")
+					.append(columnName != null ? columnName : "*")
+					.append(" FROM ")
+					.append(formName);
+			if (where != null) {
+				stringBuilder
+						.append(" WHERE ")
+						.append(String.join(" and ", Pair.convert(where)));
+			}
+			return statement.executeQuery(stringBuilder.toString());
+/*
+return statement.executeQuery("SELECT " +
+		(columnName != null ? columnName : "*") +
+		" FROM " + formName +
+		" WHERE " + String.join(" and ", Pair.convert(where))
+		);
+// NOTICE: HERE I IGNORED THE CASE THAT WHERE IS NULL
+*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("MySQL error!");
@@ -99,12 +106,5 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 			e.printStackTrace();
 			throw new RuntimeException("sql error!");
 		}
-	}
-
-	@NotNull
-	@Override
-	public ResultSet selectAll(
-			@NotNull @NonNls String formName) {
-		return null;
 	}
 }

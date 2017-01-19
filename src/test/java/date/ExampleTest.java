@@ -13,7 +13,9 @@ import java.time.format.DateTimeFormatter;
 public class ExampleTest {
 	@Test(timeout = 1000)
 	public void example() {
-		System.out.println(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
-
+		System.out.println(LocalDate
+				.now()
+				.format(DateTimeFormatter.ISO_DATE)
+		);
 	}
 }

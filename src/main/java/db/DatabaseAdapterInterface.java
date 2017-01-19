@@ -22,16 +22,18 @@ public interface DatabaseAdapterInterface {
 	boolean update(
 			@NotNull @NonNls String formName,
 			@NotNull Pair where,
-			@NotNull Pair... toSet);
+			@Nullable Pair... after);
 
 	boolean delete(
 			@NotNull @NonNls String formName,
-			@NotNull Pair... where);
+			@Nullable Pair... where);
 
 	@NotNull
-	ResultSet select(
+	default ResultSet select(
 			@NotNull @NonNls String formName,
-			@NotNull @NonNls String columnName);
+			@Nullable @NonNls String columnName) {
+		return select(formName, columnName, (Pair[]) null);
+	}
 
 	@NotNull
 	ResultSet select(
@@ -54,5 +56,7 @@ public interface DatabaseAdapterInterface {
 	ResultSet execSQL(@NotNull @NonNls String sql);
 
 	@NotNull
-	ResultSet selectAll(@NotNull @NonNls String formName);
+	default ResultSet selectAll(@NotNull @NonNls String formName) {
+		return select(formName, null);
+	}
 }

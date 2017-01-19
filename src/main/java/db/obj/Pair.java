@@ -38,4 +38,13 @@ public class Pair {
 	public String getCombined() {
 		return String.format("%s %s", key, value);
 	}
+
+	@Contract(pure = true)
+	@NotNull
+	@NonNls
+	public static String[] convert(Pair[] origin) {
+		String[] ret = new String[origin.length];
+		for (int i = 0; i < ret.length; ++i) ret[i] = origin[i].getCombined();
+		return ret;
+	}
 }
