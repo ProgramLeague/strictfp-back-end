@@ -1,5 +1,7 @@
 package db.obj;
 
+import java.util.*;
+
 /**
  * Created by Eldath on 2017/1/18 0018.
  *
@@ -10,13 +12,13 @@ public class Article {
 	private int up, down, chick, id;
 	private Writer writer;
 	private long publishTime;
-	private Tag[] tags;
+	private HashSet<Tag> tags;
 
-	public Article(int id, long publishTime, Writer writer, Tag[] tags, String title, String brief, String content) {
+	public Article(int id, long publishTime, Writer writer, HashSet<Tag> tags, String title, String brief, String content) {
 		this(id, publishTime, writer, tags, title, brief, content, 0, 0, 0);
 	}
 
-	public Article(int id, long publishTime, Writer writer, Tag[] tags, String title, String brief, String content, int up, int down, int chick) {
+	public Article(int id, long publishTime, Writer writer, HashSet<Tag> tags, String title, String brief, String content, int up, int down, int chick) {
 		this.brief = brief;
 		this.title = title;
 		this.tags = tags;
@@ -38,7 +40,7 @@ public class Article {
 	}
 
 
-	public Tag[] getTags() {
+	public HashSet<Tag> getTags() {
 		return tags;
 	}
 

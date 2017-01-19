@@ -6,18 +6,13 @@ package db.obj;
  * @author Eldath
  */
 public class Category {
-	private String name, brief;
+	private String name;
 
-	public Category(String name, String brief) {
+	public Category(String name) {
 		this.name = name;
-		this.brief = brief;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public String getBrief() {
-		return brief;
 	}
 }

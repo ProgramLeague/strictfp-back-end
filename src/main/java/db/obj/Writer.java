@@ -14,18 +14,26 @@ public class Writer {
 	@NotNull
 	@Nls
 	private String name, motto;
+	private int Id;
 	private URL avatarURL;
 	private Gender gender;
 
 	public Writer(
+			@NotNull int Id,
 			@NotNull @Nls String name,
 			@NotNull @Nls String motto,
 			@NotNull URL avatarURL,
 			@NotNull Gender gender) {
+		this.Id = Id;
 		this.name = name;
 		this.motto = motto;
 		this.avatarURL = avatarURL;
 		this.gender = gender;
+	}
+
+	@NotNull
+	public int getId() {
+		return Id;
 	}
 
 	@NotNull
@@ -51,19 +59,22 @@ public class Writer {
 	public Gender getGender() {
 		return gender;
 	}
+}
 
-	/**
-	 * Created by Eldath on 2017/1/18 0018.
-	 *
-	 * @author Eldath, ice1000
-	 */
-	enum Gender {
-		MALE,
-		FEMALE,
-		SECRECY,
-		MTF,
-		FTM,
-		NON,
-		BOTH
+class Gender {
+	private int Int;
+	private String Eng;
+
+	public Gender(String eng, int gender) {
+		Eng=eng;
+		Int = gender;
+	}
+
+	public int getInt() {
+		return Int;
+	}
+
+	public String getEng() {
+		return Eng;
 	}
 }

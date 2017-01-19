@@ -38,7 +38,7 @@ public class MySqlAdapter implements
 	}
 
 	@NotNull
-	public static MySqlAdapter getInstance() {
+	static MySqlAdapter getInstance() {
 		if (instance == null) instance = new MySqlAdapter();
 		return instance;
 	}
