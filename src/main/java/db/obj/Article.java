@@ -6,17 +6,19 @@ package db.obj;
  * @author Eldath
  */
 public class Article {
-	private String content;
+	private String content, title, brief;
 	private int up, down, chick, id;
 	private Writer writer;
 	private long publishTime;
 	private Tag[] tags;
 
-	public Article(int id, long publishTime, Writer writer, Tag[] tags, String content) {
-		this(id, publishTime, writer, tags, content, 0, 0, 0);
+	public Article(int id, long publishTime, Writer writer, Tag[] tags, String title, String brief, String content) {
+		this(id, publishTime, writer, tags, title, brief, content, 0, 0, 0);
 	}
 
-	public Article(int id, long publishTime, Writer writer, Tag[] tags, String content, int up, int down, int chick) {
+	public Article(int id, long publishTime, Writer writer, Tag[] tags, String title, String brief, String content, int up, int down, int chick) {
+		this.brief = brief;
+		this.title = title;
 		this.tags = tags;
 		this.id = id;
 		this.publishTime = publishTime;
@@ -26,6 +28,15 @@ public class Article {
 		this.chick = chick;
 		this.writer = writer;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getBrief() {
+		return brief;
+	}
+
 
 	public Tag[] getTags() {
 		return tags;
