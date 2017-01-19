@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Closeable;
 import java.sql.ResultSet;
 import java.util.Collection;
 
@@ -14,15 +15,15 @@ import java.util.Collection;
  * @author Eldath
  */
 @SuppressWarnings("SameParameterValue")
-public interface DatabaseAdapterInterface {
+public interface DatabaseAdapterInterface extends Closeable {
 	boolean insert(
 			@NotNull String formName,
 			@NotNull @NonNls String... value);
 
 	boolean update(
 			@NotNull @NonNls String formName,
-			@NotNull Pair where,
-			@Nullable Pair... after);
+			@Nullable Pair[] after,
+			@Nullable Pair... where);
 
 	boolean delete(
 			@NotNull @NonNls String formName,
@@ -35,6 +36,16 @@ public interface DatabaseAdapterInterface {
 		return select(formName, columnName, (Pair[]) null);
 	}
 
+	/**
+	 * this is the most complex one of all 'select's.
+	 *
+	 * @param formName   the name of form
+	 * @param columnName the column you wanna search
+	 * @param where      the conditions
+	 * @return query result
+	 * @throws RuntimeException if SQLException is thrown
+	 *                          // fuck checked exception
+	 */
 	@NotNull
 	ResultSet select(
 			@NotNull @NonNls String formName,

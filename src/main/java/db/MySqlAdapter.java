@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,13 +16,14 @@ import java.sql.Statement;
  *
  * @author Eldath
  */
-public class MySqlAdapter implements DatabaseAdapterInterface {
+public class MySqlAdapter implements
+		DatabaseAdapterInterface {
 	@Nullable
 	private static MySqlAdapter instance;
 
 	@NotNull
 	@NonNls
-	private static final String URL = "";
+	private static final String URL = "jdbc:mysql";
 
 	@NotNull
 	private final Statement statement;
@@ -46,22 +48,40 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	public boolean insert(
 			@NotNull @NonNls String formName,
 			@NotNull @NonNls String... value) {
-		return false;
+		try {
+			StringBuilder stringBuilder = new StringBuilder();
+			execSQL();
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean update(
 			@NotNull @NonNls String formName,
-			@NotNull Pair where,
-			@NotNull Pair... after) {
-		return false;
+			@Nullable Pair[] where,
+			@Nullable Pair... after) {
+		try {
+			StringBuilder stringBuilder = new StringBuilder();
+			execSQL();
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean delete(
 			@NotNull @NonNls String formName,
-			@NotNull Pair... where) {
-		return false;
+			@Nullable Pair... where) {
+		try {
+			StringBuilder stringBuilder = new StringBuilder();
+			execSQL();
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
 	}
 
 	@NotNull
@@ -70,18 +90,17 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 			@NotNull @NonNls String formName,
 			@Nullable @NonNls String columnName,
 			@Nullable Pair... where) {
-		try {
-			StringBuilder stringBuilder = new StringBuilder()
-					.append("SELECT ")
-					.append(columnName != null ? columnName : "*")
-					.append(" FROM ")
-					.append(formName);
-			if (where != null) {
-				stringBuilder
-						.append(" WHERE ")
-						.append(String.join(" and ", Pair.convert(where)));
-			}
-			return statement.executeQuery(stringBuilder.toString());
+		StringBuilder stringBuilder = new StringBuilder()
+				.append("SELECT ")
+				.append(columnName != null ? columnName : "*")
+				.append(" FROM ")
+				.append(formName);
+		if (where != null) {
+			stringBuilder
+					.append(" WHERE ")
+					.append(String.join(" and ", Pair.convert(where)));
+		}
+		return execSQL(stringBuilder.toString());
 /*
 return statement.executeQuery("SELECT " +
 		(columnName != null ? columnName : "*") +
@@ -90,10 +109,6 @@ return statement.executeQuery("SELECT " +
 		);
 // NOTICE: HERE I IGNORED THE CASE THAT WHERE IS NULL
 */
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException("MySQL error!");
-		}
 	}
 
 	@NotNull
@@ -102,6 +117,16 @@ return statement.executeQuery("SELECT " +
 			@NotNull @NonNls String sql) {
 		try {
 			return statement.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("sql error!");
+		}
+	}
+
+	@Override
+	public void close() {
+		try {
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("sql error!");
