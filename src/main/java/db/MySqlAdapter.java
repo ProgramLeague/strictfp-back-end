@@ -49,10 +49,7 @@ public class MySqlAdapter implements
 			@NotNull @NonNls String... value) {
 		try {
 			String boyNextDoor = "INSERT INTO " + tableName + " VALUES ( ";
-			for (String val : value) {
-				String stringBuilder = boyNextDoor + val + " )";
-				execSQL(stringBuilder);
-			}
+			for (String val : value) execSQL(boyNextDoor + val + " )");
 			return true;
 		} catch (RuntimeException e) {
 			return false;
@@ -66,8 +63,12 @@ public class MySqlAdapter implements
 			@Nullable Pair... after) {
 		// TODO
 		try {
-			StringBuilder stringBuilder = new StringBuilder();
-			execSQL(stringBuilder.toString());
+			execSQL("UPDATE " +
+					tableName +
+					" SET " +
+					String.join(" , ", Pair.convert(after)) +
+					" WHERE " +
+					String.join(" , ", Pair.convert(where)));
 			return true;
 		} catch (RuntimeException e) {
 			return false;
