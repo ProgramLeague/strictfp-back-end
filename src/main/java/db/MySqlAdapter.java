@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,11 +45,14 @@ public class MySqlAdapter implements
 
 	@Override
 	public boolean insert(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@NotNull @NonNls String... value) {
 		try {
-			StringBuilder stringBuilder = new StringBuilder();
-			execSQL();
+			String boyNextDoor = "INSERT INTO " + tableName + " VALUES ( ";
+			for (String val : value) {
+				String stringBuilder = boyNextDoor + val + " )";
+				execSQL(stringBuilder);
+			}
 			return true;
 		} catch (RuntimeException e) {
 			return false;
@@ -59,12 +61,13 @@ public class MySqlAdapter implements
 
 	@Override
 	public boolean update(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable Pair[] where,
 			@Nullable Pair... after) {
+		// TODO
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
-			execSQL();
+			execSQL(stringBuilder.toString());
 			return true;
 		} catch (RuntimeException e) {
 			return false;
@@ -73,11 +76,12 @@ public class MySqlAdapter implements
 
 	@Override
 	public boolean delete(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable Pair... where) {
+		// TODO
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
-			execSQL();
+			execSQL(stringBuilder.toString());
 			return true;
 		} catch (RuntimeException e) {
 			return false;
@@ -85,26 +89,35 @@ public class MySqlAdapter implements
 	}
 
 	@NotNull
+	@NonNls
+	@Override
+	public String getQueryString(
+			@NotNull @NonNls String tableName,
+			@Nullable @NonNls String columnName) {
+		return "SELECT " +
+				(columnName != null ? columnName : "*") +
+				" FROM " +
+				tableName;
+	}
+
+	@NotNull
 	@Override
 	public ResultSet select(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@Nullable Pair... where) {
 		StringBuilder stringBuilder = new StringBuilder()
-				.append("SELECT ")
-				.append(columnName != null ? columnName : "*")
-				.append(" FROM ")
-				.append(formName);
+				.append(getQueryString(tableName, columnName));
 		if (where != null) {
 			stringBuilder
 					.append(" WHERE ")
-					.append(String.join(" and ", Pair.convert(where)));
+					.append(String.join(" AND ", Pair.convert(where)));
 		}
 		return execSQL(stringBuilder.toString());
 /*
 return statement.executeQuery("SELECT " +
 		(columnName != null ? columnName : "*") +
-		" FROM " + formName +
+		" FROM " + tableName +
 		" WHERE " + String.join(" and ", Pair.convert(where))
 		);
 // NOTICE: HERE I IGNORED THE CASE THAT WHERE IS NULL

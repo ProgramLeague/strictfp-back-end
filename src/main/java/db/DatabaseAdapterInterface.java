@@ -16,30 +16,53 @@ import java.util.Collection;
  */
 @SuppressWarnings("SameParameterValue")
 public interface DatabaseAdapterInterface extends Closeable {
+
+	/**
+	 * @param tableName table name
+	 * @param value     the data
+	 *                  value[i] == "1, 2, \"boy\""
+	 *                  value[2] = "5, 24, \"fuck\""
+	 *                  like that
+	 * @return if exception is not thrown
+	 */
 	boolean insert(
-			@NotNull String formName,
+			@NotNull String tableName,
 			@NotNull @NonNls String... value);
 
 	boolean update(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable Pair[] after,
 			@Nullable Pair... where);
 
 	boolean delete(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable Pair... where);
 
 	@NotNull
 	default ResultSet select(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName) {
-		return select(formName, columnName, (Pair[]) null);
+		return select(tableName, columnName, (Pair[]) null);
 	}
+
+	@NotNull
+	default ResultSet selectWithExtraInfo(
+			@NotNull @NonNls String tableName,
+			@Nullable @NonNls String columnName,
+			@NotNull @NonNls String extraInfo) {
+		return execSQL(getQueryString(tableName, columnName) + extraInfo);
+	}
+
+	@NonNls
+	@NotNull
+	String getQueryString(
+			@NotNull @NonNls String tableName,
+			@Nullable @NonNls String columnName);
 
 	/**
 	 * this is the most complex one of all 'select's.
 	 *
-	 * @param formName   the name of form
+	 * @param tableName  the name of table
 	 * @param columnName the column you wanna search
 	 * @param where      the conditions
 	 * @return query result
@@ -48,17 +71,17 @@ public interface DatabaseAdapterInterface extends Closeable {
 	 */
 	@NotNull
 	ResultSet select(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@Nullable Pair... where);
 
 	@NotNull
 	default ResultSet select(
-			@NotNull @NonNls String formName,
+			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@Nullable Collection<Pair> where) {
 		return select(
-				formName,
+				tableName,
 				columnName,
 				where != null ? (Pair[]) where.toArray() : null
 		);
@@ -67,7 +90,7 @@ public interface DatabaseAdapterInterface extends Closeable {
 	ResultSet execSQL(@NotNull @NonNls String sql);
 
 	@NotNull
-	default ResultSet selectAll(@NotNull @NonNls String formName) {
-		return select(formName, null);
+	default ResultSet selectAll(@NotNull @NonNls String tableName) {
+		return select(tableName, null);
 	}
 }
