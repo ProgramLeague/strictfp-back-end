@@ -32,4 +32,10 @@ public class Pair {
 	public String getValue() {
 		return value;
 	}
+
+	@Contract(pure = true)
+	@NotNull
+	public String getCombined() {
+		return String.format("%s %s", key, value);
+	}
 }

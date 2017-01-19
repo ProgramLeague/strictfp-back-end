@@ -60,7 +60,7 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	@Override
 	public boolean delete(
 			@NotNull @NonNls String formName,
-			@NotNull Pair where) {
+			@NotNull Pair... where) {
 		return false;
 	}
 
@@ -76,9 +76,17 @@ public class MySqlAdapter implements DatabaseAdapterInterface {
 	@Override
 	public ResultSet select(
 			@NotNull @NonNls String formName,
-			@NotNull @NonNls String columnName,
-			@NotNull Pair where) {
-		return null;
+			@Nullable @NonNls String columnName,
+			@Nullable Pair... where) {
+		try {
+			return statement.executeQuery("SELECT " +
+					((columnName == null) ? "*" : columnName) +
+					" FROM " + formName + " WHERE "
+			);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("MySQL error!");
+		}
 	}
 
 	@NotNull
