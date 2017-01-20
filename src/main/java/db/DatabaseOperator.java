@@ -30,7 +30,7 @@ public class DatabaseOperator {
 			String[] tags = resultSet
 					.getString("tags")
 					.split(",");
-			HashSet<Tag> tags1 = new HashSet<>();
+			Set<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
 			Writer writer = getWriter(resultSet.getInt("writerId"));
