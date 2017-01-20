@@ -3,7 +3,7 @@ package db.obj;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Set;
 
 /**
  * Created by Eldath on 2017/1/18 0018.
@@ -13,7 +13,6 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public class Article {
 	private int up, down, chick, id;
-	private long publishTime;
 	private
 	@NotNull
 	Writer writer;
@@ -23,19 +22,11 @@ public class Article {
 	private
 	@NotNull
 	@NonNls
-	String title;
-	private
-	@NotNull
-	@NonNls
-	String brief;
-	private
-	@NotNull
-	@NonNls
-	String content;
+	String title, publishTime, brief, content;
 
 	public Article(
 			int id,
-			long publishTime,
+			@NotNull @NonNls String publishTime,
 			@NotNull Writer writer,
 			@NotNull Set<Tag> tags,
 			@NotNull @NonNls String title,
@@ -46,7 +37,7 @@ public class Article {
 
 	public Article(
 			int id,
-			long publishTime,
+			@NotNull @NonNls String publishTime,
 			@NotNull Writer writer,
 			@NotNull Set<Tag> tags,
 			@NotNull @NonNls String title,
@@ -65,6 +56,11 @@ public class Article {
 		this.down = down;
 		this.chick = chick;
 		this.writer = writer;
+	}
+
+	public static String dateParser(int dateInt) {
+		//TODO
+		return "TODO";
 	}
 
 	@NotNull
@@ -86,7 +82,7 @@ public class Article {
 		return id;
 	}
 
-	public long getPublishTime() {
+	public String getPublishTime() {
 		return publishTime;
 	}
 

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Eldath on 2017/1/18 0018.
@@ -34,7 +35,7 @@ public class DatabaseOperator {
 				tags1.add(new Tag(thisTag));
 			article = new Article(
 					resultSet.getInt("Id"),
-					resultSet.getInt("pdate"),
+					Article.dateParser(resultSet.getInt("pdate")),
 					writer,
 					tags1,
 					resultSet.getString("title"),
