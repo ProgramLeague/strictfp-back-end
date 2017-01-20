@@ -5,8 +5,15 @@ import org.junit.Test;
 
 /**
  * Created by ice1000 on 2017/1/19.
+ *
+ * @author ice1000
  */
 public class MySqlAdapterTest {
+	/**
+	 * test passed
+	 *
+	 * @throws Exception is a rubbish
+	 */
 	@Test
 	public void insert() throws Exception {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
@@ -26,19 +33,24 @@ public class MySqlAdapterTest {
 //		);
 	}
 
+	/**
+	 * test passed
+	 *
+	 * @throws Exception is a rubbish
+	 */
 	@Test
 	public void update() throws Exception {
 		MySqlAdapter.getInstance().update(
 				"article",
-				new Pair[]{new Pair("Id", "=100")},
-				new Pair("up", ">= 1")
+				new Pair[]{new Pair("click", "=23333")},
+				new Pair("Id", ">=1")
 		);
 		/*
 		 * the above operation will generate query string as below
 		 * this is a simple example
 		 * but I think you can understand it
 		 */
-		String testStr = "UPDATE article SET Id=100 WHERE up>=1";
+		String testStr = "UPDATE article SET click=23333 WHERE Id>=1";
 	}
 
 	@Test
