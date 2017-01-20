@@ -50,7 +50,7 @@ public class DatabaseOperator {
 	}
 
 	public static Article getArticle(int pDate) {
-		return getArticle(new Pair("padte", "=" + pDate));
+		return getArticle(new Pair("pdate", "=" + pDate));
 	}
 
 	public static Writer getWriter(Pair... pair) {

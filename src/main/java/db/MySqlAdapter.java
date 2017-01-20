@@ -20,7 +20,14 @@ public class MySqlAdapter implements
 	@NotNull
 	@NonNls
 	private static final String DEFAULT_URL =
-			"jdbc:mysql://localhost:3306/main";
+			"jdbc:mysql://localhost:3306/strictfp";
+	@NotNull
+	@NonNls
+	private static final String user = "root";
+
+	@NotNull
+	@NonNls
+	private static final String password = "root";
 
 	@NotNull
 	private final Statement statement;
@@ -29,8 +36,8 @@ public class MySqlAdapter implements
 
 	private MySqlAdapter(@NotNull @NonNls String url) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(url);
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection(url, user, password);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
