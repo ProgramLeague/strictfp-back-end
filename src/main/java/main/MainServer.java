@@ -1,3 +1,5 @@
+package main;
+
 import api.TimeLine;
 import api.User;
 import org.apache.log4j.PropertyConfigurator;
@@ -25,7 +27,7 @@ public class MainServer {
 		server.setStopAtShutdown(true);
 		// 像下面这行一样
 		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
-		context.addServlet(new ServletHolder(new User()),"/user");
+		context.addServlet(new ServletHolder(new User()), "/user");
 		server.start();
 		server.join();
 	}

@@ -1,12 +1,11 @@
 package util;
 
-import java.sql.SQLException;
-
 /**
  * Created by ice1000 on 2017/1/20.
  *
  * @author ice1000
  */
+@SuppressWarnings("WeakerAccess")
 public class TestTools {
 	/**
 	 * run a code block many times.
@@ -32,6 +31,6 @@ public class TestTools {
 	}
 
 	public interface Func {
-		void invoke() throws SQLException;
+		void invoke() throws Exception;
 	}
 }
