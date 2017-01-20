@@ -1,4 +1,5 @@
 import api.TimeLine;
+import api.User;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -23,6 +24,7 @@ public class MainServer {
 		server.setHandler(context);
 		// 像下面这行一样
 		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
+		context.addServlet(new ServletHolder(new User()),"/user");
 		server.start();
 		server.join();
 	}
