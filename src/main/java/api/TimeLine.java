@@ -5,13 +5,13 @@ import db.obj.Article;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -29,27 +29,35 @@ public class TimeLine extends HttpServlet {
 	@Override
 	protected void doGet(
 			@NotNull HttpServletRequest request,
-			@NotNull HttpServletResponse response)
-			throws ServletException, IOException {
+			@NotNull HttpServletResponse response) throws IOException {
 		// 接受参数ܲ
+		response.setCharacterEncoding("utf-8");
 		int start = Integer.parseInt(request.getParameter("start"));
 		int end = Integer.parseInt(request.getParameter("end"));
 		JSONObject jsonObject = new JSONObject();
-		HashMap<String, String> status = new HashMap<>();
 		Vector<Article> articles = new Vector<>();
-		status.put("code", String.valueOf(HttpServletResponse.SC_OK));
-		status.put("message", "query timeline successfully");
-		jsonObject.put("meta", status);
-		for (int nowDate = start; nowDate <= end; nowDate++)
-			articles.add(DatabaseOperator.getArticle(nowDate));
-		jsonObject.put("data", articles);
+		Map<String, String> status = new HashMap<>();
 		// 业务逻辑
-		// 返回内容
+		try {
+			// database operations
+			for (int nowDate = start; nowDate <= end; ++nowDate)
+				articles.add(DatabaseOperator.getArticle(nowDate));
+			jsonObject.put("data", articles);
+			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
+			status.put("message", "query timeline successfully");
+			jsonObject.put("meta", status);
+			// 返回内容
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (RuntimeException van) {
+			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
+			status.put("message", "internal error: " + van.getMessage() );
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			// return error messages
+		}
 		try (ServletOutputStream out = response.getOutputStream()) {
 			out.write(jsonObject.toString().getBytes());
 			out.flush();
+			out.close();
 		}
-		response.setCharacterEncoding("utf-8");
-		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }

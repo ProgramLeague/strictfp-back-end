@@ -14,6 +14,7 @@ import java.util.Set;
  *
  * @author Eldath
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class DatabaseOperator {
 	@NotNull
 	private static DatabaseAdapter adapter = MySqlAdapter.getInstance();
@@ -22,7 +23,7 @@ public class DatabaseOperator {
 	@NotNull
 	public static Article getArticle(Pair... pair) {
 		try {
-			ResultSet resultSet = adapter.select("article", null, pair);
+			ResultSet resultSet = adapter.select("article", pair);
 			Article article;
 			String[] tags = resultSet
 					.getString("tags")
@@ -54,7 +55,7 @@ public class DatabaseOperator {
 
 	public static Writer getWriter(Pair... pair) {
 		try {
-			ResultSet writerResultSet = adapter.select("writer", null, pair);
+			ResultSet writerResultSet = adapter.select("writer", pair);
 			return new Writer(
 					writerResultSet.getInt("Id"),
 					writerResultSet.getString("name"),

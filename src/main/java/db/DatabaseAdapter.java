@@ -31,8 +31,14 @@ public interface DatabaseAdapter extends Closeable {
 
 	boolean update(
 			@NotNull @NonNls String tableName,
-			@Nullable Pair[] after,
+			@NotNull Pair[] after,
 			@Nullable Pair... where);
+
+	default boolean update(
+			@NotNull @NonNls String tableName,
+			@NotNull Pair[] after) {
+		return update(tableName, after, (Pair[]) null);
+	}
 
 	boolean delete(
 			@NotNull @NonNls String tableName,
@@ -78,6 +84,20 @@ public interface DatabaseAdapter extends Closeable {
 	@NotNull
 	default ResultSet select(
 			@NotNull @NonNls String tableName,
+			@Nullable Pair... where) {
+		return select(tableName, null, where);
+	}
+
+	@NotNull
+	default ResultSet select(
+			@NotNull @NonNls String tableName,
+			@Nullable Collection<Pair> where) {
+		return select(tableName, null, where);
+	}
+
+	@NotNull
+	default ResultSet select(
+			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@Nullable Collection<Pair> where) {
 		return select(
@@ -91,6 +111,10 @@ public interface DatabaseAdapter extends Closeable {
 
 	@NotNull
 	default ResultSet selectAll(@NotNull @NonNls String tableName) {
-		return select(tableName, null);
+		return select(
+				tableName,
+				null,
+				(Pair[]) null
+		);
 	}
 }

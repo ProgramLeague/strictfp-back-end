@@ -5,10 +5,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by Eldath on 2017/1/17 0017.
@@ -27,11 +24,14 @@ public class MySqlAdapter implements
 
 	@NotNull
 	private final Statement statement;
+	@NotNull
+	private final Connection connection;
 
-	private MySqlAdapter(String url) {
+	private MySqlAdapter(@NotNull @NonNls String url) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			statement = DriverManager.getConnection(url).createStatement();
+			connection = DriverManager.getConnection(url);
+			statement = connection.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("database cannot connect error!");
@@ -39,7 +39,7 @@ public class MySqlAdapter implements
 	}
 
 	@NotNull
-	static MySqlAdapter getInstance() {
+	public static MySqlAdapter getInstance() {
 		if (instance == null) instance = new MySqlAdapter(DEFAULT_URL);
 		return instance;
 	}
@@ -60,16 +60,20 @@ public class MySqlAdapter implements
 	@Override
 	public boolean update(
 			@NotNull @NonNls String tableName,
-			@Nullable Pair[] where,
-			@Nullable Pair... after) {
-		// TODO
+			@NotNull Pair[] after,
+			@Nullable Pair... where) {
 		try {
-			execSQL("UPDATE " +
-					tableName +
-					" SET " +
-					String.join(" , ", Pair.convert(after)) +
-					" WHERE " +
-					String.join(" , ", Pair.convert(where)));
+			StringBuilder boyNextDoor = new StringBuilder()
+					.append("UPDATE ")
+					.append(tableName)
+					.append(" SET ")
+					.append(String.join(" , ", Pair.convert(after)));
+			if (where != null) {
+				boyNextDoor
+						.append(" WHERE ")
+						.append(String.join(" , ", Pair.convert(where)));
+			}
+			execSQL(boyNextDoor.toString());
 			return true;
 		} catch (RuntimeException e) {
 			return false;
@@ -141,6 +145,7 @@ return statement.executeQuery("SELECT " +
 	public void close() {
 		try {
 			statement.close();
+			connection.close();
 			instance = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
