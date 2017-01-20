@@ -1,5 +1,6 @@
 package db.obj;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,9 +59,15 @@ public class Article {
 		this.writer = writer;
 	}
 
-	public static String dateParser(int dateInt) {
-		//TODO
-		return "TODO";
+	@NotNull
+	@Contract(pure = true)
+	public static String parseDate(int dateInt) {
+		return String.format(
+				"%d-%02d-%02d",
+				dateInt / 10000,
+				dateInt % 10000 / 100,
+				dateInt % 100
+		);
 	}
 
 	@NotNull
@@ -82,6 +89,7 @@ public class Article {
 		return id;
 	}
 
+	@NotNull
 	public String getPublishTime() {
 		return publishTime;
 	}

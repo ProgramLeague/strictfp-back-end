@@ -1,7 +1,5 @@
 package db;
 
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +16,4 @@ public class DatabaseAdapterTest {
 		assertEquals(1, 1);
 	}
 
-	public static void main(@NotNull @NonNls String[] args) {
-	}
 }

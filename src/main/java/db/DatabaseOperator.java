@@ -36,7 +36,7 @@ public class DatabaseOperator {
 				tags1.add(new Tag(thisTag));
 			article = new Article(
 					resultSet.getInt("Id"),
-					Article.dateParser(resultSet.getInt("pdate")),
+					Article.parseDate(resultSet.getInt("pdate")),
 					writer,
 					tags1,
 					resultSet.getString("title"),
