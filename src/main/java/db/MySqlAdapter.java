@@ -39,7 +39,7 @@ public class MySqlAdapter implements
 	}
 
 	@NotNull
-	static MySqlAdapter getInstance() {
+	public static MySqlAdapter getInstance() {
 		if (instance == null) instance = new MySqlAdapter(DEFAULT_URL);
 		return instance;
 	}
@@ -72,7 +72,6 @@ public class MySqlAdapter implements
 				boyNextDoor
 						.append(" WHERE ")
 						.append(String.join(" , ", Pair.convert(where)));
-
 			}
 			execSQL(boyNextDoor.toString());
 			return true;

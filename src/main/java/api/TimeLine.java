@@ -30,6 +30,7 @@ public class TimeLine extends HttpServlet {
 			@NotNull HttpServletResponse response)
 			throws ServletException, IOException {
 		// 接受参数ܲ
+		response.setCharacterEncoding("utf-8");
 		long start = Long.parseLong(request.getParameter("start"));
 		long end = Long.parseLong(request.getParameter("end"));
 		int timelineID = Integer.parseInt(request.getParameter("timelineid"));
@@ -37,10 +38,15 @@ public class TimeLine extends HttpServlet {
 		LocalDate endDate = LocalDate.ofEpochDay(end);
 		MySqlAdapter db = MySqlAdapter.getInstance();
 		Vector<String> articles = new Vector<>();
-		ResultSet allArticles = db.selectAll("articles");
+		try {
+			ResultSet allArticles = db.selectAll("articles");
+		} catch (RuntimeException ignored) {
+			// TODO handle the error case
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			return;
+		}
 		// 业务逻辑
 		// 返回内容
-		response.setCharacterEncoding("utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
