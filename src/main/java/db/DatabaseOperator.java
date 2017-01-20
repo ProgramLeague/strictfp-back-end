@@ -4,6 +4,8 @@ import db.obj.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -16,36 +18,32 @@ import java.util.Set;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class DatabaseOperator {
-	@NotNull
-	private static DatabaseAdapter adapter = MySqlAdapter.getInstance();
 
 	@Contract(pure = true)
 	@NotNull
 	public static Article getArticle(Pair... pair) {
-		try {
+		try (DatabaseAdapter adapter = MySqlAdapter.getInstance()) {
 			ResultSet resultSet = adapter.select("article", pair);
-			Article article;
-			String[] tags = resultSet
-					.getString("tags")
-					.split(",");
+			resultSet.next();
+			int Id = resultSet.getInt("Id");
+			String pDate = Article.parseDate(resultSet.getInt("pdate"));
+			Writer writer = getWriter(resultSet.getInt("writerId"));
+			String[] tags = resultSet.getString("tags").split(",");
 			Set<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
-			Writer writer = getWriter(resultSet.getInt("writerId"));
-			for (String thisTag : tags)
-				tags1.add(new Tag(thisTag));
-			article = new Article(
-					resultSet.getInt("Id"),
-					Article.parseDate(resultSet.getInt("pdate")),
-					writer,
-					tags1,
-					resultSet.getString("title"),
-					resultSet.getString("brief"),
-					resultSet.getString("content")
-			);
-			return article;
+			String title = resultSet.getString("title");
+			String brief = resultSet.getString("brief");
+			String content = resultSet.getString("content");
+			int up = resultSet.getInt("up");
+			int down = resultSet.getInt("down");
+			int click = resultSet.getInt("click");
+			resultSet.close();
+			return new Article(Id, pDate, writer, tags1, title, brief, content);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
+		} catch (IOException e) {
+			throw new RuntimeException("IO error", e);
 		}
 	}
 
@@ -58,17 +56,22 @@ public class DatabaseOperator {
 	@NotNull
 	@Contract(pure = true)
 	public static Writer getWriter(Pair... pair) {
+		DatabaseAdapter adapter = MySqlAdapter.getInstance();
 		try {
 			ResultSet writerResultSet = adapter.select("writer", pair);
-			return new Writer(
-					writerResultSet.getInt("Id"),
-					writerResultSet.getString("name"),
-					writerResultSet.getString("motto"),
-					writerResultSet.getURL("avasterURL"),
-					Genders.fromInt(writerResultSet.getInt("gender"))
-			);
+			writerResultSet.next();
+			int Id = writerResultSet.getInt("Id");
+			String name = writerResultSet.getString("name");
+			String motto = writerResultSet.getString("motto");
+			URL avatarURL = writerResultSet.getURL("avatarURL");
+			Gender gender = Genders.fromInt(writerResultSet.getInt("gender"));
+			writerResultSet.close();
+			adapter.close();
+			return new Writer(Id, name, motto, avatarURL, gender);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
+		} catch (IOException e) {
+			throw new RuntimeException("IO error", e);
 		}
 	}
 
