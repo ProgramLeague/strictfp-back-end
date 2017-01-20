@@ -1,5 +1,8 @@
 package db.obj;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
@@ -7,18 +10,51 @@ import java.util.*;
  *
  * @author Eldath
  */
+@SuppressWarnings("WeakerAccess")
 public class Article {
-	private String content, title, brief;
 	private int up, down, chick, id;
-	private Writer writer;
 	private long publishTime;
-	private HashSet<Tag> tags;
+	private
+	@NotNull
+	Writer writer;
+	private
+	@NotNull
+	Set<Tag> tags;
+	private
+	@NotNull
+	@NonNls
+	String title;
+	private
+	@NotNull
+	@NonNls
+	String brief;
+	private
+	@NotNull
+	@NonNls
+	String content;
 
-	public Article(int id, long publishTime, Writer writer, HashSet<Tag> tags, String title, String brief, String content) {
+	public Article(
+			int id,
+			long publishTime,
+			@NotNull Writer writer,
+			@NotNull Set<Tag> tags,
+			@NotNull @NonNls String title,
+			@NotNull @NonNls String brief,
+			@NotNull @NonNls String content) {
 		this(id, publishTime, writer, tags, title, brief, content, 0, 0, 0);
 	}
 
-	public Article(int id, long publishTime, Writer writer, HashSet<Tag> tags, String title, String brief, String content, int up, int down, int chick) {
+	public Article(
+			int id,
+			long publishTime,
+			@NotNull Writer writer,
+			@NotNull Set<Tag> tags,
+			@NotNull @NonNls String title,
+			@NotNull @NonNls String brief,
+			@NotNull @NonNls String content,
+			int up,
+			int down,
+			int chick) {
 		this.brief = brief;
 		this.title = title;
 		this.tags = tags;
@@ -31,16 +67,18 @@ public class Article {
 		this.writer = writer;
 	}
 
+	@NotNull
 	public String getTitle() {
 		return title;
 	}
 
+	@NotNull
 	public String getBrief() {
 		return brief;
 	}
 
-
-	public HashSet<Tag> getTags() {
+	@NotNull
+	public Set<Tag> getTags() {
 		return tags;
 	}
 
@@ -52,6 +90,7 @@ public class Article {
 		return publishTime;
 	}
 
+	@NotNull
 	public String getContent() {
 		return content;
 	}
@@ -68,6 +107,7 @@ public class Article {
 		return chick;
 	}
 
+	@NotNull
 	public Writer getWriter() {
 		return writer;
 	}

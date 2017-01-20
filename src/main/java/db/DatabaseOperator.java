@@ -23,15 +23,24 @@ public class DatabaseOperator {
 		try {
 			ResultSet resultSet = adapter.select("article", null, pair);
 			Article article;
-			String[] tags = resultSet.getString("tags").split(",");
-			HashSet<Tag> tags1 = new HashSet<>();
+			String[] tags = resultSet
+					.getString("tags")
+					.split(",");
+			Set<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
 			Writer writer = getWriter(resultSet.getInt("writerId"));
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
-			article = new Article(resultSet.getInt("Id"), resultSet.getInt("pdate"), writer, tags1,
-					resultSet.getString("title"), resultSet.getString("brief"), resultSet.getString("content"));
+			article = new Article(
+					resultSet.getInt("Id"),
+					resultSet.getInt("pdate"),
+					writer,
+					tags1,
+					resultSet.getString("title"),
+					resultSet.getString("brief"),
+					resultSet.getString("content")
+			);
 			return article;
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
@@ -45,9 +54,13 @@ public class DatabaseOperator {
 	public static Writer getWriter(Pair... pair) {
 		try {
 			ResultSet writerResultSet = adapter.select("writer", null, pair);
-			return new Writer(writerResultSet.getInt("Id"), writerResultSet.getString("name"),
-					writerResultSet.getString("motto"), writerResultSet.getURL("avasterURL"),
-					Genders.parseInt(writerResultSet.getInt("gender")));
+			return new Writer(
+					writerResultSet.getInt("Id"),
+					writerResultSet.getString("name"),
+					writerResultSet.getString("motto"),
+					writerResultSet.getURL("avasterURL"),
+					Genders.fromInt(writerResultSet.getInt("gender"))
+			);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
 		}

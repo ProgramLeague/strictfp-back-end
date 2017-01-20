@@ -108,8 +108,7 @@ public class MySqlAdapter implements
 			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@Nullable Pair... where) {
-		StringBuilder stringBuilder = new StringBuilder()
-				.append(getQueryString(tableName, columnName));
+		StringBuilder stringBuilder = new StringBuilder(getQueryString(tableName, columnName));
 		if (where != null) {
 			stringBuilder
 					.append(" WHERE ")

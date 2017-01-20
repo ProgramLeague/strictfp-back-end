@@ -2,6 +2,7 @@ package db.obj;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
@@ -12,14 +13,19 @@ import java.net.URL;
 public class Writer {
 
 	@NotNull
-	@Nls
-	private String name, motto;
-	private int Id;
+	@NonNls
+	private String name;
+	@NotNull
+	@NonNls
+	private String motto;
+	@NotNull
 	private URL avatarURL;
+	@NotNull
 	private Gender gender;
+	private int Id;
 
 	public Writer(
-			@NotNull int Id,
+			int Id,
 			@NotNull @Nls String name,
 			@NotNull @Nls String motto,
 			@NotNull URL avatarURL,
@@ -31,7 +37,7 @@ public class Writer {
 		this.gender = gender;
 	}
 
-	@NotNull
+	@Contract(pure = true)
 	public int getId() {
 		return Id;
 	}
@@ -61,19 +67,25 @@ public class Writer {
 	}
 }
 
+@SuppressWarnings("WeakerAccess")
 class Gender {
 	private int Int;
+	@NotNull
+	@NonNls
 	private String Eng;
 
-	public Gender(String eng, int gender) {
-		Eng=eng;
+	public Gender(@NotNull @NonNls String eng, int gender) {
+		Eng = eng;
 		Int = gender;
 	}
 
+	@Contract(pure = true)
 	public int getInt() {
 		return Int;
 	}
 
+	@NonNls
+	@NotNull
 	public String getEng() {
 		return Eng;
 	}
