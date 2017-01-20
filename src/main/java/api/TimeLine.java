@@ -48,18 +48,19 @@ public class TimeLine extends HttpServlet {
 			jsonObject.put("meta", status);
 			// 返回内容
 			response.setStatus(HttpServletResponse.SC_OK);
-			try (ServletOutputStream out = response.getOutputStream()) {
-				out.write(jsonObject.toString().getBytes());
-				out.flush();
-				out.close();
-			}
 		} catch (RuntimeException van) {
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 			status.put("message", "internal error: " + van.getMessage());
 			jsonObject.put("meta", status);
+			jsonObject.put("data", "_");
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
+		}
+		try (ServletOutputStream out = response.getOutputStream()) {
+			out.write(jsonObject.toString().getBytes());
+			out.flush();
+			out.close();
 		}
 	}
 }
