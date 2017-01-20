@@ -4,6 +4,7 @@ import db.DatabaseOperator;
 import db.obj.Pair;
 import db.obj.Writer;
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -36,6 +37,7 @@ public class User extends HttpServlet {
 			jsonObject.put("data", writer);
 			resp.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException re) {
+			LoggerFactory.getLogger(User.class).error("fatal error:", re);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 			status.put("message", "query user successfully");
 			jsonObject.put("meta", status);

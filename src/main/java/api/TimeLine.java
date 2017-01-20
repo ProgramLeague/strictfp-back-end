@@ -6,11 +6,11 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -50,6 +50,7 @@ public class TimeLine extends HttpServlet {
 			// 返回内容
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException van) {
+			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 			status.put("message", "internal error: " + van.getMessage());
 			jsonObject.put("meta", status);
@@ -58,10 +59,9 @@ public class TimeLine extends HttpServlet {
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
 		}
-		try (ServletOutputStream out = response.getOutputStream()) {
-			out.write(jsonObject.toString().getBytes());
-			out.flush();
-			out.close();
+		try (PrintWriter pw = response.getWriter()) {
+			pw.write(jsonObject.toString());
+			pw.flush();
 		}
 	}
 }
