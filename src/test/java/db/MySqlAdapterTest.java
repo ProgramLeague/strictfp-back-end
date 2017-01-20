@@ -59,7 +59,16 @@ public class MySqlAdapterTest {
 	@Test
 	@TestOnly
 	public void delete() throws Exception {
-
+		MySqlAdapter.getInstance().delete(
+				"article",
+				new Pair("Id", "=1")
+		);
+		/*
+		 * the above code shows how to delete elements from
+		 * a table.
+		 * I think you guys can understand that.
+		 * LOL
+		 */
 	}
 
 	@Test
