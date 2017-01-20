@@ -31,3 +31,6 @@ hs_err_pid*
 build/
 .idea/encodings.xml
 .idea/modules/
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
