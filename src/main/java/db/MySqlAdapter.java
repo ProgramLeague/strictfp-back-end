@@ -4,6 +4,8 @@ import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
@@ -14,6 +16,7 @@ import java.sql.*;
  */
 public class MySqlAdapter implements
 		DatabaseAdapter {
+	private static final Logger logger = LoggerFactory.getLogger(MySqlAdapter.class);
 	@Nullable
 	private static MySqlAdapter instance;
 
@@ -144,7 +147,7 @@ return statement.executeQuery("SELECT " +
 	public ResultSet querySQL(
 			@NotNull @NonNls String sql) {
 		try {
-			System.out.println(sql);
+			logger.info("Run SQL statement: " + sql);
 			return statement.executeQuery(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -155,7 +158,7 @@ return statement.executeQuery("SELECT " +
 	public boolean execSQL(
 			@NotNull @NonNls String sql) {
 		try {
-			System.out.println(sql);
+			logger.info("Run SQL statement: " + sql);
 			return statement.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();

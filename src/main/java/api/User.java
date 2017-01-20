@@ -1,6 +1,7 @@
 package api;
 
 import db.DatabaseOperator;
+import db.obj.Gender;
 import db.obj.Pair;
 import db.obj.Writer;
 import org.json.JSONObject;
@@ -31,10 +32,21 @@ public class User extends HttpServlet {
 		Map<String, String> status = new HashMap<>();
 		try {
 			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));
+			int Id = writer.getId();
+			String avatarURL = writer.getAvatarURL().toString();
+			Gender gender = writer.getGender();
+			String writerName = writer.getName();
+			String motto = writer.getMotto();
+			Map<String, String> writerInfo = new HashMap<>();
+			writerInfo.put("Id", String.valueOf(Id));
+			writerInfo.put("gender", String.valueOf(gender.getInt()));
+			writerInfo.put("name", writerName);
+			writerInfo.put("avatarURL", avatarURL);
+			writerInfo.put("motto", motto);
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "query user successfully");
 			jsonObject.put("meta", status);
-			jsonObject.put("data", writer);
+			jsonObject.put("data", writerInfo);
 			resp.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException re) {
 			LoggerFactory.getLogger(User.class).error("fatal error:", re);
