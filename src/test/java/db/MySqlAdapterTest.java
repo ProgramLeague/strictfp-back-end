@@ -9,6 +9,11 @@ import org.junit.Test;
  * @author ice1000
  */
 public class MySqlAdapterTest {
+	/**
+	 * test passed
+	 *
+	 * @throws Exception is a rubbish
+	 */
 	@Test
 	public void insert() throws Exception {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
@@ -28,6 +33,11 @@ public class MySqlAdapterTest {
 //		);
 	}
 
+	/**
+	 * test passed
+	 *
+	 * @throws Exception is a rubbish
+	 */
 	@Test
 	public void update() throws Exception {
 		MySqlAdapter.getInstance().update(

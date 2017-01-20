@@ -15,9 +15,7 @@ import static util.TestTools.run;
 public class ExampleTest {
 	@Test(timeout = 1000)
 	public void example() throws Exception {
-		run(10, () -> {
-			System.out.println("boy next door");
-		});
+		run(10, () -> System.out.println("boy next door"));
 		forceRun(() -> {
 			throw new SQLException();
 		});
