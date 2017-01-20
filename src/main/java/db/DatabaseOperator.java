@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Eldath on 2017/1/18 0018.
@@ -34,7 +35,7 @@ public class DatabaseOperator {
 			String[] tags = resultSet
 					.getString("tags")
 					.split(",");
-			HashSet<Tag> tags1 = new HashSet<>();
+			Set<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
 			ResultSet writerResultSet = adapter.select(
@@ -62,6 +63,7 @@ public class DatabaseOperator {
 			);
 			return article;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new RuntimeException("SQL error");
 		}
 	}
