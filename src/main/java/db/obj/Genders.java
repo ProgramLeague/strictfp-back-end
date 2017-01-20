@@ -26,7 +26,7 @@ public class Genders {
 
 	@Contract(pure = true)
 	@NotNull
-	public static Gender parseInt(int input) {
+	public static Gender fromInt(int input) {
 		if (input == 1) return MALE;
 		else if (input == -1) return FEMALE;
 		return SECRET;
