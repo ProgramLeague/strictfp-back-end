@@ -35,29 +35,29 @@ public class TimeLine extends HttpServlet {
 		int start = Integer.parseInt(request.getParameter("start"));
 		int end = Integer.parseInt(request.getParameter("end"));
 		JSONObject jsonObject = new JSONObject();
-		Map<String, String> status = new HashMap<>();
 		Vector<Article> articles = new Vector<>();
-		status.put("code", String.valueOf(HttpServletResponse.SC_OK));
-		status.put("message", "query timeline successfully");
-		jsonObject.put("meta", status);
-		for (int nowDate = start; nowDate <= end; ++nowDate)
-			articles.add(DatabaseOperator.getArticle(nowDate));
-		jsonObject.put("data", articles);
+		Map<String, String> status = new HashMap<>();
 		// 业务逻辑
-		//noinspection EmptyTryBlock
 		try {
 			// database operations
-		} catch (RuntimeException ignored) {
+			for (int nowDate = start; nowDate <= end; ++nowDate)
+				articles.add(DatabaseOperator.getArticle(nowDate));
+			jsonObject.put("data", articles);
+			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
+			status.put("message", "query timeline successfully");
+			jsonObject.put("meta", status);
+			// 返回内容
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (RuntimeException van) {
+			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
+			status.put("message", "internal error: " + van.getMessage() );
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
-			return;
 		}
-		// 返回内容
 		try (ServletOutputStream out = response.getOutputStream()) {
 			out.write(jsonObject.toString().getBytes());
 			out.flush();
 			out.close();
 		}
-		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
