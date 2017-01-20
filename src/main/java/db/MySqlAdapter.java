@@ -14,6 +14,7 @@ import java.sql.*;
  *
  * @author Eldath
  */
+@SuppressWarnings("WeakerAccess")
 public class MySqlAdapter implements
 		DatabaseAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(MySqlAdapter.class);
