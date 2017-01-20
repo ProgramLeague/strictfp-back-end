@@ -6,11 +6,12 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -59,9 +60,12 @@ public class TimeLine extends HttpServlet {
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
 		}
-		try (PrintWriter pw = response.getWriter()) {
-			pw.write(jsonObject.toString());
-			pw.flush();
+		response.setContentType("application/json"); // specific content type
+		response.setCharacterEncoding("utf-8");
+		try (ServletOutputStream out = response.getOutputStream()) { // standardize , normalize it;s good! believe me =-=
+			out.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
+			out.flush();
+			out.close();
 		}
 	}
 }

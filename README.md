@@ -1,11 +1,11 @@
 # StrictFP-Back-End
 
-## ¿ª·¢ÐëÖª
-0. ´úÂëÃÜ¼¯´¦×¢ÒâÁé»îÊ¹ÓÃ¿ÕÐÐ¡£
-1. Ê¹ÓÃÐ¡ÍÕ·åÃüÃû·¨£¬ÐÎÈç`` thisLine, thisFile ``¡£
-2. ×ñÊØJavaÃüÃû¹æ·¶£¬°üÃûÈ«Ð¡Ð´£¬ÀàÃûÊ××ÖÄ¸´óÐ´¡£
-3. ´óÐÍÖØ¹¹Îñ±ØÍ¨Öª @Eldath ºÍ @ice1000¡£
-4. ËùÓÐAPIÇëÖÃÓÚ``api``°üÖÐ£¬APIÎÄµµÇë¼û[ÕâÀï](https://github.com/ProgramLeague/strictfp/blob/hexo/source/_posts/apis_def.md)¡£
-5. Êý¾Ý¿â½á¹¹Í¼Çë¼û[ÕâÀï](https://www.processon.com/view/link/587ef0a9e4b049e7959d88d5)¡££¨¸öÈËÈÏÎª»Ò³£²»ÐÐ£¬ÓÐ½¨ÒéÇëÌá³ö£©
-6. ¾¡¿ÉÄÜ¼ò»¯±í´ïÊ½¡£²»ÒªÈÃÀàËÆif (a == true)µÄÕâÖÖÀ¬»ø³öÏÖ¡£
-7. ÄÜ²»ÉùÃ÷±äÁ¿¾Í²»ÉùÃ÷±äÁ¿¡£»ð³µ±í´ïÊ½¿É¶ÁÐÔ²¢²»µÍ¡£
+## å¼€å‘é¡»çŸ¥
+0. ä»£ç å¯†é›†å¤„æ³¨æ„çµæ´»ä½¿ç”¨ç©ºè¡Œã€‚
+1. ä½¿ç”¨å°é©¼å³°å‘½åæ³•ï¼Œå½¢å¦‚`` thisLine, thisFile ``ã€‚
+2. éµå®ˆJavaå‘½åè§„èŒƒï¼ŒåŒ…åå…¨å°å†™ï¼Œç±»åé¦–å­—æ¯å¤§å†™ã€‚
+3. å¤§åž‹é‡æž„åŠ¡å¿…é€šçŸ¥ @Eldath å’Œ @ice1000ã€‚
+4. æ‰€æœ‰APIè¯·ç½®äºŽ``api``åŒ…ä¸­ï¼ŒAPIæ–‡æ¡£è¯·è§[è¿™é‡Œ](https://github.com/ProgramLeague/strictfp/blob/hexo/source/_posts/apis_def.md)ã€‚
+5. æ•°æ®åº“ç»“æž„å›¾è¯·è§[è¿™é‡Œ](https://www.processon.com/view/link/587ef0a9e4b049e7959d88d5)ã€‚ï¼ˆä¸ªäººè®¤ä¸ºç°å¸¸ä¸è¡Œï¼Œæœ‰å»ºè®®è¯·æå‡ºï¼‰
+6. å°½å¯èƒ½ç®€åŒ–è¡¨è¾¾å¼ã€‚ä¸è¦è®©ç±»ä¼¼if (a == true)çš„è¿™ç§åžƒåœ¾å‡ºçŽ°ã€‚
+7. èƒ½ä¸å£°æ˜Žå˜é‡å°±ä¸å£°æ˜Žå˜é‡ã€‚ç«è½¦è¡¨è¾¾å¼å¯è¯»æ€§å¹¶ä¸ä½Žã€‚
