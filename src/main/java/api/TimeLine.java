@@ -50,7 +50,8 @@ public class TimeLine extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException van) {
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
-			status.put("message", "internal error: " + van.getMessage() );
+			status.put("message", "internal error: " + van.getMessage());
+			jsonObject.put("meta", status);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
 		}
