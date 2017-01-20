@@ -31,7 +31,7 @@ public interface DatabaseAdapter extends Closeable {
 
 	boolean update(
 			@NotNull @NonNls String tableName,
-			@Nullable Pair[] after,
+			@NotNull Pair[] after,
 			@Nullable Pair... where);
 
 	boolean delete(
