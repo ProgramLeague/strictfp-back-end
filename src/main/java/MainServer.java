@@ -1,4 +1,5 @@
 import api.TimeLine;
+import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MainServer {
 	public static void main(@NotNull @NonNls String[] args) throws Exception {
+		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties");
 		Server server = new Server(80);
 		ServletContextHandler context =
 				new ServletContextHandler(ServletContextHandler.SESSIONS);

@@ -1,15 +1,17 @@
 package api;
 
-import db.MySqlAdapter;
+import db.DatabaseOperator;
+import db.obj.Article;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -30,16 +32,23 @@ public class TimeLine extends HttpServlet {
 			@NotNull HttpServletResponse response)
 			throws ServletException, IOException {
 		// 接受参数ܲ
-		long start = Long.parseLong(request.getParameter("start"));
-		long end = Long.parseLong(request.getParameter("end"));
-		int timelineID = Integer.parseInt(request.getParameter("timelineid"));
-		LocalDate startDate = LocalDate.ofEpochDay(start);
-		LocalDate endDate = LocalDate.ofEpochDay(end);
-		MySqlAdapter db = MySqlAdapter.getInstance();
-		Vector<String> articles = new Vector<>();
-		ResultSet allArticles = db.selectAll("articles");
+		int start = Integer.parseInt(request.getParameter("start"));
+		int end = Integer.parseInt(request.getParameter("end"));
+		JSONObject jsonObject = new JSONObject();
+		HashMap<String, String> status = new HashMap<>();
+		Vector<Article> articles = new Vector<>();
+		status.put("code", String.valueOf(HttpServletResponse.SC_OK));
+		status.put("message", "query timeline successfully");
+		jsonObject.put("meta", status);
+		for (int nowDate = start; nowDate <= end; nowDate++)
+			articles.add(DatabaseOperator.getArticle(nowDate));
+		jsonObject.put("data", articles);
 		// 业务逻辑
 		// 返回内容
+		try (ServletOutputStream out = response.getOutputStream()) {
+			out.write(jsonObject.toString().getBytes());
+			out.flush();
+		}
 		response.setCharacterEncoding("utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}

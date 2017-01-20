@@ -15,15 +15,11 @@ import java.util.HashSet;
  */
 public class DatabaseOperator {
 	@NotNull
-	private DatabaseAdapter adapter;
-
-	public DatabaseOperator(@NotNull DatabaseAdapter database) {
-		adapter = database;
-	}
+	private static DatabaseAdapter adapter = MySqlAdapter.getInstance();
 
 	@Contract(pure = true)
 	@NotNull
-	public Article getArticle(Pair... pair) {
+	public static Article getArticle(Pair... pair) {
 		try {
 			ResultSet resultSet = adapter.select("article", null, pair);
 			Article article;
@@ -42,11 +38,11 @@ public class DatabaseOperator {
 		}
 	}
 
-	public Article getArticle(int pDate) {
+	public static Article getArticle(int pDate) {
 		return getArticle(new Pair("padte", "=" + pDate));
 	}
 
-	public Writer getWriter(Pair... pair) {
+	public static Writer getWriter(Pair... pair) {
 		try {
 			ResultSet writerResultSet = adapter.select("writer", null, pair);
 			return new Writer(writerResultSet.getInt("Id"), writerResultSet.getString("name"),
@@ -57,7 +53,7 @@ public class DatabaseOperator {
 		}
 	}
 
-	public Writer getWriter(int Id) {
+	public static Writer getWriter(int Id) {
 		return getWriter(new Pair("Id", "=" + Id));
 	}
 }
