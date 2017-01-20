@@ -30,23 +30,24 @@ public class TimeLine extends HttpServlet {
 			@NotNull HttpServletResponse response)
 			throws ServletException, IOException {
 		// 接受参数ܲ
-		response.setCharacterEncoding("utf-8");
-		long start = Long.parseLong(request.getParameter("start"));
-		long end = Long.parseLong(request.getParameter("end"));
-		int timelineID = Integer.parseInt(request.getParameter("timelineid"));
-		LocalDate startDate = LocalDate.ofEpochDay(start);
-		LocalDate endDate = LocalDate.ofEpochDay(end);
-		MySqlAdapter db = MySqlAdapter.getInstance();
-		Vector<String> articles = new Vector<>();
-		try {
-			ResultSet allArticles = db.selectAll("articles");
-		} catch (RuntimeException ignored) {
-			// TODO handle the error case
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			return;
-		}
+		int start = Integer.parseInt(request.getParameter("start"));
+		int end = Integer.parseInt(request.getParameter("end"));
+		JSONObject jsonObject = new JSONObject();
+		HashMap<String, String> status = new HashMap<>();
+		Vector<Article> articles = new Vector<>();
+		status.put("code", String.valueOf(HttpServletResponse.SC_OK));
+		status.put("message", "query timeline successfully");
+		jsonObject.put("meta", status);
+		for (int nowDate = start; nowDate <= end; nowDate++)
+			articles.add(DatabaseOperator.getArticle(nowDate));
+		jsonObject.put("data", articles);
 		// 业务逻辑
 		// 返回内容
+		try (ServletOutputStream out = response.getOutputStream()) {
+			out.write(jsonObject.toString().getBytes());
+			out.flush();
+		}
+		response.setCharacterEncoding("utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
