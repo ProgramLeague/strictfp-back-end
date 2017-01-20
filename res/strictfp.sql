@@ -1,16 +1,9 @@
 ﻿# Host: localhost  (Version: 5.5.53)
-# Date: 2017-01-19 13:06:20
+# Date: 2017-01-20 10:58:15
 # Generator: MySQL-Front 5.3  (Build 4.234)
+# jdbc:mysql://localhost:3306/main
 
 /*!40101 SET NAMES utf8 */;
-
-#
-# Database "article"
-#
-
-CREATE DATABASE IF NOT EXISTS `article` /*!40100 DEFAULT CHARACTER SET utf8
-	COLLATE utf8_general_ci */;
-USE `article`;
 
 #
 # Structure for table "article"
@@ -21,7 +14,7 @@ CREATE TABLE `article` (
 	`Id`       INT(11) NOT NULL AUTO_INCREMENT,
 	`pdate`    TINYTEXT,
 	`writerId` INT(11) UNSIGNED DEFAULT '0',
-	`tags`     TINYTEXT,
+	`tags`     TINYTEXT COMMENT 'e.g. Tech,Music,Startalk',
 	`category` TINYTEXT,
 	`title`    TINYTEXT,
 	`brief`    TINYTEXT,
@@ -45,14 +38,6 @@ CREATE TABLE `article` (
 	ENABLE KEYS */;
 
 #
-# Database "writer"
-#
-
-CREATE DATABASE IF NOT EXISTS `writer` /*!40100 DEFAULT CHARACTER SET utf8
-	COLLATE utf8_general_ci */;
-USE `writer`;
-
-#
 # Structure for table "writer"
 #
 
@@ -66,7 +51,8 @@ CREATE TABLE `writer` (
 	PRIMARY KEY (`Id`)
 )
 	ENGINE = MyISAM
-	DEFAULT CHARSET = utf8;
+	DEFAULT CHARSET = utf8
+	ROW_FORMAT = DYNAMIC;
 
 #
 # Data for table "writer"
