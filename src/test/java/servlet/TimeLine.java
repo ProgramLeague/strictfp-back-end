@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class TimeLine {
 	public static void main(String[] args) throws IOException {
-		//使用jsoup获取jetty连接
+		//浣跨敤jsoup鑾峰彇jetty杩炴帴
 		Connection con = Jsoup.connect("http://localhost:80/api/v0/timeline").data("start", "20170101")
 				.data("end", "20170102").timeout(80000);
 		Document doc = con.get();

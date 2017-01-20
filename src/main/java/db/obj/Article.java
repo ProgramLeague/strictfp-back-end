@@ -71,47 +71,57 @@ public class Article {
 	}
 
 	@NotNull
+	@Contract(pure = true)
 	public String getTitle() {
 		return title;
 	}
 
 	@NotNull
+	@Contract(pure = true)
 	public String getBrief() {
 		return brief;
 	}
 
 	@NotNull
+	@Contract(pure = true)
 	public Set<Tag> getTags() {
 		return tags;
 	}
 
+	@Contract(pure = true)
 	public int getId() {
 		return id;
 	}
 
 	@NotNull
+	@Contract(pure = true)
 	public String getPublishTime() {
 		return publishTime;
 	}
 
 	@NotNull
+	@Contract(pure = true)
 	public String getContent() {
 		return content;
 	}
 
+	@Contract(pure = true)
 	public int getUpCount() {
 		return up;
 	}
 
+	@Contract(pure = true)
 	public int getDownCount() {
 		return down;
 	}
 
+	@Contract(pure = true)
 	public int getChickCount() {
 		return chick;
 	}
 
 	@NotNull
+	@Contract(pure = true)
 	public Writer getWriter() {
 		return writer;
 	}

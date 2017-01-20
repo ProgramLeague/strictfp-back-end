@@ -13,7 +13,7 @@ public class DatabaseAdapterTest {
 
 	@Test(timeout = 1000)
 	public void test() {
-		assertEquals(1, 1);
+		assertEquals(2, 1 + 1);
 	}
 
 }
