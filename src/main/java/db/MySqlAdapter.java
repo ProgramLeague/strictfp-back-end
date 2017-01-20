@@ -91,10 +91,15 @@ public class MySqlAdapter implements
 	public boolean delete(
 			@NotNull @NonNls String tableName,
 			@Nullable Pair... where) {
-		// TODO
 		try {
-			StringBuilder stringBuilder = new StringBuilder();
-			execSQL(stringBuilder.toString());
+			StringBuilder boyNextDoor = new StringBuilder("DELETE FROM ")
+					.append(tableName);
+			if (where != null) {
+				boyNextDoor
+						.append(" WHERE ")
+						.append(String.join(" , ", Pair.convert(where)));
+			}
+			execSQL(boyNextDoor.toString());
 			return true;
 		} catch (RuntimeException e) {
 			return false;
@@ -119,13 +124,13 @@ public class MySqlAdapter implements
 			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@Nullable Pair... where) {
-		StringBuilder stringBuilder = new StringBuilder(getQueryString(tableName, columnName));
+		StringBuilder deepDarkFantasy = new StringBuilder(getQueryString(tableName, columnName));
 		if (where != null) {
-			stringBuilder
+			deepDarkFantasy
 					.append(" WHERE ")
 					.append(String.join(" AND ", Pair.convert(where)));
 		}
-		return execSQL(stringBuilder.toString());
+		return execSQL(deepDarkFantasy.toString());
 /*
 return statement.executeQuery("SELECT " +
 		(columnName != null ? columnName : "*") +

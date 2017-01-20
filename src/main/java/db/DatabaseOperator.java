@@ -49,10 +49,14 @@ public class DatabaseOperator {
 		}
 	}
 
+	@NotNull
+	@Contract(pure = true)
 	public static Article getArticle(int pDate) {
 		return getArticle(new Pair("pdate", "=" + pDate));
 	}
 
+	@NotNull
+	@Contract(pure = true)
 	public static Writer getWriter(Pair... pair) {
 		try {
 			ResultSet writerResultSet = adapter.select("writer", pair);
@@ -68,6 +72,8 @@ public class DatabaseOperator {
 		}
 	}
 
+	@NotNull
+	@Contract(pure = true)
 	public static Writer getWriter(int Id) {
 		return getWriter(new Pair("Id", "=" + Id));
 	}

@@ -14,16 +14,13 @@ import java.util.Set;
 @SuppressWarnings("WeakerAccess")
 public class Article {
 	private int up, down, chick, id;
-	private
 	@NotNull
-	Writer writer;
-	private
+	private Writer writer;
 	@NotNull
-	Set<Tag> tags;
-	private
+	private Set<Tag> tags;
 	@NotNull
 	@NonNls
-	String title, publishTime, brief, content;
+	private String title, publishTime, brief, content;
 
 	public Article(
 			int id,
