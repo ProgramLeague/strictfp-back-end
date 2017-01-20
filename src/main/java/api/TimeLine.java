@@ -31,6 +31,7 @@ public class TimeLine extends HttpServlet {
 			@NotNull HttpServletRequest request,
 			@NotNull HttpServletResponse response) throws IOException {
 		// 接受参数ܲ
+		response.setCharacterEncoding("utf-8");
 		int start = Integer.parseInt(request.getParameter("start"));
 		int end = Integer.parseInt(request.getParameter("end"));
 		JSONObject jsonObject = new JSONObject();
@@ -43,13 +44,20 @@ public class TimeLine extends HttpServlet {
 			articles.add(DatabaseOperator.getArticle(nowDate));
 		jsonObject.put("data", articles);
 		// 业务逻辑
+		//noinspection EmptyTryBlock
+		try {
+			// database operations
+		} catch (RuntimeException ignored) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			// return error messages
+			return;
+		}
 		// 返回内容
 		try (ServletOutputStream out = response.getOutputStream()) {
 			out.write(jsonObject.toString().getBytes());
 			out.flush();
 			out.close();
 		}
-		response.setCharacterEncoding("utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
