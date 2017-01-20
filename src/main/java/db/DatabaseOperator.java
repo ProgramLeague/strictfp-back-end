@@ -22,12 +22,13 @@ public class DatabaseOperator {
 	@Contract(pure = true)
 	@NotNull
 	public static Article getArticle(Pair... pair) {
-		try (DatabaseAdapter adapter = MySqlAdapter.getInstance()) {
+		try {
+			DatabaseAdapter adapter = MySqlAdapter.getInstance();
 			ResultSet resultSet = adapter.select("article", pair);
 			resultSet.next();
 			int Id = resultSet.getInt("Id");
 			String pDate = Article.parseDate(resultSet.getInt("pdate"));
-			Writer writer = getWriter(resultSet.getInt("writerId"));
+			int writerId = resultSet.getInt("writerId");
 			String[] tags = resultSet.getString("tags").split(",");
 			Set<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
@@ -39,6 +40,8 @@ public class DatabaseOperator {
 			int down = resultSet.getInt("down");
 			int click = resultSet.getInt("click");
 			resultSet.close();
+			adapter.close();
+			Writer writer = getWriter(writerId);
 			return new Article(Id, pDate, writer, tags1, title, brief, content);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);

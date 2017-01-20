@@ -22,6 +22,7 @@ public class MainServer {
 				new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/api/v0");
 		server.setHandler(context);
+		server.setStopAtShutdown(true);
 		// 像下面这行一样
 		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
 		context.addServlet(new ServletHolder(new User()),"/user");
