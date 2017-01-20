@@ -23,46 +23,41 @@ public class DatabaseOperator {
 
 	@Contract(pure = true)
 	@NotNull
-	public Article getArticle(int Id) {
+	public Article getArticle(Pair... pair) {
 		try {
-			ResultSet resultSet = adapter.select(
-					"article",
-					null,
-					new Pair("Id", "=" + Id)
-			);
+			ResultSet resultSet = adapter.select("article", null, pair);
 			Article article;
-			String[] tags = resultSet
-					.getString("tags")
-					.split(",");
+			String[] tags = resultSet.getString("tags").split(",");
 			HashSet<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
-			ResultSet writerResultSet = adapter.select(
-					"writer",
-					null,
-					new Pair("Id", "=" + resultSet.getInt("writerId"))
-			);
-			Writer writer = new Writer(
-					writerResultSet.getInt("Id"),
-					writerResultSet.getString("name"),
-					writerResultSet.getString("motto"),
-					writerResultSet.getURL("avasterURL"),
-					Genders.parseInt(writerResultSet.getInt("gender"))
-			);
+			Writer writer = getWriter(resultSet.getInt("writerId"));
 			for (String thisTag : tags)
 				tags1.add(new Tag(thisTag));
-			article = new Article(
-					Id,
-					resultSet.getInt("pdate"),
-					writer,
-					tags1,
-					resultSet.getString("title"),
-					resultSet.getString("brief"),
-					resultSet.getString("content")
-			);
+			article = new Article(resultSet.getInt("Id"), resultSet.getInt("pdate"), writer, tags1,
+					resultSet.getString("title"), resultSet.getString("brief"), resultSet.getString("content"));
 			return article;
 		} catch (SQLException e) {
-			throw new RuntimeException("SQL error");
+			throw new RuntimeException("SQL error", e);
 		}
+	}
+
+	public Article getArticle(int pDate) {
+		return getArticle(new Pair("padte", "=" + pDate));
+	}
+
+	public Writer getWriter(Pair... pair) {
+		try {
+			ResultSet writerResultSet = adapter.select("writer", null, pair);
+			return new Writer(writerResultSet.getInt("Id"), writerResultSet.getString("name"),
+					writerResultSet.getString("motto"), writerResultSet.getURL("avasterURL"),
+					Genders.parseInt(writerResultSet.getInt("gender")));
+		} catch (SQLException e) {
+			throw new RuntimeException("SQL error", e);
+		}
+	}
+
+	public Writer getWriter(int Id) {
+		return getWriter(new Pair("Id", "=" + Id));
 	}
 }
