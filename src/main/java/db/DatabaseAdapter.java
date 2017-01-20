@@ -56,7 +56,7 @@ public interface DatabaseAdapter extends Closeable {
 			@NotNull @NonNls String tableName,
 			@Nullable @NonNls String columnName,
 			@NotNull @NonNls String extraInfo) {
-		return execSQL(getQueryString(tableName, columnName) + extraInfo);
+		return querySQL(getQueryString(tableName, columnName) + extraInfo);
 	}
 
 	@NonNls
@@ -107,7 +107,10 @@ public interface DatabaseAdapter extends Closeable {
 		);
 	}
 
-	ResultSet execSQL(@NotNull @NonNls String sql);
+	@NotNull
+	ResultSet querySQL(@NotNull @NonNls String sql);
+
+	boolean execSQL(@NotNull @NonNls String sql);
 
 	@NotNull
 	default ResultSet selectAll(@NotNull @NonNls String tableName) {

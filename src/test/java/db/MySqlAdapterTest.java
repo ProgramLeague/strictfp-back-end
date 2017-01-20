@@ -12,8 +12,18 @@ public class MySqlAdapterTest {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
 		adapter.insert(
 				"article",
-				""
+				"1,20170101,0,'Tech, Startalk','Tech','How to mo the older?','Tech you how to mo the older'," +
+						"'Mo is the best way to increase your knowledge.',10000,0,1000",
+				"2,20170101,0,'Tech, Startalk','Tech','How to mo the older?'," +
+						"'Tech you how to mo the older','Mo is the best way to increase your knowledge.',10000,0,10000"
 		);
+//		System.out.println("INSERT INTO `article` VALUES (" +
+//				"1,20170101,0,'Tech, Startalk','Tech','How to mo the older?','Tech you how to mo the older'," +
+//				"'Mo is the best way to increase your knowledge.',10000,0,1000" +
+//				"),(" +
+//				"2,20170101,0,'Tech, Startalk','Tech','How to mo the older?'," +
+//				"'Tech you how to mo the older','Mo is the best way to increase your knowledge.',10000,0,10000);"
+//		);
 	}
 
 	@Test

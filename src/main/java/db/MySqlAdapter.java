@@ -41,7 +41,7 @@ public class MySqlAdapter implements
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("database cannot connect error!");
+			throw new RuntimeException("cannot connect to the database!");
 		}
 	}
 
@@ -80,8 +80,7 @@ public class MySqlAdapter implements
 						.append(" WHERE ")
 						.append(String.join(" , ", Pair.convert(where)));
 			}
-			execSQL(boyNextDoor.toString());
-			return true;
+			return execSQL(boyNextDoor.toString());
 		} catch (RuntimeException e) {
 			return false;
 		}
@@ -99,8 +98,7 @@ public class MySqlAdapter implements
 						.append(" WHERE ")
 						.append(String.join(" , ", Pair.convert(where)));
 			}
-			execSQL(boyNextDoor.toString());
-			return true;
+			return execSQL(boyNextDoor.toString());
 		} catch (RuntimeException e) {
 			return false;
 		}
@@ -130,7 +128,7 @@ public class MySqlAdapter implements
 					.append(" WHERE ")
 					.append(String.join(" AND ", Pair.convert(where)));
 		}
-		return execSQL(deepDarkFantasy.toString());
+		return querySQL(deepDarkFantasy.toString());
 /*
 return statement.executeQuery("SELECT " +
 		(columnName != null ? columnName : "*") +
@@ -143,10 +141,22 @@ return statement.executeQuery("SELECT " +
 
 	@NotNull
 	@Override
-	public ResultSet execSQL(
+	public ResultSet querySQL(
 			@NotNull @NonNls String sql) {
 		try {
+			System.out.println(sql);
 			return statement.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("sql error!");
+		}
+	}
+
+	public boolean execSQL(
+			@NotNull @NonNls String sql) {
+		try {
+			System.out.println(sql);
+			return statement.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("sql error!");
