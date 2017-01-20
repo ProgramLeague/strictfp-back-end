@@ -9,21 +9,26 @@ import org.junit.Test;
 public class MySqlAdapterTest {
 	@Test
 	public void insert() throws Exception {
+		DatabaseAdapter adapter = MySqlAdapter.getInstance();
+		adapter.insert(
+				"article",
+				""
+		);
 	}
 
 	@Test
 	public void update() throws Exception {
 		MySqlAdapter.getInstance().update(
-				"items",
-				new Pair[]{new Pair("price", "= 233")},
-				new Pair("id", ">=100")
+				"article",
+				new Pair[]{new Pair("Id", "=100")},
+				new Pair("up", ">= 1")
 		);
 		/*
 		 * the above operation will generate query string as below
 		 * this is a simple example
 		 * but I think you can understand it
 		 */
-		String testStr = "UPDATE items SET price=233 WHERE id>=100";
+		String testStr = "UPDATE article SET Id=100 WHERE up>=1";
 	}
 
 	@Test
