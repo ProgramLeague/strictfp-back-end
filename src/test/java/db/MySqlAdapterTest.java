@@ -1,6 +1,7 @@
 package db;
 
 import db.obj.Pair;
+import org.jetbrains.annotations.TestOnly;
 import org.junit.Test;
 
 /**
@@ -15,6 +16,7 @@ public class MySqlAdapterTest {
 	 * @throws Exception is a rubbish
 	 */
 	@Test
+	@TestOnly
 	public void insert() throws Exception {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
 		adapter.insert(
@@ -39,6 +41,7 @@ public class MySqlAdapterTest {
 	 * @throws Exception is a rubbish
 	 */
 	@Test
+	@TestOnly
 	public void update() throws Exception {
 		MySqlAdapter.getInstance().update(
 				"article",
@@ -54,11 +57,13 @@ public class MySqlAdapterTest {
 	}
 
 	@Test
+	@TestOnly
 	public void delete() throws Exception {
 
 	}
 
 	@Test
+	@TestOnly
 	public void select() throws Exception {
 
 	}
