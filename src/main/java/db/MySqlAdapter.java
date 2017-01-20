@@ -20,7 +20,7 @@ public class MySqlAdapter implements
 	@NotNull
 	@NonNls
 	private static final String DEFAULT_URL =
-			"jdbc:mysql://localhost:3306/strictfp";
+			"jdbc:mysql://localhost:3306/strictfp?serverTimezone=UTC";
 	@NotNull
 	@NonNls
 	private static final String user = "root";
