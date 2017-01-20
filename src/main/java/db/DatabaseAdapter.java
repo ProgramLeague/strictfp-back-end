@@ -15,7 +15,7 @@ import java.util.Collection;
  * @author Eldath
  */
 @SuppressWarnings("SameParameterValue")
-public interface DatabaseAdapterInterface extends Closeable {
+public interface DatabaseAdapter extends Closeable {
 
 	/**
 	 * @param tableName table name

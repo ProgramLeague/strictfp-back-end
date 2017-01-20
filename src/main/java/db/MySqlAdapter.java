@@ -16,21 +16,22 @@ import java.sql.Statement;
  * @author Eldath
  */
 public class MySqlAdapter implements
-		DatabaseAdapterInterface {
+		DatabaseAdapter {
 	@Nullable
 	private static MySqlAdapter instance;
 
 	@NotNull
 	@NonNls
-	private static final String URL = "jdbc:mysql";
+	private static final String DEFAULT_URL =
+			"jdbc:mysql://localhost:3306/main";
 
 	@NotNull
 	private final Statement statement;
 
-	private MySqlAdapter() {
+	private MySqlAdapter(String url) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			statement = DriverManager.getConnection(URL).createStatement();
+			statement = DriverManager.getConnection(url).createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("database cannot connect error!");
@@ -39,7 +40,7 @@ public class MySqlAdapter implements
 
 	@NotNull
 	static MySqlAdapter getInstance() {
-		if (instance == null) instance = new MySqlAdapter();
+		if (instance == null) instance = new MySqlAdapter(DEFAULT_URL);
 		return instance;
 	}
 
@@ -141,6 +142,7 @@ return statement.executeQuery("SELECT " +
 	public void close() {
 		try {
 			statement.close();
+			instance = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("sql error!");
