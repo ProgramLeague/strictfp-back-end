@@ -112,13 +112,13 @@ public class CheckCert extends HttpServlet {
 		if (introduce.length() >= 0xFFFF) errorMessage.add("introduce length must less than " + 0xFFFF);
 		// verify account
 		if (!zhihu_username.equals("_"))
-			if (VerifyAccount.getInstance().verityZhihuAccount(zhihu_username))
+			if (VerifyAccount.getInstance().verifyZhihuAccount(zhihu_username))
 				errorMessage.add("no such zhihu account");
 		if (!github_username.equals("_"))
-			if (VerifyAccount.getInstance().verityGitHubAccount(github_username))
+			if (VerifyAccount.getInstance().verifyGitHubAccount(github_username))
 				errorMessage.add("no such github account");
 		if (!stackoverflow_username.equals("_"))
-			if (VerifyAccount.getInstance().verityStackOverFlowAccount(stackoverflow_username))
+			if (VerifyAccount.getInstance().verifyStackOverFlowAccount(stackoverflow_username))
 				errorMessage.add("no such stackoverflow account");
 	}
 }

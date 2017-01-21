@@ -56,7 +56,7 @@ public class VerifyAccount {
 		return result;
 	}
 
-	public boolean verityZhihuImportance(@NotNull @NonNls String username) {
+	public boolean verifyZhihuImportance(@NotNull @NonNls String username) {
 		// FIXME 如果这人的 粉丝数>=50 && 赞数>=40 则返回true，否则返回false。
 		try {
 			Document page = Jsoup.parse(new URL(new StringBuffer("https://www.zhihu.com/people/")
@@ -73,40 +73,50 @@ public class VerifyAccount {
 		}
 	}
 
-	public boolean verityStackOverFlowImportance(@NotNull @NonNls String username) {
-		// FIXME 如果这人的 回答数>=5 则返回true，否则返回false。
-		// 可以参考：https://api.stackexchange.com/docs
-		return true;
-	}
-
-	public boolean verityZhihuAccount(@NotNull @NonNls String username) {
-		return verity("https://www.zhihu.com/people/", username);
-	}
-
-	public boolean verityStackOverFlowAccount(@NotNull @NonNls String username) {
+	public boolean verifyStackOverFlowImportance(@NotNull @NonNls String username) {
 		try {
-			String url = apiRoot + String.format("users?inname=%s&site=stackoverflow", username);
-			System.out.println(url);
+			String url = apiRoot + String.format("users?order=asc&min=%s&max=%s&sort=name&inname=%s&site=stackoverflow&filter=!9YdnSAffT", username,username,username);
 			HttpURLConnection conn = HttpURLConnection.class.cast(new URL(url).openConnection());
 			JSONTokener tokener = new JSONTokener(new GZIPInputStream(conn.getInputStream())); // note that it was compressed
-			conn.disconnect();
 			JSONObject object = JSONObject.class.cast(tokener.nextValue());
+			conn.disconnect();
 			if(object.getJSONArray("items").length() == 0)
 				return false;
 			else{
-				// TODO needs to verify
+				JSONObject user = JSONObject.class.cast(object.getJSONArray("items").get(0));
+				return user.getInt("answer_count") >= 5;
 			}
 		}catch (IOException e){
 			throw new RuntimeException("unable to fetch data from stackoverflow", e);
 		}
-		return true;
 	}
 
-	public boolean verityGitHubAccount(@NotNull @NonNls String username) {
-		return verity("https://github.com/", username);
+	public boolean verifyZhihuAccount(@NotNull @NonNls String username) {
+		return verify("https://www.zhihu.com/people/", username);
 	}
 
-	private boolean verity(
+	public boolean verifyStackOverFlowAccount(@NotNull @NonNls String username) {
+		try {
+			String url = apiRoot + String.format("users?order=asc&min=%s&max=%s&sort=name&inname=%s&site=stackoverflow", username,username,username);
+			HttpURLConnection conn = HttpURLConnection.class.cast(new URL(url).openConnection());
+			JSONTokener tokener = new JSONTokener(new GZIPInputStream(conn.getInputStream())); // note that it was compressed
+			JSONObject object = JSONObject.class.cast(tokener.nextValue());
+			conn.disconnect();
+			if(object.getJSONArray("items").length() == 0)
+				return false;
+			else{
+				return true;
+			}
+		}catch (IOException e){
+			throw new RuntimeException("unable to fetch data from stackoverflow", e);
+		}
+	}
+
+	public boolean verifyGitHubAccount(@NotNull @NonNls String username) {
+		return verify("https://github.com/", username);
+	}
+
+	private boolean verify(
 			@NotNull @NonNls String contextPath,
 			@NotNull @NonNls String username) {
 		try {
