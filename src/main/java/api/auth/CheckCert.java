@@ -68,6 +68,7 @@ public class CheckCert extends HttpServlet {
 		status.put("message", "verify user info successfully");
 		jsonObject.put("meta", status);
 		jsonObject.put("data", errorMessage);
+		resp.setContentType("application/json");
 		sos.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
 		sos.flush();
 		sos.close();

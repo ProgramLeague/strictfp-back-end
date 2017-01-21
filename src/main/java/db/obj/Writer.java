@@ -56,14 +56,14 @@ public class Writer {
 
 	@NotNull
 	@Contract(pure = true)
-	public URL getAvatarURL() {
+	public URL getAvatar() {
 		return avatarURL;
 	}
 
 	@NotNull
 	@Contract(pure = true)
-	public Gender getGender() {
-		return gender;
+	public int getGender() {
+		return gender.getInt();
 	}
 }
 

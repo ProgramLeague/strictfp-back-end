@@ -31,8 +31,8 @@ public class VerifyAccount {
 	}
 
 	public boolean verityStackOverFlowAccount(String username) {
-		//TODO ÕâÆÆÕ»Òç³öµÄµØÖ·²»ÊÇÖ±½Ó/user/XXX£¬ËüÊÇ/users/Ê²Ã´¹íÊı×Ö/XXX¡¢ÎÒµÄ·½·¨¾ÍÓÃ²»ÁËÁË¡£
-		//TODO ½»¸øÁ×°É£¡
+		//TODO è¿™ç ´æ ˆæº¢å‡ºçš„åœ°å€ä¸æ˜¯ç›´æ¥/user/XXXï¼Œå®ƒæ˜¯/users/ä»€ä¹ˆé¬¼æ•°å­—/XXXã€æˆ‘çš„æ–¹æ³•å°±ç”¨ä¸äº†äº†ã€‚
+		//TODO äº¤ç»™ç£·å§ï¼
 		return true;
 	}
 

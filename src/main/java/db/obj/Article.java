@@ -127,7 +127,7 @@ public class Article {
 
 	@NotNull
 	@Contract(pure = true)
-	public Writer getWriter() {
+	public Writer getAuthorInfo() {
 		return writer;
 	}
 }
