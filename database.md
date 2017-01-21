@@ -1,32 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-		"http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-	<title>strictfp</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="date" content="Sat, 21 Jan 2017 12:10:44 +0800">
-	<meta name="generator" content="MySQL-Front 5.3  (Build 4.234)">
-	<style type="text/css"><!--
-		body {font-family: Arial,Helvetica,sans-serif; font-size: 12px;}
-		h1 {font-size: 18px; text-decoration: bold;}
-		h2 {font-size: 16px; text-decoration: bold;}
-		h3 {font-size: 14px; text-decoration: bold;}
-		th,
-		td {font-size: 12px; border-color: #000000; border-style: solid; border-width: 1px; padding: 1px; font-weight: normal;}
-		code {font-size: 12px;}
-		.TableObject {border-collapse: collapse; border-color: #000000; font-family: Microsoft Sans Serif}
-		.TableData {border-collapse: collapse; border-color: #000000; font-family: Microsoft Sans Serif}
-		.TableHeader {border-color: #000000; text-decoration: bold; background-color: #e0e0e0;}
-		.StructureHeader {padding-left: 5px; text-align: left; border-color: #000000; text-decoration: bold;}
-		.Structure {text-align: left; border-color: #aaaaaa;}
-		.odd {}
-		.even {}
-		.DataHeader {padding-left: 5px; text-align: left; border-color: #000000; background-color: #e0e0e0;}
-		.Null {color: #999999;}
-		.PrimaryKey {font-weight: bold;}
-		.RightAlign {text-align: right;}
-	--></style>
-</head>
 <body>
 <h1 class="DatabaseTitle">数据库: strictfp</h1>
 <h2>表格: article</h2>
