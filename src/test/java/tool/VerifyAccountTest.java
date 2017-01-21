@@ -1,6 +1,5 @@
 package tool;
 
-import org.jetbrains.annotations.TestOnly;
 import org.junit.Test;
 
 /**
@@ -11,7 +10,8 @@ import org.junit.Test;
 public class VerifyAccountTest {
 	@Test
 	public void test() {
-		System.out.println(VerifyAccount.getInstance().verityGitHubAccount("Ray-Eldath"));
-		System.out.println(VerifyAccount.getInstance().verityZhihuAccount("ice1000"));
+		//System.out.println(VerifyAccount.getInstance().verityGitHubAccount("Ray-Eldath"));
+		//System.out.println(VerifyAccount.getInstance().verityZhihuAccount("ice1000"));
+		System.out.println(VerifyAccount.getInstance().verityStackOverFlowAccount("VonC"));
 	}
 }

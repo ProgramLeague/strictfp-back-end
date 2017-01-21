@@ -59,6 +59,7 @@ public class MySqlAdapter implements
 	public boolean insert(
 			@NotNull @NonNls String tableName,
 			@NotNull @NonNls String... value) {
+		// TODO unsafe , needs to be fixed - phosphorus15
 		try {
 			String boyNextDoor = "INSERT INTO " + tableName + " VALUES ( ";
 			for (String val : value) execSQL(boyNextDoor + val + " )");
