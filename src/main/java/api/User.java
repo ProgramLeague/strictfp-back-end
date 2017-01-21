@@ -3,6 +3,7 @@ package api;
 import db.DatabaseOperator;
 import db.obj.Pair;
 import db.obj.Writer;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,10 @@ public class User extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(
+			@NotNull HttpServletRequest req,
+			@NotNull HttpServletResponse resp
+	) throws ServletException, IOException {
 		String name = req.getParameter("name");
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();

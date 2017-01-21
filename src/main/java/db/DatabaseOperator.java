@@ -2,6 +2,7 @@ package db;
 
 import db.obj.*;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +20,7 @@ import java.util.Set;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class DatabaseOperator {
 
+	@Nullable
 	@Contract(pure = true)
 	public static Article getArticle(Pair... pair) {
 		try {
@@ -43,10 +45,10 @@ public class DatabaseOperator {
 			Writer writer = getWriter(writerId);
 			if (writer == null) return null;
 			return new Article(Id, pDate, writer, tags1, title, brief, content);
-		} catch (SQLException e) {
-			throw new RuntimeException("SQL error", e);
-		} catch (IOException e) {
-			throw new RuntimeException("IO error", e);
+		} catch (SQLException | IOException e) {
+			// 我觉得不应该因为出错就停止，而是返回一个错误的值。
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -55,6 +57,7 @@ public class DatabaseOperator {
 		return getArticle(new Pair("pdate", "=" + "\"" + pDate.toString() + "\""));
 	}
 
+	@Nullable
 	@Contract(pure = true)
 	public static Writer getWriter(Pair... pair) {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
@@ -69,10 +72,10 @@ public class DatabaseOperator {
 			writerResultSet.close();
 			adapter.close();
 			return new Writer(Id, name, motto, avatarURL, gender);
-		} catch (SQLException e) {
-			throw new RuntimeException("SQL error", e);
-		} catch (IOException e) {
-			throw new RuntimeException("IO error", e);
+		} catch (SQLException ignored) {
+			throw new RuntimeException("SQL error", ignored);
+		} catch (IOException ignored) {
+			throw new RuntimeException("IO error", ignored);
 		}
 	}
 
