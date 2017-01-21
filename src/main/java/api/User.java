@@ -35,7 +35,8 @@ public class User extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		try {
-			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));//TODO: check sql injection possibility
+			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));
+			//TODO: check sql injection possibility
 			if (writer == null) throw new RuntimeException("No such user.");
 			// get info
 			int Id = writer.getId();

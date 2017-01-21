@@ -77,7 +77,6 @@ public class TimeLine extends HttpServlet {
 		}
 		// FIXME 非测试时移去注释
 		// response.setContentType("application/json"); // specific content type
-		response.setCharacterEncoding("utf-8");
 		try (ServletOutputStream out = response.getOutputStream()) { // standardize , normalize it's good! believe me =-=
 			out.write(json.toString().getBytes(StandardCharsets.UTF_8));
 			out.flush();

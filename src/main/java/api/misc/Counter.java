@@ -1,5 +1,7 @@
 package api.misc;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,10 @@ import java.io.IOException;
  */
 public class Counter extends HttpServlet {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(
+			@NotNull HttpServletRequest req,
+			@NotNull HttpServletResponse resp
+	) throws ServletException, IOException {
 		String action = req.getParameter("action");
 		String counterPoolId = req.getParameter("counterpool");
 		String counterId = req.getParameter("counterid");

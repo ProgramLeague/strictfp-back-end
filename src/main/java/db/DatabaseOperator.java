@@ -62,11 +62,11 @@ public class DatabaseOperator {
 			ResultSet writerResultSet = adapter.select("writer", pair);
 			if (!writerResultSet.next()) return null;
 			int Id = writerResultSet.getInt("Id");
-			WriterType writerType = WriterTypes.formInt(writerResultSet.getInt("writertype"));
+			WriterType writerType = WriterType.fromInt(writerResultSet.getInt("writertype"));
 			String name = writerResultSet.getString("uname");
 			String motto = writerResultSet.getString("motto");
 			URL avatarURL = writerResultSet.getURL("avatarURL");
-			Gender gender = Genders.fromInt(writerResultSet.getInt("gender"));
+			Gender gender = Gender.fromInt(writerResultSet.getInt("gender"));
 			writerResultSet.close();
 			adapter.close();
 			return new Writer(Id, writerType, name, motto, avatarURL, gender);

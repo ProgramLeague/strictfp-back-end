@@ -13,7 +13,10 @@ public class Constant {
 		static {
 			EMPTY_OBJECT = new JSONObject();
 			//TODO: add string _ as PADDING. - Akari
+			// frog? I don't understand what does 'PADDING' mean.
+			// +1s
 		}
+
 		public static final JSONObject EMPTY_OBJECT;
 	}
 }

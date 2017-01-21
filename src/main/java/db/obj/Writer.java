@@ -8,9 +8,12 @@ import org.jetbrains.annotations.NotNull;
 import java.net.URL;
 
 /**
+ * TODO: such name may cause misunderstandings. 'Author' may be better. - Akari
+ * should we change the MySQL column name too? - ice1000
+ *
  * @author Eldath
  */
-//TODO: such name may cause misunderstandings. 'Author' may be better. - Akari
+@SuppressWarnings("unused")
 public class Writer {
 
 	@NotNull
@@ -23,9 +26,9 @@ public class Writer {
 	private URL avatarURL;
 	@NotNull
 	private Gender gender;
-	private int Id;
 	@NotNull
 	private WriterType writerType;
+	private int Id;
 
 	public Writer(
 			int Id,
@@ -70,7 +73,6 @@ public class Writer {
 		return writerType;
 	}
 
-	@NotNull
 	@Contract(pure = true)
 	public int getGender() {
 		return gender.getInt();
