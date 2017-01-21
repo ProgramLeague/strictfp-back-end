@@ -1,5 +1,7 @@
 package api;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +18,17 @@ public class Test extends HttpServlet {
 	public Test(){}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(
+			@NotNull HttpServletRequest req,
+			@NotNull HttpServletResponse resp
+	) throws ServletException, IOException {
 		ServletOutputStream sos=resp.getOutputStream();
 		resp.setContentType("text/plain");
 		sos.println("bibibi");
 		sos.flush();
 		try {
 			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException ignored) {
 		}
 		sos.println("bobobo");
 		sos.flush();
