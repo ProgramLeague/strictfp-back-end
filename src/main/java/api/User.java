@@ -40,7 +40,7 @@ public class User extends HttpServlet {
 			String writerName = writer.getName();
 			String motto = writer.getMotto();
 			Map<String, String> writerInfo = new HashMap<>();
-			writerInfo.put("Id", String.valueOf(Id));
+			writerInfo.put("id", String.valueOf(Id));
 			writerInfo.put("gender", String.valueOf(gender.getInt()));
 			writerInfo.put("name", writerName);
 			writerInfo.put("avatarURL", avatarURL);
