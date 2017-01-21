@@ -8,6 +8,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by ice1000 on 2017/1/20.
+ *
+ * @author ice1000
  */
 public class ArticleTest {
 	@Test(timeout = 100)

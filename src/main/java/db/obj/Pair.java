@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Eldath
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Pair {
 	@NotNull
 	@NonNls

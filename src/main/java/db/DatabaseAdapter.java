@@ -14,7 +14,7 @@ import java.util.Collection;
  *
  * @author Eldath
  */
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings({"SameParameterValue", "WeakerAccess"})
 public interface DatabaseAdapter extends Closeable {
 
 	/**

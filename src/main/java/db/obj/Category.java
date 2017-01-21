@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Eldath
  */
+@SuppressWarnings("WeakerAccess")
 public class Category {
 	@NotNull
 	@NonNls

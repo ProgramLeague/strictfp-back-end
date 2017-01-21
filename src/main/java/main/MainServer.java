@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Eldath
  */
+@SuppressWarnings("WeakerAccess")
 public class MainServer {
 	public static void main(@NotNull @NonNls String[] args) throws Exception {
 		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties");

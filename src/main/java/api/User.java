@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,8 +58,10 @@ public class User extends HttpServlet {
 			jsonObject.put("data", "_");
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("application/json");
 		try (ServletOutputStream out = resp.getOutputStream()) {
-			out.write(jsonObject.toString().getBytes());
+			out.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8)); // how can you sure if it is not utf-8 ?
 			out.flush();
 			out.close();
 		}
