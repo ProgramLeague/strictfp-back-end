@@ -10,6 +10,7 @@ import java.net.URL;
 /**
  * @author Eldath
  */
+//TODO: such name may cause misunderstandings. 'Author' may be better. - Akari
 public class Writer {
 
 	@NotNull
