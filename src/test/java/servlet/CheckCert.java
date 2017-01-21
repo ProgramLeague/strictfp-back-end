@@ -7,6 +7,6 @@ package servlet;
  */
 public class CheckCert {
 	public static void main(String[] args) {
-		//FIXME 懒得写测试了。你们自己看着我其他的测试写吧
+		//FIXME 鎳掑緱鍐欐祴璇曚簡銆備綘浠嚜宸辩湅鐫�鎴戝叾浠栫殑娴嬭瘯鍐欏惂
 	}
 }
