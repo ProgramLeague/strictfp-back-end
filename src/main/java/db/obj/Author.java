@@ -8,13 +8,12 @@ import org.jetbrains.annotations.NotNull;
 import java.net.URL;
 
 /**
- * TODO: such name may cause misunderstandings. 'Author' may be better. - Akari
  * should we change the MySQL column name too? - ice1000
  *
  * @author Eldath
  */
 @SuppressWarnings("unused")
-public class Writer {
+public class Author {
 
 	@NotNull
 	@NonNls
@@ -30,7 +29,7 @@ public class Writer {
 	private WriterType writerType;
 	private int Id;
 
-	public Writer(
+	public Author(
 			int Id,
 			@NotNull WriterType writerType,
 			@NotNull @Nls String name,

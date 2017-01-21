@@ -40,9 +40,9 @@ public class DatabaseOperator {
 			int click = resultSet.getInt("click");
 			resultSet.close();
 			adapter.close();
-			Writer writer = getWriter(writerId);
-			if (writer == null) return null;
-			return new Article(Id, pDate, writer, tags1, title, brief, content);
+			Author author = getWriter(writerId);
+			if (author == null) return null;
+			return new Article(Id, pDate, author, tags1, title, brief, content);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
 		} catch (IOException e) {
@@ -56,7 +56,7 @@ public class DatabaseOperator {
 	}
 
 	@Contract(pure = true)
-	public static Writer getWriter(Pair... pair) {
+	public static Author getWriter(Pair... pair) {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
 		try {
 			ResultSet writerResultSet = adapter.select("writer", pair);
@@ -69,7 +69,7 @@ public class DatabaseOperator {
 			Gender gender = Gender.fromInt(writerResultSet.getInt("gender"));
 			writerResultSet.close();
 			adapter.close();
-			return new Writer(Id, writerType, name, motto, avatarURL, gender);
+			return new Author(Id, writerType, name, motto, avatarURL, gender);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
 		} catch (IOException e) {
@@ -78,7 +78,7 @@ public class DatabaseOperator {
 	}
 
 	@Contract(pure = true)
-	public static Writer getWriter(int Id) {
+	public static Author getWriter(int Id) {
 		return getWriter(new Pair("Id", "=" + Id));
 	}
 }

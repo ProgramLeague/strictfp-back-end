@@ -30,6 +30,18 @@ public class VerifyAccount {
 		return instance;
 	}
 
+	public boolean verityZhihuImportance(String username) {
+		// FIXME 如果这人的 粉丝数>=50 && 赞数>=40 则返回true，否则返回false。
+		// 可以参考：https://github.com/shanelau/zhihu
+		return true;
+	}
+
+	public boolean verityStackOverFlowImportance(String username) {
+		// FIXME 如果这人的 回答数>=5 则返回true，否则返回false。
+		// 可以参考：https://api.stackexchange.com/docs
+		return true;
+	}
+
 	public boolean verityZhihuAccount(String username) {
 		return verity("https://www.zhihu.com/people/", username);
 	}
