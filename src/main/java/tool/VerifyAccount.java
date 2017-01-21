@@ -1,5 +1,7 @@
 package tool;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,37 +27,40 @@ public class VerifyAccount {
 		//TODO
 	}
 
+	@NotNull
 	public static VerifyAccount getInstance() {
 		if (instance == null) instance = new VerifyAccount();
 		return instance;
 	}
 
-	public boolean verityZhihuImportance(String username) {
+	public boolean verityZhihuImportance(@NotNull @NonNls String username) {
 		// FIXME 如果这人的 粉丝数>=50 && 赞数>=40 则返回true，否则返回false。
 		// 可以参考：https://github.com/shanelau/zhihu
 		return true;
 	}
 
-	public boolean verityStackOverFlowImportance(String username) {
+	public boolean verityStackOverFlowImportance(@NotNull @NonNls String username) {
 		// FIXME 如果这人的 回答数>=5 则返回true，否则返回false。
 		// 可以参考：https://api.stackexchange.com/docs
 		return true;
 	}
 
-	public boolean verityZhihuAccount(String username) {
+	public boolean verityZhihuAccount(@NotNull @NonNls String username) {
 		return verity("https://www.zhihu.com/people/", username);
 	}
 
-	public boolean verityStackOverFlowAccount(String username) {
+	public boolean verityStackOverFlowAccount(@NotNull @NonNls String username) {
 		//TODO 这破栈溢出的地址不是直接/user/XXX，它是/users/什么鬼数字/XXX、我的方法就用不了了。交给磷吧！
 		return true;
 	}
 
-	public boolean verityGitHubAccount(String username) {
+	public boolean verityGitHubAccount(@NotNull @NonNls String username) {
 		return verity("https://github.com/", username);
 	}
 
-	private boolean verity(String contextPath, String username) {
+	private boolean verity(
+			@NotNull @NonNls String contextPath,
+			@NotNull @NonNls String username) {
 		try {
 			URL url = new URL(contextPath + username);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();

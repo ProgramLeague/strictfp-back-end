@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * @author Eldath
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Article {
 	private int up, down, click, id;
 	@NotNull

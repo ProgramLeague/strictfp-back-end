@@ -15,7 +15,7 @@ import java.util.Map;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class WriterType {
 	static {
-		HashMap<String, Boolean> normalPower = new HashMap<>();
+		Map<String, Boolean> normalPower = new HashMap<>();
 		normalPower.put("PUBLISH_ARTICLE", true);
 		normalPower.put("NON_EXAMINATION_PUBLISH_ARTICLE", false);
 		NORMAL_WRITER = new WriterType(normalPower);

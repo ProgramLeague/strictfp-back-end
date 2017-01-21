@@ -2,6 +2,7 @@ package api.auth;
 
 import db.DatabaseOperator;
 import db.obj.Pair;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
@@ -89,8 +90,14 @@ public class CheckCert extends HttpServlet {
 		sos.close();
 	}
 
-	private void verify(String username, String email, String zhihu_username, String github_username,
-	                    String stackoverflow_username, String brief, String introduce) {
+	private void verify(
+			@NotNull @NonNls String username,
+			@NotNull @NonNls String email,
+			@NotNull @NonNls String zhihu_username,
+			@NotNull @NonNls String github_username,
+			@NotNull @NonNls String stackoverflow_username,
+			@NotNull @NonNls String brief,
+			@NotNull @NonNls String introduce) {
 		//FIXME 就是我在群上说的想法。在这里告诉前端让它绘制一个等待界面，然后在本方法末尾放一个玩意告诉前端等待界面可以移除了。
 		// judge validity
 		if (DatabaseOperator.getWriter(new Pair("uname", "=\"" + username + "\"")) != null)
