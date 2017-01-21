@@ -2,6 +2,7 @@ package main;
 
 import api.TimeLine;
 import api.User;
+import api.misc.Heartbeat;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -29,6 +30,7 @@ public class MainServer {
 		// 像下面这行一样
 		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
 		context.addServlet(new ServletHolder(new User()), "/user");
+		context.addServlet(new ServletHolder(new Heartbeat()),"/misc/heartbeat");
 		server.start();
 		server.join();
 	}

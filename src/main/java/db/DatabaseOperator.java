@@ -62,7 +62,7 @@ public class DatabaseOperator {
 			ResultSet writerResultSet = adapter.select("writer", pair);
 			if (!writerResultSet.next()) return null;
 			int Id = writerResultSet.getInt("Id");
-			String name = writerResultSet.getString("name");
+			String name = writerResultSet.getString("uname");
 			String motto = writerResultSet.getString("motto");
 			URL avatarURL = writerResultSet.getURL("avatarURL");
 			Gender gender = Genders.fromInt(writerResultSet.getInt("gender"));
