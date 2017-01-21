@@ -2,6 +2,7 @@ package api.auth;
 
 import db.DatabaseOperator;
 import db.obj.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
 import tool.VerifyAccount;
@@ -25,13 +26,18 @@ import java.util.regex.Pattern;
  * @author Eldath
  */
 public class CheckCert extends HttpServlet {
+	@NotNull
 	private Set<String> errorMessage = new HashSet<>();
 
 	public CheckCert() {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(
+			@NotNull HttpServletRequest req,
+			@NotNull HttpServletResponse resp)
+			throws ServletException, IOException {
+		// init
 		ServletOutputStream sos = resp.getOutputStream();
 		BASE64Decoder decoder = new BASE64Decoder();
 		JSONObject jsonObject = new JSONObject();
@@ -39,11 +45,23 @@ public class CheckCert extends HttpServlet {
 		// get info
 		String username = new String(decoder.decodeBuffer(req.getParameter("uname")), StandardCharsets.UTF_8);
 		String email = new String(decoder.decodeBuffer(req.getParameter("email")), StandardCharsets.UTF_8);
-		String zhihu_username = new String(decoder.decodeBuffer(req.getParameter("zhihu")));
-		String github_username = new String(decoder.decodeBuffer(req.getParameter("github")));
-		String stackoverflow_username = new String(decoder.decodeBuffer(req.getParameter("stackoverflow")));
-		String brief = new String(decoder.decodeBuffer(req.getParameter("brief")));
-		String introduce = new String(decoder.decodeBuffer(req.getParameter("introduce")));
+		String zhihu_username = new String(decoder.decodeBuffer(
+				req.getParameter("zhihu")),
+				StandardCharsets.UTF_8
+		);
+		String github_username = new String(decoder.decodeBuffer(
+				req.getParameter("github")),
+				StandardCharsets.UTF_8
+		);
+		String stackoverflow_username = new String(decoder.decodeBuffer(
+				req.getParameter("stackoverflow")),
+				StandardCharsets.UTF_8
+		);
+		String brief = new String(decoder.decodeBuffer(req.getParameter("brief")), StandardCharsets.UTF_8);
+		String introduce = new String(decoder.decodeBuffer(
+				req.getParameter("introduce")),
+				StandardCharsets.UTF_8
+		);
 		// verify info
 		verify(username, email, zhihu_username, github_username, stackoverflow_username, brief, introduce);
 		status.put("code", String.valueOf(HttpServletResponse.SC_OK));
