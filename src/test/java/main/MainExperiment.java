@@ -1,3 +1,5 @@
+package main;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -9,6 +11,7 @@ import java.net.URL;
 public class MainExperiment {
 
 	// 绝对不准弄Test！！！
+	// 好好好 你牛逼你牛逼
 	public static void main(String[] args) throws IOException {
 		URL url = new URL("https://www.zhihu.com/");
 		System.out.println(url.getProtocol());

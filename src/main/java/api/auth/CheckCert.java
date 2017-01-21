@@ -43,23 +43,32 @@ public class CheckCert extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		// get info
-		String username = new String(decoder.decodeBuffer(req.getParameter("uname")), StandardCharsets.UTF_8);
-		String email = new String(decoder.decodeBuffer(req.getParameter("email")), StandardCharsets.UTF_8);
-		String zhihu_username = new String(decoder.decodeBuffer(
-				req.getParameter("zhihu")),
+		String username = new String(
+				decoder.decodeBuffer(req.getParameter("uname")),
 				StandardCharsets.UTF_8
 		);
-		String github_username = new String(decoder.decodeBuffer(
-				req.getParameter("github")),
+		String email = new String(
+				decoder.decodeBuffer(req.getParameter("email")),
 				StandardCharsets.UTF_8
 		);
-		String stackoverflow_username = new String(decoder.decodeBuffer(
-				req.getParameter("stackoverflow")),
+		String zhihu_username = new String(
+				decoder.decodeBuffer(req.getParameter("zhihu")),
 				StandardCharsets.UTF_8
 		);
-		String brief = new String(decoder.decodeBuffer(req.getParameter("brief")), StandardCharsets.UTF_8);
-		String introduce = new String(decoder.decodeBuffer(
-				req.getParameter("introduce")),
+		String github_username = new String(
+				decoder.decodeBuffer(req.getParameter("github")),
+				StandardCharsets.UTF_8
+		);
+		String stackoverflow_username = new String(
+				decoder.decodeBuffer(req.getParameter("stackoverflow")),
+				StandardCharsets.UTF_8
+		);
+		String brief = new String(
+				decoder.decodeBuffer(req.getParameter("brief")),
+				StandardCharsets.UTF_8
+		);
+		String introduce = new String(
+				decoder.decodeBuffer(req.getParameter("introduce")),
 				StandardCharsets.UTF_8
 		);
 		// verify info
@@ -68,7 +77,6 @@ public class CheckCert extends HttpServlet {
 		status.put("message", "verify user info successfully");
 		jsonObject.put("meta", status);
 		jsonObject.put("data", errorMessage);
-		resp.setContentType("application/json");
 		sos.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
 		sos.flush();
 		sos.close();
