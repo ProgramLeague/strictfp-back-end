@@ -42,7 +42,7 @@ public class TimeLine extends HttpServlet {
 		Vector<Article> articles = new Vector<>();
 		Map<String, String> status = new HashMap<>();
 		try {
-			// database operations
+			// get info
 			for (LocalDate nowDate = start;
 			     nowDate.isBefore(end) || nowDate.isEqual(end);
 			     nowDate = nowDate.plusDays(1)) {
@@ -51,10 +51,11 @@ public class TimeLine extends HttpServlet {
 				articles.add(nowArticle);
 			}
 			if(articles.isEmpty()) throw new RuntimeException("no article now");
-			jsonObject.put("data", articles);
+			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "query timeline successfully");
 			jsonObject.put("meta", status);
+			jsonObject.put("data", articles);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException van) {
 			// report error

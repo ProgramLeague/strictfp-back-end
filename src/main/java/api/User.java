@@ -33,31 +33,38 @@ public class User extends HttpServlet {
 		Map<String, String> status = new HashMap<>();
 		try {
 			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));
-			if (writer != null) throw new RuntimeException("no such a user");
+			if (writer == null) throw new RuntimeException("no such a user");
+			// get info
 			int Id = writer.getId();
 			String avatarURL = writer.getAvatarURL().toString();
 			Gender gender = writer.getGender();
 			String writerName = writer.getName();
 			String motto = writer.getMotto();
+			// build map
 			Map<String, String> writerInfo = new HashMap<>();
 			writerInfo.put("id", String.valueOf(Id));
 			writerInfo.put("gender", String.valueOf(gender.getInt()));
 			writerInfo.put("name", writerName);
 			writerInfo.put("avatarURL", avatarURL);
 			writerInfo.put("motto", motto);
+			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "query user successfully");
+			// build object
 			jsonObject.put("meta", status);
 			jsonObject.put("data", writerInfo);
 			resp.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException re) {
 			LoggerFactory.getLogger(User.class).error("fatal error:", re);
+			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 			status.put("message", "internal error: " + re.getMessage());
+			// build object
 			jsonObject.put("meta", status);
 			jsonObject.put("data", "_");
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
+		// write object
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("application/json");
 		try (ServletOutputStream out = resp.getOutputStream()) {
