@@ -3,6 +3,7 @@ package main;
 import api.Test;
 import api.TimeLine;
 import api.User;
+import api.auth.CheckCert;
 import api.misc.Heartbeat;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jetty.server.Server;
@@ -33,6 +34,7 @@ public class MainServer {
 		context.addServlet(new ServletHolder(new User()), "/user");
 		context.addServlet(new ServletHolder(new Heartbeat()), "/misc/heartbeat");
 		context.addServlet(new ServletHolder(new Test()), "/test");
+		context.addServlet(new ServletHolder(new CheckCert()), "/auth/check_cert");
 		server.start();
 		server.join();
 	}

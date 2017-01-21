@@ -33,7 +33,7 @@ public class VerifyAccount {
 	public boolean verityStackOverFlowAccount(String username) {
 		//TODO 这破栈溢出的地址不是直接/user/XXX，它是/users/什么鬼数字/XXX、我的方法就用不了了。
 		//TODO 交给磷吧！
-		return false;
+		return true;
 	}
 
 	public boolean verityGitHubAccount(String username) {
