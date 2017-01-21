@@ -26,8 +26,15 @@ import java.util.regex.Pattern;
  * @author Eldath
  */
 public class CheckCert extends HttpServlet {
+	static {
+		pattern = Pattern.compile(
+				"[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?"
+		);
+	}
+
 	@NotNull
 	private Set<String> errorMessage = new HashSet<>();
+	private static final Pattern pattern;
 
 	public CheckCert() {
 	}
@@ -88,17 +95,14 @@ public class CheckCert extends HttpServlet {
 		// judge validity
 		if (DatabaseOperator.getWriter(new Pair("uname", "=\"" + username + "\"")) != null)
 			errorMessage.add("user already exists");
-		if (email.length() >= 255) errorMessage.add("email length must less than 255");
-		if (!Pattern.compile("[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w]" +
-				"(?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?")
-				.matcher(email)
-				.find()) errorMessage.add("email illegal");
-		if (zhihu_username.length() >= 255) errorMessage.add("zhihu username length must less than 255");
-		if (github_username.length() >= 255) errorMessage.add("github username length must less than 255");
-		if (stackoverflow_username.length() >= 255)
+		if (email.length() >= 0xFF) errorMessage.add("email length must less than 255");
+		if (!pattern.matcher(email).find()) errorMessage.add("email illegal");
+		if (zhihu_username.length() >= 0xFF) errorMessage.add("zhihu username length must less than 255");
+		if (github_username.length() >= 0xFF) errorMessage.add("github username length must less than 255");
+		if (stackoverflow_username.length() >= 0xFF)
 			errorMessage.add("stackoverflow username length must less than 255");
-		if (brief.length() >= 255) errorMessage.add("brief length must less than 255");
-		if (introduce.length() >= 65535) errorMessage.add("introduce length must less than 65535");
+		if (brief.length() >= 0xFF) errorMessage.add("brief length must less than 255");
+		if (introduce.length() >= 0xFFFF) errorMessage.add("introduce length must less than " + 0xFFFF);
 		// verify account
 		if (!zhihu_username.equals("_"))
 			if (VerifyAccount.getInstance().verityZhihuAccount(zhihu_username))
