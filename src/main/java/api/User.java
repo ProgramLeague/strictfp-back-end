@@ -35,8 +35,8 @@ public class User extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		try {
-			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));
-			if (writer == null) throw new RuntimeException("no such a user");
+			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));//TODO: check sql injection possibility
+			if (writer == null) throw new RuntimeException("No such user.");
 			// get info
 			int Id = writer.getId();
 			String avatarURL = writer.getAvatar().toString();
@@ -48,11 +48,11 @@ public class User extends HttpServlet {
 			writerInfo.put("id", String.valueOf(Id));
 			writerInfo.put("gender", String.valueOf(genderInt));
 			writerInfo.put("name", writerName);
-			writerInfo.put("avatarURL", avatarURL);
+			writerInfo.put("avatar", avatarURL);
 			writerInfo.put("motto", motto);
 			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
-			status.put("message", "query user successfully");
+			status.put("message", "SUCCESS - query userinfo");
 			// build object
 			jsonObject.put("meta", status);
 			jsonObject.put("data", writerInfo);
@@ -61,10 +61,10 @@ public class User extends HttpServlet {
 			LoggerFactory.getLogger(User.class).error("fatal error:", re);
 			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
-			status.put("message", "internal error: " + re.getMessage());
+			status.put("message", "Internal server error: " + re.getMessage());
 			// build object
 			jsonObject.put("meta", status);
-			jsonObject.put("data", "_");
+			jsonObject.put("data", "_");//FIXME: replace with constant
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		// write object

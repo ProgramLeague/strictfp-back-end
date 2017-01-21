@@ -12,6 +12,7 @@ public class Constant {
 	public static final class JSON {
 		static {
 			EMPTY_OBJECT = new JSONObject();
+			//TODO: add string _ as PADDING. - Akari
 		}
 		public static final JSONObject EMPTY_OBJECT;
 	}
