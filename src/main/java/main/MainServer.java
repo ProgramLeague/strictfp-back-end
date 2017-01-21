@@ -1,5 +1,6 @@
 package main;
 
+import api.Test;
 import api.TimeLine;
 import api.User;
 import api.misc.Heartbeat;
@@ -30,7 +31,8 @@ public class MainServer {
 		// 像下面这行一样
 		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
 		context.addServlet(new ServletHolder(new User()), "/user");
-		context.addServlet(new ServletHolder(new Heartbeat()),"/misc/heartbeat");
+		context.addServlet(new ServletHolder(new Heartbeat()), "/misc/heartbeat");
+		context.addServlet(new ServletHolder(new Test()), "/test");
 		server.start();
 		server.join();
 	}
