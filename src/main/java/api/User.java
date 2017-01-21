@@ -63,7 +63,7 @@ public class User extends HttpServlet {
 		try (ServletOutputStream out = resp.getOutputStream()) {
 			out.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8)); // how can you sure if it is not utf-8 ?
 			out.flush();
-			out.close();
+			// out.close();
 		}
 	}
 }
