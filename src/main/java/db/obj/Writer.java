@@ -24,14 +24,18 @@ public class Writer {
 	@NotNull
 	private Gender gender;
 	private int Id;
+	@NotNull
+	private WriterType writerType;
 
 	public Writer(
 			int Id,
+			@NotNull WriterType writerType,
 			@NotNull @Nls String name,
 			@NotNull @Nls String motto,
 			@NotNull URL avatarURL,
 			@NotNull Gender gender) {
 		this.Id = Id;
+		this.writerType = writerType;
 		this.name = name;
 		this.motto = motto;
 		this.avatarURL = avatarURL;
@@ -59,6 +63,11 @@ public class Writer {
 	@Contract(pure = true)
 	public URL getAvatar() {
 		return avatarURL;
+	}
+
+	@NotNull
+	public WriterType getWriterType() {
+		return writerType;
 	}
 
 	@NotNull
