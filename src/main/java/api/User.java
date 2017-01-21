@@ -32,6 +32,7 @@ public class User extends HttpServlet {
 		Map<String, String> status = new HashMap<>();
 		try {
 			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));
+			if (writer != null) throw new RuntimeException("no such a user");
 			int Id = writer.getId();
 			String avatarURL = writer.getAvatarURL().toString();
 			Gender gender = writer.getGender();
@@ -51,7 +52,7 @@ public class User extends HttpServlet {
 		} catch (RuntimeException re) {
 			LoggerFactory.getLogger(User.class).error("fatal error:", re);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
-			status.put("message", "query user successfully");
+			status.put("message", "internal error: " + re.getMessage());
 			jsonObject.put("meta", status);
 			jsonObject.put("data", "_");
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

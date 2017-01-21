@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -31,25 +32,30 @@ public class TimeLine extends HttpServlet {
 	protected void doGet(
 			@NotNull HttpServletRequest request,
 			@NotNull HttpServletResponse response) throws IOException {
-		// 接受参数ܲ
 		response.setCharacterEncoding("utf-8");
-		int start = Integer.parseInt(request.getParameter("start"));
-		int end = Integer.parseInt(request.getParameter("end"));
+		request.setCharacterEncoding("utf-8");
+		LocalDate start = LocalDate.parse(request.getParameter("start"));
+		LocalDate end = LocalDate.parse(request.getParameter("end"));
 		JSONObject jsonObject = new JSONObject();
 		Vector<Article> articles = new Vector<>();
 		Map<String, String> status = new HashMap<>();
-		// 业务逻辑
 		try {
 			// database operations
-			for (int nowDate = start; nowDate <= end; ++nowDate)
-				articles.add(DatabaseOperator.getArticle(nowDate));
+			for (LocalDate nowDate = start;
+			     nowDate.isBefore(end) || nowDate.isEqual(end);
+			     nowDate = nowDate.plusDays(1)) {
+				Article nowArticle = DatabaseOperator.getArticle(nowDate);
+				if (nowArticle == null) break;
+				articles.add(nowArticle);
+			}
+			if(articles.isEmpty()) throw new RuntimeException("no article now");
 			jsonObject.put("data", articles);
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "query timeline successfully");
 			jsonObject.put("meta", status);
-			// 返回内容
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException van) {
+			// report error
 			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 			status.put("message", "internal error: " + van.getMessage());

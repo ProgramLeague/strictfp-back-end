@@ -2,12 +2,12 @@ package db;
 
 import db.obj.*;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,14 +20,13 @@ import java.util.Set;
 public class DatabaseOperator {
 
 	@Contract(pure = true)
-	@NotNull
 	public static Article getArticle(Pair... pair) {
 		try {
 			DatabaseAdapter adapter = MySqlAdapter.getInstance();
 			ResultSet resultSet = adapter.select("article", pair);
-			resultSet.next();
+			if (!resultSet.next()) return null;
 			int Id = resultSet.getInt("Id");
-			String pDate = Article.parseDate(resultSet.getInt("pdate"));
+			LocalDate pDate = resultSet.getDate("pdate").toLocalDate();
 			int writerId = resultSet.getInt("writerId");
 			String[] tags = resultSet.getString("tags").split(",");
 			Set<Tag> tags1 = new HashSet<>();
@@ -42,6 +41,7 @@ public class DatabaseOperator {
 			resultSet.close();
 			adapter.close();
 			Writer writer = getWriter(writerId);
+			if (writer == null) return null;
 			return new Article(Id, pDate, writer, tags1, title, brief, content);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
@@ -50,19 +50,17 @@ public class DatabaseOperator {
 		}
 	}
 
-	@NotNull
 	@Contract(pure = true)
-	public static Article getArticle(int pDate) {
-		return getArticle(new Pair("pdate", "=" + pDate));
+	public static Article getArticle(LocalDate pDate) {
+		return getArticle(new Pair("pdate", "=" + "\"" + pDate.toString() + "\""));
 	}
 
-	@NotNull
 	@Contract(pure = true)
 	public static Writer getWriter(Pair... pair) {
 		DatabaseAdapter adapter = MySqlAdapter.getInstance();
 		try {
 			ResultSet writerResultSet = adapter.select("writer", pair);
-			writerResultSet.next();
+			if (!writerResultSet.next()) return null;
 			int Id = writerResultSet.getInt("Id");
 			String name = writerResultSet.getString("name");
 			String motto = writerResultSet.getString("motto");
@@ -78,7 +76,6 @@ public class DatabaseOperator {
 		}
 	}
 
-	@NotNull
 	@Contract(pure = true)
 	public static Writer getWriter(int Id) {
 		return getWriter(new Pair("Id", "=" + Id));

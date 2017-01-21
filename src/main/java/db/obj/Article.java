@@ -4,6 +4,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,18 +15,21 @@ import java.util.Set;
  */
 @SuppressWarnings("WeakerAccess")
 public class Article {
-	private int up, down, chick, id;
+	private int up, down, click, id;
 	@NotNull
 	private Writer writer;
 	@NotNull
 	private Set<Tag> tags;
 	@NotNull
 	@NonNls
-	private String title, publishTime, brief, content;
+	private String title, brief, content;
+	@NotNull
+	@NonNls
+	private LocalDate publishDate;
 
 	public Article(
 			int id,
-			@NotNull @NonNls String publishTime,
+			@NotNull @NonNls LocalDate publishTime,
 			@NotNull Writer writer,
 			@NotNull Set<Tag> tags,
 			@NotNull @NonNls String title,
@@ -35,7 +40,7 @@ public class Article {
 
 	public Article(
 			int id,
-			@NotNull @NonNls String publishTime,
+			@NotNull @NonNls LocalDate publishTime,
 			@NotNull Writer writer,
 			@NotNull Set<Tag> tags,
 			@NotNull @NonNls String title,
@@ -43,16 +48,16 @@ public class Article {
 			@NotNull @NonNls String content,
 			int up,
 			int down,
-			int chick) {
+			int click) {
 		this.brief = brief;
 		this.title = title;
 		this.tags = tags;
 		this.id = id;
-		this.publishTime = publishTime;
+		this.publishDate = publishTime;
 		this.content = content;
 		this.up = up;
 		this.down = down;
-		this.chick = chick;
+		this.click = click;
 		this.writer = writer;
 	}
 
@@ -81,8 +86,11 @@ public class Article {
 
 	@NotNull
 	@Contract(pure = true)
-	public Set<Tag> getTags() {
-		return tags;
+	public Set<String> getTags() {
+		Set<String> tagSet = new HashSet<>();
+		for (Tag thisTag : tags)
+			tagSet.add(thisTag.getName());
+		return tagSet;
 	}
 
 	@Contract(pure = true)
@@ -92,8 +100,8 @@ public class Article {
 
 	@NotNull
 	@Contract(pure = true)
-	public String getPublishTime() {
-		return publishTime;
+	public LocalDate getcdate() {
+		return publishDate;
 	}
 
 	@NotNull
@@ -103,18 +111,18 @@ public class Article {
 	}
 
 	@Contract(pure = true)
-	public int getUpCount() {
+	public int getUp() {
 		return up;
 	}
 
 	@Contract(pure = true)
-	public int getDownCount() {
+	public int getDown() {
 		return down;
 	}
 
 	@Contract(pure = true)
-	public int getChickCount() {
-		return chick;
+	public int getClick() {
+		return click;
 	}
 
 	@NotNull

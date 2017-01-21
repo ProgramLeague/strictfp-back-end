@@ -49,7 +49,7 @@ public class MySqlAdapter implements
 	}
 
 	@NotNull
-	public static MySqlAdapter getInstance() {
+	static MySqlAdapter getInstance() {
 		if (instance == null) instance = new MySqlAdapter(DEFAULT_URL);
 		return instance;
 	}
@@ -77,11 +77,11 @@ public class MySqlAdapter implements
 					.append("UPDATE ")
 					.append(tableName)
 					.append(" SET ")
-					.append(String.join(" , ", Pair.convert(after)));
+					.append(String.join(" , ", (CharSequence[]) Pair.convert(after)));
 			if (where != null) {
 				boyNextDoor
 						.append(" WHERE ")
-						.append(String.join(" , ", Pair.convert(where)));
+						.append(String.join(" , ", (CharSequence[]) Pair.convert(where)));
 			}
 			return execSQL(boyNextDoor.toString());
 		} catch (RuntimeException e) {
@@ -99,7 +99,7 @@ public class MySqlAdapter implements
 			if (where != null) {
 				boyNextDoor
 						.append(" WHERE ")
-						.append(String.join(" , ", Pair.convert(where)));
+						.append(String.join(" , ", (CharSequence[]) Pair.convert(where)));
 			}
 			return execSQL(boyNextDoor.toString());
 		} catch (RuntimeException e) {
@@ -129,7 +129,7 @@ public class MySqlAdapter implements
 		if (where != null) {
 			deepDarkFantasy
 					.append(" WHERE ")
-					.append(String.join(" AND ", Pair.convert(where)));
+					.append(String.join(" AND ", (CharSequence[]) Pair.convert(where)));
 		}
 		return querySQL(deepDarkFantasy.toString());
 /*
