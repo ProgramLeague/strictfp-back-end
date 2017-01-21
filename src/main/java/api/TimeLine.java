@@ -5,13 +5,13 @@ import db.obj.Article;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
+import tool.Constant;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class TimeLine extends HttpServlet {
 		LocalDate end = LocalDate.parse(request.getParameter("end"));
 		JSONObject jsonObject = new JSONObject();
 		Vector<Article> articles = new Vector<>();
-		Map<String, String> status = new HashMap<>();
+		Map<String, Object> status = new HashMap<>();
 		try {
 			// get info
 			for (LocalDate nowDate = start;
@@ -50,10 +50,12 @@ public class TimeLine extends HttpServlet {
 				if (nowArticle == null) break;
 				articles.add(nowArticle);
 			}
-			if(articles.isEmpty()) throw new RuntimeException("no article now");
+			if (articles.isEmpty()) throw new RuntimeException("no article now");
 			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "query timeline successfully");
+			status.put("extra", Constant._EMPTY_OBJECT);
+			status.put("security", Constant._EMPTY_OBJECT);
 			jsonObject.put("meta", status);
 			jsonObject.put("data", articles);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -62,6 +64,8 @@ public class TimeLine extends HttpServlet {
 			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
 			status.put("message", "internal error: " + van.getMessage());
+			status.put("extra", Constant._EMPTY_OBJECT);
+			status.put("security", Constant._EMPTY_OBJECT);
 			jsonObject.put("meta", status);
 			jsonObject.put("data", "_");
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
