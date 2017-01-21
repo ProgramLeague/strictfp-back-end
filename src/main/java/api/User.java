@@ -31,7 +31,7 @@ public class User extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		try {
-			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));
+			Writer writer = DatabaseOperator.getWriter(new Pair("uname", "=" + name));
 			if (writer == null) throw new RuntimeException("no such a user");
 			// get info
 			int Id = writer.getId();
@@ -64,8 +64,7 @@ public class User extends HttpServlet {
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		// write object
-		resp.setCharacterEncoding("utf-8");
-		resp.setContentType("application/json");
+		// FIXME 生产环境移去注释 response.setContentType("application/json");
 		try (ServletOutputStream out = resp.getOutputStream()) {
 			out.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8)); // how can you sure if it is not utf-8 ?
 			out.flush();

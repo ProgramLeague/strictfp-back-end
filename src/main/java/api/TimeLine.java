@@ -54,8 +54,8 @@ public class TimeLine extends HttpServlet {
 			// build status
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "query timeline successfully");
-			status.put("extra", Constant.EMPTY_OBJECT);
-			status.put("security", Constant.EMPTY_OBJECT);
+			status.put("extra", Constant._EMPTY_OBJECT);
+			status.put("security", Constant._EMPTY_OBJECT);
 			jsonObject.put("meta", status);
 			jsonObject.put("data", articles);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -66,16 +66,15 @@ public class TimeLine extends HttpServlet {
 			status.put("message", "internal error: " + van.getMessage());
 			// 这里怎么整啊 没有EMPTY_OBJECT这种玩意啊。咋弄出来"extra": {}这种效果呢
 			// TODO fixed. delete this comment when you see it.
-			status.put("extra", Constant.EMPTY_OBJECT);
-			status.put("security", Constant.EMPTY_OBJECT);
+			status.put("extra", Constant._EMPTY_OBJECT);
+			status.put("security", Constant._EMPTY_OBJECT);
 			jsonObject.put("meta", status);
 			jsonObject.put("data", "_");
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
 		}
-		// FIXME 非测试时移去注释
-		// response.setContentType("application/json"); // specific content type
+		// FIXME 生产环境移去注释 response.setContentType("application/json"); // specific content type
 		response.setCharacterEncoding("utf-8");
 		try (ServletOutputStream out = response.getOutputStream()) { // standardize , normalize it's good! believe me =-=
 			out.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));

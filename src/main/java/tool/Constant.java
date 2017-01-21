@@ -9,8 +9,8 @@ import org.json.JSONObject;
  */
 public class Constant {
 	static {
-		EMPTY_OBJECT = new JSONObject();
+		_EMPTY_OBJECT = new JSONObject();
 	}
 
-	public static final JSONObject EMPTY_OBJECT;
+	public static final JSONObject _EMPTY_OBJECT;
 }
