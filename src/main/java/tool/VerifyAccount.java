@@ -14,8 +14,12 @@ import java.net.URL;
  * @author Eldath
  */
 public class VerifyAccount {
-	private static VerifyAccount instance = null;
-	private static Logger logger = LoggerFactory.getLogger(VerifyAccount.class);
+	static {
+		logger = LoggerFactory.getLogger(VerifyAccount.class);
+	}
+
+	private static VerifyAccount instance;
+	private static final Logger logger;
 
 	private VerifyAccount() {
 		//TODO
@@ -31,8 +35,7 @@ public class VerifyAccount {
 	}
 
 	public boolean verityStackOverFlowAccount(String username) {
-		//TODO 这破栈溢出的地址不是直接/user/XXX，它是/users/什么鬼数字/XXX、我的方法就用不了了。
-		//TODO 交给磷吧！
+		//TODO 这破栈溢出的地址不是直接/user/XXX，它是/users/什么鬼数字/XXX、我的方法就用不了了。交给磷吧！
 		return true;
 	}
 

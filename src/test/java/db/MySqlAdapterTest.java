@@ -9,6 +9,7 @@ import org.junit.Test;
  *
  * @author ice1000
  */
+@SuppressWarnings("unused")
 public class MySqlAdapterTest {
 	/**
 	 * test passed
