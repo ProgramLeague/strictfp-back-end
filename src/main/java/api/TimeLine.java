@@ -62,9 +62,9 @@ public class TimeLine extends HttpServlet {
 		} catch (RuntimeException van) {
 			// report error
 			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
-			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
+			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR + ".0"));
 			status.put("message", "internal error: " + van.getMessage());
-			status.put("extra", Constant._EMPTY_OBJECT);
+			//TODO 这里怎么整啊 没有EMPTY_OBJECT这种玩意啊。咋弄出来"extra": {}这种效果呢 status.put("extra", Constant._EMPTY_OBJECT);
 			status.put("security", Constant._EMPTY_OBJECT);
 			jsonObject.put("meta", status);
 			jsonObject.put("data", "_");
@@ -72,7 +72,7 @@ public class TimeLine extends HttpServlet {
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
 		}
-		response.setContentType("application/json"); // specific content type
+		// FIXME 非测试时移去注释 response.setContentType("application/json"); // specific content type
 		response.setCharacterEncoding("utf-8");
 		try (ServletOutputStream out = response.getOutputStream()) { // standardize , normalize it's good! believe me =-=
 			out.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));

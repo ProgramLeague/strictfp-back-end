@@ -1,7 +1,6 @@
 package api;
 
 import db.DatabaseOperator;
-import db.obj.Gender;
 import db.obj.Pair;
 import db.obj.Writer;
 import org.json.JSONObject;
@@ -36,14 +35,14 @@ public class User extends HttpServlet {
 			if (writer == null) throw new RuntimeException("no such a user");
 			// get info
 			int Id = writer.getId();
-			String avatarURL = writer.getAvatarURL().toString();
-			Gender gender = writer.getGender();
+			String avatarURL = writer.getAvatar().toString();
+			int genderInt = writer.getGender();
 			String writerName = writer.getName();
 			String motto = writer.getMotto();
 			// build map
 			Map<String, String> writerInfo = new HashMap<>();
 			writerInfo.put("id", String.valueOf(Id));
-			writerInfo.put("gender", String.valueOf(gender.getInt()));
+			writerInfo.put("gender", String.valueOf(genderInt));
 			writerInfo.put("name", writerName);
 			writerInfo.put("avatarURL", avatarURL);
 			writerInfo.put("motto", motto);

@@ -18,6 +18,7 @@ public class Test extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletOutputStream sos=resp.getOutputStream();
+		resp.setContentType("text/plain");
 		sos.println("bibibi");
 		sos.flush();
 		try {
