@@ -17,7 +17,7 @@ import java.util.Set;
 public class Article {
 	private int up, down, click, id;
 	@NotNull
-	private Writer writer;
+	private Author author;
 	@NotNull
 	private Set<Tag> tags;
 	@NotNull
@@ -30,18 +30,18 @@ public class Article {
 	public Article(
 			int id,
 			@NotNull @NonNls LocalDate publishTime,
-			@NotNull Writer writer,
+			@NotNull Author author,
 			@NotNull Set<Tag> tags,
 			@NotNull @NonNls String title,
 			@NotNull @NonNls String brief,
 			@NotNull @NonNls String content) {
-		this(id, publishTime, writer, tags, title, brief, content, 0, 0, 0);
+		this(id, publishTime, author, tags, title, brief, content, 0, 0, 0);
 	}
 
 	public Article(
 			int id,
 			@NotNull @NonNls LocalDate publishTime,
-			@NotNull Writer writer,
+			@NotNull Author author,
 			@NotNull Set<Tag> tags,
 			@NotNull @NonNls String title,
 			@NotNull @NonNls String brief,
@@ -58,7 +58,7 @@ public class Article {
 		this.up = up;
 		this.down = down;
 		this.click = click;
-		this.writer = writer;
+		this.author = author;
 	}
 
 	@NotNull
@@ -127,7 +127,7 @@ public class Article {
 
 	@NotNull
 	@Contract(pure = true)
-	public Writer getAuthorInfo() {
-		return writer;
+	public Author getAuthorInfo() {
+		return author;
 	}
 }

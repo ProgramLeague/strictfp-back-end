@@ -10,8 +10,8 @@ import java.net.URL;
 /**
  * @author Eldath
  */
-//TODO: such name may cause misunderstandings. 'Author' may be better. - Akari
-public class Writer {
+//advice accepted TODO: such name may cause misunderstandings. 'Author' may be better. - Akari
+public class Author {
 
 	@NotNull
 	@NonNls
@@ -27,7 +27,7 @@ public class Writer {
 	@NotNull
 	private WriterType writerType;
 
-	public Writer(
+	public Author(
 			int Id,
 			@NotNull WriterType writerType,
 			@NotNull @Nls String name,

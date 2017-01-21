@@ -82,7 +82,7 @@ CREATE TABLE `senior_writer_application` (
 )
 	ENGINE = MyISAM
 	DEFAULT CHARSET = utf8
-	COMMENT = 'The writer info that need check artificially.';
+	COMMENT = 'The author info that need check artificially.';
 
 #
 # Data for table "senior_writer_application"
@@ -94,11 +94,11 @@ CREATE TABLE `senior_writer_application` (
 	ENABLE KEYS */;
 
 #
-# Structure for table "writer"
+# Structure for table "author"
 #
 
-DROP TABLE IF EXISTS `writer`;
-CREATE TABLE `writer` (
+DROP TABLE IF EXISTS `author`;
+CREATE TABLE `author` (
 	`Id`         INT(11)    NOT NULL AUTO_INCREMENT,
 	`writertype` TINYINT(1) NOT NULL DEFAULT '0',
 	`uname`      TINYTEXT   NOT NULL,
@@ -114,11 +114,11 @@ CREATE TABLE `writer` (
 	ROW_FORMAT = DYNAMIC;
 
 #
-# Data for table "writer"
+# Data for table "author"
 #
 
-/*!40000 ALTER TABLE `writer`
+/*!40000 ALTER TABLE `author`
 	DISABLE KEYS */;
-INSERT INTO `writer` VALUES (1, 0, 'Eldath', '', 'Mo is the best way to increase knowledge.', 'http://mo.mo/mo', 1);
-/*!40000 ALTER TABLE `writer`
+INSERT INTO `author` VALUES (1, 0, 'Eldath', '', 'Mo is the best way to increase knowledge.', 'http://mo.mo/mo', 1);
+/*!40000 ALTER TABLE `author`
 	ENABLE KEYS */;

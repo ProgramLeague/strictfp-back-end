@@ -1,8 +1,8 @@
 package api;
 
 import db.DatabaseOperator;
+import db.obj.Author;
 import db.obj.Pair;
-import db.obj.Writer;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
@@ -35,14 +35,14 @@ public class User extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		try {
-			Writer writer = DatabaseOperator.getWriter(new Pair("name", "=" + name));//TODO: check sql injection possibility
-			if (writer == null) throw new RuntimeException("No such user.");
+			Author author = DatabaseOperator.getWriter(new Pair("name", "=" + name));//TODO: check sql injection possibility
+			if (author == null) throw new RuntimeException("No such user.");
 			// get info
-			int Id = writer.getId();
-			String avatarURL = writer.getAvatar().toString();
-			int genderInt = writer.getGender();
-			String writerName = writer.getName();
-			String motto = writer.getMotto();
+			int Id = author.getId();
+			String avatarURL = author.getAvatar().toString();
+			int genderInt = author.getGender();
+			String writerName = author.getName();
+			String motto = author.getMotto();
 			// build map
 			Map<String, String> writerInfo = new HashMap<>();
 			writerInfo.put("id", String.valueOf(Id));
