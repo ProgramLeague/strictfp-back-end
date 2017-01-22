@@ -65,8 +65,6 @@ public class TimeLine extends HttpServlet {
 			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR + ".0"));
 			status.put("message", "internal error: " + van.getMessage());
-			// 这里怎么整啊 没有EMPTY_OBJECT这种玩意啊。咋弄出来"extra": {}这种效果呢
-			// TODO fixed. delete this comment when you see it.
 			status.put("extra", Constant.JSON.EMPTY_OBJECT);
 			status.put("security", Constant.JSON.EMPTY_OBJECT);
 			json.put("meta", status);

@@ -23,7 +23,7 @@ import static tool.Tools.getValidNumber;
  *
  * @author Eldath
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public class VerifyAccount {
 	static {
 		logger = LoggerFactory.getLogger(VerifyAccount.class);

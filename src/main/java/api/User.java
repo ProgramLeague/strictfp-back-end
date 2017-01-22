@@ -35,8 +35,7 @@ public class User extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		try {
-			Author author = DatabaseOperator.getWriter(new Pair("name", "=" + name));//TODO: check sql injection possibility
-			//TODO: check sql injection possibility
+			Author author = DatabaseOperator.getWriter(new Pair("name", "=" + name));
 			if (author == null) throw new RuntimeException("No such user.");
 			// get info
 			int Id = author.getId();
@@ -65,7 +64,8 @@ public class User extends HttpServlet {
 			status.put("message", "Internal server error: " + re.getMessage());
 			// build object
 			jsonObject.put("meta", status);
-			jsonObject.put("data", "_");//FIXME: replace with constant
+			jsonObject.put("data", "_");
+			//FIXME: replace with constant
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		// write object
