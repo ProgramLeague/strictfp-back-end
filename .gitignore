@@ -11,7 +11,7 @@
 # Package Files #
 *.jar
 !/gradle/wrapper/*.jar
-# 一切为了持续集成 ——Eldath0
+# 一切为了持续集成 ——Eldath
 *.war
 *.ear
 
