@@ -16,6 +16,15 @@ import java.util.Collection;
  */
 @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
 public interface DatabaseAdapter extends Closeable {
+	/**
+	 * please use this method to get the adapter!
+	 *
+	 * @return currently used adapter
+	 */
+	@NotNull
+	public static DatabaseAdapter currentlyUsingAdapterInstance() {
+		return MySqlAdapter.getInstance();
+	}
 
 	/**
 	 * @param tableName table name

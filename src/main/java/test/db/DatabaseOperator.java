@@ -1,5 +1,6 @@
 package test.db;
 
+import org.jetbrains.annotations.Nullable;
 import test.db.obj.*;
 import org.jetbrains.annotations.Contract;
 
@@ -19,10 +20,11 @@ import java.util.Set;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class DatabaseOperator {
 
+	@Nullable
 	@Contract(pure = true)
 	public static Article getArticle(Pair... pair) {
 		try {
-			DatabaseAdapter adapter = MySqlAdapter.getInstance();
+			DatabaseAdapter adapter = DatabaseAdapter.currentlyUsingAdapterInstance();
 			ResultSet resultSet = adapter.select("article", pair);
 			if (!resultSet.next()) return null;
 			int Id = resultSet.getInt("Id");
@@ -55,11 +57,13 @@ public class DatabaseOperator {
 		return getArticle(new Pair("pdate", "=" + "\"" + pDate.toString() + "\""));
 	}
 
+	@Nullable
 	@Contract(pure = true)
 	public static Author getWriter(Pair... pair) {
-		DatabaseAdapter adapter = MySqlAdapter.getInstance();
 		try {
-			ResultSet writerResultSet = adapter.select("writer", pair);
+			ResultSet writerResultSet = DatabaseAdapter
+					.currentlyUsingAdapterInstance()
+					.select("writer", pair);
 			if (!writerResultSet.next()) return null;
 			int Id = writerResultSet.getInt("Id");
 			WriterType writerType = WriterType.fromInt(writerResultSet.getInt("writertype"));
@@ -68,7 +72,9 @@ public class DatabaseOperator {
 			URL avatarURL = writerResultSet.getURL("avatarURL");
 			Gender gender = Gender.fromInt(writerResultSet.getInt("gender"));
 			writerResultSet.close();
-			adapter.close();
+			DatabaseAdapter
+					.currentlyUsingAdapterInstance()
+					.close();
 			return new Author(Id, writerType, name, motto, avatarURL, gender);
 		} catch (SQLException e) {
 			throw new RuntimeException("SQL error", e);
