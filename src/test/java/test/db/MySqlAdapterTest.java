@@ -19,8 +19,7 @@ public class MySqlAdapterTest {
 	@Test
 	@TestOnly
 	public void insert() throws Exception {
-		DatabaseAdapter adapter = MySqlAdapter.getInstance();
-		adapter.insert(
+		MySqlAdapter.getInstance().insert(
 				"article",
 				"1,20170101,0,'Tech, Startalk','Tech','How to mo the older?','Tech you how to mo the older'," +
 						"'Mo is the best way to increase your knowledge.',10000,0,1000",

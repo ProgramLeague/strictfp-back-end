@@ -1,6 +1,7 @@
 package test.db.obj;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,24 +28,24 @@ public class Gender {
 		return SECRET;
 	}
 
-	private int Int;
+	private int number;
 	@NotNull
 	@NonNls
-	private String Eng;
+	private String representation;
 
-	public Gender(@NotNull @NonNls String eng, int gender) {
-		Eng = eng;
-		Int = gender;
+	public Gender(@NotNull @Nls String representation, int gender) {
+		this.representation = representation;
+		number = gender;
 	}
 
 	@Contract(pure = true)
-	public int getInt() {
-		return Int;
+	public int getNumber() {
+		return number;
 	}
 
 	@NonNls
 	@NotNull
-	public String getEng() {
-		return Eng;
+	public String getRepresentation() {
+		return representation;
 	}
 }

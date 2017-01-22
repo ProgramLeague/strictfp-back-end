@@ -109,7 +109,8 @@ public class VerifyAccount {
 			// note that it was compressed
 			JSONObject object = JSONObject.class.cast(tokener.nextValue());
 			conn.disconnect();
-			return object.getJSONArray("items").length() != 0; // 特判一下吧还是。。昨晚查询不存在用户返回的是200 ...和一个json
+			return object.getJSONArray("items").length() != 0;
+			// 特判一下吧还是。。昨晚查询不存在用户返回的是200 ...和一个json
 		} catch (IOException e) {
 			throw new RuntimeException("unable to fetch data from stackoverflow", e);
 		}
@@ -127,7 +128,9 @@ public class VerifyAccount {
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.connect();
 			int responseCode = connection.getResponseCode();
-			return responseCode == 200; // 要是人家不404 呢？wok
+			return responseCode == 200;
+			// 要是人家不404 呢？wok
+			// 其实之前写的是 if (reCo == 404) return false; else return true...我就给改了 ---ice
 		} catch (MalformedURLException e) {
 			logger.warn("URL exception: ", e);
 			return false;

@@ -74,7 +74,7 @@ public class Author {
 
 	@Contract(pure = true)
 	public int getGender() {
-		return gender.getInt();
+		return gender.getNumber();
 	}
 }
 
