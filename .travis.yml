@@ -1,12 +1,21 @@
 sudo: required
 language: java
 jdk:
-- oraclejdk8
+    - oraclejdk8
+test:
+    post:
+        - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+        - bash <(curl -s https://codecov.io/bash)
+script:
+    - ./gradlew check
+    - ./gradlew jacocoTestReport
+
 after_success:
-- if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-- bash <(curl -s https://codecov.io/bash)
+    - bash <(curl -s https://codecov.io/bash)
+
 before_install:
 - chmod a+x gradlew
+
 notifications:
   slack:
     secure: Ut9Ot5WXFJXQcbRsofz77yFvkpd+lUjbshIP0gcLCIoSSNCdG6EclE4LkqKLdZImB7ILCOsWlCwBDOaVhyAKsI048W5YQLPVJEamzbjnO8M+w1PNpSJPASZmSLPBS/O5BYVYemNo8wBPkAYGIpCRFnmhjh8GnrFUWLPzr4HZZC5PCZdL1RQXfOT9xIW/DI+NQTisZV29K8lUky0i3yhCd0v2AiMtx0BcJ8BREmJiEtKD8jms/a+at98lxjmqr/X80EQjk3JHbHNRN+CWiDa5qmLz3SvohtyRp03nfgFgBuKuzLlvaJoZDHdgYZiQtjir9248IFckRQR8WpDzk8pAzSe1AU8OVK3RtHdcphxbK0cSCz/SOXiMOWZxWa7vqn6kkKynuq2b+YORnKFxkSmIWGDHQISV/MSciBABs22qtwpNeQnUJBnIJ1F1lgaRmau0Mfd74MWjktszLpZ7jVX3EVKBfWcMZhSClSBt4cuvbxoZhbbPfkOakLuyxsj6pZXo9oIfLWtgjwpttza2GZmNAreS+/23J9gp9eCv9h4xgdW3ZAI1IMvIiNr3HDBJPpdwNXO/HFQe9McI3YBOwVSvE2I9lzrVrzMYxXHqrnsADF8Wgz8DwRXO2h2dQtxy6U+FJ3WG5i3KOU7JX5GEKz8rJyiPyneBDRKun83DE5lE5zo=
