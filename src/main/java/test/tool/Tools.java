@@ -24,9 +24,10 @@ public class Tools {
 		int result = 0;
 		int current = content[index++];
 		while (!(current >= '0' && current <= '9')) current = content[index++];
-		while (index < content.length && current >= '0' && current <= '9') {
+		while (index <= content.length && current >= '0' && current <= '9') {
 			result = (result << 3) + (result << 1) + (current - '0'); // equal to result * 10
-			current = content[index];
+			if (index >= content.length) break;
+			current = content[index++];
 		}
 		return result;
 	}

@@ -43,6 +43,7 @@ public class MySqlAdapter implements
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, password);
+			connection.setAutoCommit(false);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
