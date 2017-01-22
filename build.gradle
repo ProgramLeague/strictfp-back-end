@@ -28,9 +28,26 @@ dependencies {
 	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.22'
 }
 
+test {
+	filter {
+		// include specific method in any of the tests
+		// includeTestsMatching "*UiCheck"
+
+		//include all tests from package
+		includeTestsMatching "test.tool.*"
+
+		//include all integration tests
+		// includeTestsMatching "*IntegTest"
+	}
+}
+
 jacocoTestReport {
 	reports {
 		xml.enabled false
 		html.enabled true
 	}
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
 }

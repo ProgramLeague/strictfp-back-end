@@ -1,11 +1,11 @@
 package api;
 
-import db.DatabaseOperator;
-import db.obj.Article;
+import test.db.DatabaseOperator;
+import test.db.obj.Article;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
-import tool.Constant;
+import test.tool.Constant;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;

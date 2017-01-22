@@ -10,7 +10,7 @@
 <table border="0" cellspacing="0" summary="article" class="TableObject">
 	<tr class="TableHeader StructureHeader"><th>名称</th><th>类型</th><th>空</th><th>默认值</th><th>属性</th><th>备注</th></tr>
 	<tr class="Structure"><td class="PrimaryKey">Id</td><td>int(11)</td><td>否</td><td>&lt;auto_increment&gt;</td><td>&nbsp;</td><td>&nbsp;</td>	</tr>
-	<tr class="Structure"><td class="PrimaryKey">pdate</td><td>date</td><td>否</td><td>2017-01-01</td><td>&nbsp;</td><td>&nbsp;</td>	</tr>
+	<tr class="Structure"><td class="PrimaryKey">pdate</td><td>test.date</td><td>否</td><td>2017-01-01</td><td>&nbsp;</td><td>&nbsp;</td>	</tr>
 	<tr class="Structure"><td>writerId</td><td>smallint(5) unsigned</td><td>否</td><td>0</td><td>&nbsp;</td><td>&nbsp;</td>	</tr>
 	<tr class="Structure"><td>tags</td><td>tinytext</td><td>否</td><td>&nbsp;</td><td>&nbsp;</td><td>e.g. Tech,Music,Startalk</td>	</tr>
 	<tr class="Structure"><td>category</td><td>tinytext</td><td>否</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>	</tr>
