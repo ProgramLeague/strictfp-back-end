@@ -10,8 +10,17 @@ import org.junit.Test;
 public class VerifyAccountTest {
 	@Test
 	public void test() {
-		System.out.println(VerifyAccount.getInstance().verifyGitHubAccount("Ray-Eldath"));
-		System.out.println(VerifyAccount.getInstance().verifyZhihuAccount("ice1000"));
-		System.out.println(VerifyAccount.getInstance().verifyStackOverFlowImportance("VonC"));
+		System.out.println(VerifyAccount
+						.getInstance()
+						.verifyGitHubAccount("Ray-Eldath")
+		);
+		System.out.println(VerifyAccount
+						.getInstance()
+						.verifyZhihuAccount("ice1000")
+		);
+		System.out.println(VerifyAccount
+						.getInstance()
+						.verifyStackOverFlowImportance("VonC")
+		);
 	}
 }

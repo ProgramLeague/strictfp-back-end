@@ -39,6 +39,7 @@ public class MySqlAdapter implements
 	private final Connection connection;
 
 	private MySqlAdapter(@NotNull @NonNls String url) {
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, password);
@@ -61,6 +62,7 @@ public class MySqlAdapter implements
 			@NotNull @NonNls String... value) {
 		// TODO unsafe , needs to be fixed - phosphorus15
 		try {
+//			PreparedStatement preparedStatement = connection.prepareStatement();
 			String boyNextDoor = "INSERT INTO " + tableName + " VALUES ( ";
 			for (String val : value) execSQL(boyNextDoor + val + " )");
 			return true;
