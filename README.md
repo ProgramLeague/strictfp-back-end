@@ -1,5 +1,5 @@
 # StrictFP-Back-End
-
+[![Build Status](https://travis-ci.org/ProgramLeague/strictfp-back-end.svg?branch=master)](https://travis-ci.org/ProgramLeague/strictfp-back-end)  [![codecov](https://codecov.io/gh/ProgramLeague/strictfp-back-end/branch/master/graph/badge.svg)](https://codecov.io/gh/ProgramLeague/strictfp-back-end)
 ## 开发动态
 
 ### 以下为v0版本API的实现情况

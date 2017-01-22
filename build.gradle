@@ -2,24 +2,35 @@ group 'tech.program-league'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
-    jcenter()
-    mavenCentral()
+	jcenter()
+	mavenCentral()
 }
 
 dependencies {
-    testCompile name: 'junit', group: 'junit', version: '4.11'
-    // https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all
-    compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
-    compile group: 'org.eclipse.jetty.aggregate', name: 'jetty-all', version: '9.4.0.v20161208'
-    // https://mvnrepository.com/artifact/org.json/json
-    compile group: 'org.json', name: 'json', version: '20160810'
+	testCompile name: 'junit', group: 'junit', version: '4.11'
+	// https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all
+	compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
+	compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+	compile group: 'org.eclipse.jetty.aggregate', name: 'jetty-all', version: '9.4.0.v20161208'
+	// https://mvnrepository.com/artifact/org.json/json
+	compile group: 'org.json', name: 'json', version: '20160810'
 	// https://mvnrepository.com/artifact/org.jsoup/jsoup
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
 	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
 	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
 	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.22'
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		html.enabled true
+	}
 }
