@@ -29,7 +29,7 @@ public class DatabaseOperator {
 			if (!resultSet.next()) return null;
 			int Id = resultSet.getInt("Id");
 			LocalDate pDate = resultSet.getDate("pdate").toLocalDate();
-			int writerId = resultSet.getInt("writerId");
+			int writerId = resultSet.getInt("authorid");
 			String[] tags = resultSet.getString("tags").split(",");
 			Set<Tag> tags1 = new HashSet<>();
 			for (String thisTag : tags)
@@ -63,10 +63,10 @@ public class DatabaseOperator {
 		try {
 			ResultSet writerResultSet = DatabaseAdapter
 					.currentlyUsingAdapterInstance()
-					.select("writer", pair);
+					.select("author", pair);
 			if (!writerResultSet.next()) return null;
 			int Id = writerResultSet.getInt("Id");
-			WriterType writerType = WriterType.fromInt(writerResultSet.getInt("writertype"));
+			WriterType writerType = WriterType.fromInt(writerResultSet.getInt("authortype"));
 			String name = writerResultSet.getString("uname");
 			String motto = writerResultSet.getString("motto");
 			URL avatarURL = writerResultSet.getURL("avatarURL");
