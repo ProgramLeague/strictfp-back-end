@@ -1,5 +1,6 @@
-package test.db;
+package db;
 
+import db.obj.*;
 import org.jetbrains.annotations.Nullable;
 import test.db.obj.*;
 import org.jetbrains.annotations.Contract;

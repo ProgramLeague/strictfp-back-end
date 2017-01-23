@@ -1,6 +1,6 @@
 package test.extern;
 
-import test.db.obj.Pair;
+import db.obj.Pair;
 import org.jetbrains.annotations.TestOnly;
 import org.json.JSONObject;
 import org.junit.Test;

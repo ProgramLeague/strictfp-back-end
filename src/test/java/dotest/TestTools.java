@@ -1,7 +1,7 @@
-package test.util;
+package dotest;
 
 import org.junit.Test;
-import test.tool.Tools;
+import tool.Tools;
 
 import java.util.Random;
 

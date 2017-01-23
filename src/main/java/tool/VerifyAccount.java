@@ -1,4 +1,4 @@
-package test.tool;
+package tool;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
 
-import static test.tool.Tools.getValidNumber;
+import static tool.Tools.getValidNumber;
 
 /**
  * Created by Eldath on 2017/1/21 0021.
@@ -53,9 +53,9 @@ public class VerifyAccount {
 					.first()
 					.text()
 					.trim();
-			int reputationPoint = getValidNumber(reputationStr.toCharArray());
+			int reputationPoint = Tools.getValidNumber(reputationStr.toCharArray());
 			Elements likes = page.select("div[class='NumberBoard-value']");
-			int likesPoint = getValidNumber(likes
+			int likesPoint = Tools.getValidNumber(likes
 					.last()
 					.text()
 					.trim()

@@ -1,4 +1,4 @@
-package test.db.obj;
+package db.obj;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nls;

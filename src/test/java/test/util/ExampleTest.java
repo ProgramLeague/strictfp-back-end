@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static test.util.TestTools.forceRun;
-import static test.util.TestTools.run;
+import static dotest.TestTools.forceRun;
+import static dotest.TestTools.run;
 
 /**
  * Created by ice1000 on 2017/1/20.

@@ -1,8 +1,8 @@
 package api;
 
-import test.db.DatabaseOperator;
-import test.db.obj.Author;
-import test.db.obj.Pair;
+import db.DatabaseOperator;
+import db.obj.Author;
+import db.obj.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;

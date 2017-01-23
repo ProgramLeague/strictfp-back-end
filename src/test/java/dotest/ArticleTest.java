@@ -1,5 +1,6 @@
-package test.db.obj;
+package dotest;
 
+import db.obj.Article;
 import org.junit.Test;
 
 import java.time.LocalDate;

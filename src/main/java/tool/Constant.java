@@ -1,4 +1,4 @@
-package test.tool;
+package tool;
 
 import org.json.JSONObject;
 

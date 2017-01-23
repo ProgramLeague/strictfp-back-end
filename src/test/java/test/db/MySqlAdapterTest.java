@@ -1,6 +1,7 @@
 package test.db;
 
-import test.db.obj.Pair;
+import db.MySqlAdapter;
+import db.obj.Pair;
 import org.jetbrains.annotations.TestOnly;
 import org.junit.Test;
 

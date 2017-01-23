@@ -1,5 +1,6 @@
 package test.main;
 
+import main.MainServer;
 import org.junit.Test;
 
 /**

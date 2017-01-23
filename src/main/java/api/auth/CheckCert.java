@@ -1,11 +1,11 @@
 package api.auth;
 
-import test.db.DatabaseOperator;
-import test.db.obj.Pair;
+import db.DatabaseOperator;
+import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
-import test.tool.VerifyAccount;
+import tool.VerifyAccount;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;

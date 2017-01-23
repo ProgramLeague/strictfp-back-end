@@ -1,7 +1,7 @@
 package api;
 
-import test.db.DatabaseOperator;
-import test.db.obj.Article;
+import db.DatabaseOperator;
+import db.obj.Article;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;

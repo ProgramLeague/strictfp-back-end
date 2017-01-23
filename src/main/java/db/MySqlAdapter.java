@@ -1,6 +1,6 @@
-package test.db;
+package db;
 
-import test.db.obj.Pair;
+import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,7 +52,7 @@ public class MySqlAdapter implements
 	}
 
 	@NotNull
-	static MySqlAdapter getInstance() {
+	public static MySqlAdapter getInstance() {
 		if (instance == null) instance = new MySqlAdapter(DEFAULT_URL);
 		return instance;
 	}

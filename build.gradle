@@ -34,7 +34,7 @@ test {
 		// includeTestsMatching "*UiCheck"
 
 		//include all tests from package
-		includeTestsMatching "test.tool.*"
+		includeTestsMatching "dotest.*"
 
 		//include all integration tests
 		// includeTestsMatching "*IntegTest"
