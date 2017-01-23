@@ -18,9 +18,9 @@ public class WriterType {
 		Map<String, Boolean> normalPower = new HashMap<>();
 		normalPower.put("PUBLISH_ARTICLE", true);
 		normalPower.put("NON_EXAMINATION_PUBLISH_ARTICLE", false);
-		NORMAL_WRITER = new WriterType(normalPower);
+		NORMAL_WRITER = new WriterType(normalPower, 0);
 		normalPower.put("NON_EXAMINATION_PUBLISH_ARTICLE", true);
-		ADVANCED_WRITER = new WriterType(normalPower);
+		ADVANCED_WRITER = new WriterType(normalPower, 1);
 	}
 
 	public static final WriterType NORMAL_WRITER;
@@ -41,7 +41,7 @@ public class WriterType {
 	 * default value is 0.
 	 * represent the corresponding number in the SQL database.
 	 */
-	public int powerLevel;
+	private int powerLevel;
 
 	public WriterType(@NotNull Map<String, Boolean> powerMap) {
 		this(powerMap, 0);
@@ -55,6 +55,15 @@ public class WriterType {
 	@NotNull
 	public Map<String, Boolean> getPowerMap() {
 		return powerMap;
+	}
+
+	public void setPowerLevel(int powerLevel) {
+		this.powerLevel = powerLevel;
+	}
+
+	@Contract(pure = true)
+	public int getPowerLevel() {
+		return powerLevel;
 	}
 
 	public boolean isAllow(@NotNull @NonNls String power) {
