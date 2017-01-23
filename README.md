@@ -6,9 +6,9 @@
 
 - [X] 完成``/api/v0/timeline``
 - [X] 完成``/api/v0/user``
-- [ ] 完成``/api/v0/article``（带相关文章推荐，个人认为应使用互信息） 
-- [ ] 完成 登录 相关API
-- [ ] 完成 注册/用户审核 相关API
+- [ ] 完成``/api/v0/article``（带相关文章推荐，个人认为应使用互信息）
+- [X] 完成``/api/v0/misc/heartbeat``
+- [ ] 完成``/api/v0/misc/counter``
 
 ## 开发须知
 

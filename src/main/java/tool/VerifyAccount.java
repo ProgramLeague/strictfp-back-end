@@ -31,7 +31,7 @@ public class VerifyAccount {
 
 	private static VerifyAccount instance;
 	private static final Logger logger;
-	private static final String apiRoot = "http://api.stackexchange.com/2.2/";
+	private static final String SOFApiRoot = "http://api.stackexchange.com/2.2/";
 
 	private VerifyAccount() {
 	}
@@ -70,7 +70,7 @@ public class VerifyAccount {
 
 	public boolean verifyStackOverFlowImportance(@NotNull @NonNls String username) {
 		try {
-			String url = apiRoot + String.format(
+			String url = SOFApiRoot + String.format(
 					"users?order=asc&min=%s&max=%s&sort=name&inname=%s&site=stackoverflow&filter=!9YdnSAffT",
 					username,
 					username,
@@ -99,7 +99,7 @@ public class VerifyAccount {
 
 	public boolean verifyStackOverFlowAccount(@NotNull @NonNls String username) {
 		try {
-			String url = apiRoot + String.format(
+			String url = SOFApiRoot + String.format(
 					"users?order=asc&min=%s&max=%s&sort=name&inname=%s&site=stackoverflow",
 					username,
 					username,
@@ -131,7 +131,7 @@ public class VerifyAccount {
 			connection.connect();
 			int responseCode = connection.getResponseCode();
 			return responseCode == 200;
-			// 要是人家不404 呢？wok
+			// 要是人家不404 呢？
 			// 其实之前写的是 if (reCo == 404) return false; else return true...我就给改了 ---ice
 		} catch (MalformedURLException e) {
 			logger.warn("URL exception: ", e);
