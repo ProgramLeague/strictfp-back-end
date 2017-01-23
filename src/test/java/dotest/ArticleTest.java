@@ -15,8 +15,10 @@ import static org.junit.Assert.assertEquals;
 public class ArticleTest {
 	@Test(timeout = 100)
 	public void testDateParser() throws Exception {
+		System.out.println("ArticleTest start");
 		assertEquals("2017-01-20", Article.parseDate(20170120));
 		assertEquals("2017-11-22", Article.parseDate(20171122));
+		System.out.println("└─Finish ArticleTest");
 	}
 
 	/**

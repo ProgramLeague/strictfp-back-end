@@ -39,6 +39,7 @@ public class TestTools {
 
 	@Test(timeout = 2000)
 	public void getValidNumber() throws Exception {
+		System.out.println("TestTools start");
 		assertEquals(2333, Tools.getValidNumber("2333"));
 		final Random random = new Random(System.currentTimeMillis());
 		run(1000, () -> {
@@ -48,6 +49,7 @@ public class TestTools {
 					Tools.getValidNumber("boyNextDoor" + nextInt + "assWeCan")
 			);
 		});
+		System.out.println("└─Finish TestTools");
 	}
 
 	public interface Func {
