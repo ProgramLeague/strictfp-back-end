@@ -12,8 +12,9 @@ import java.net.URL;
  *
  * @author Eldath
  */
-@SuppressWarnings("unused")
-public class Author {
+@SuppressWarnings({"unused", "WeakerAccess"})
+public class Author implements
+		SqlObject {
 
 	@NotNull
 	@NonNls
@@ -75,6 +76,18 @@ public class Author {
 	@Contract(pure = true)
 	public int getGender() {
 		return gender.getNumber();
+	}
+
+	@NotNull
+	@Override
+	public String toSqlString() {
+		return getId() + "," +
+				getWriterType().toString() + "," +
+				getName() + "," +
+				"" + "," + // FIXME  那个pass字段咋回事 我不知道该往里面塞啥东西 --ice1000
+				getMotto() + "," +
+				getAvatar().toString() + "," +
+				getGender();
 	}
 }
 

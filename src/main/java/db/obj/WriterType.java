@@ -34,12 +34,25 @@ public class WriterType {
 		return NORMAL_WRITER;
 	}
 
-	public Map<String, Boolean> powerMap = new HashMap<>();
+	@NotNull
+	public final Map<String, Boolean> powerMap;
 
-	public WriterType(Map<String, Boolean> powerMap) {
-		this.powerMap = powerMap;
+	/**
+	 * default value is 0.
+	 * represent the corresponding number in the SQL database.
+	 */
+	public int powerLevel;
+
+	public WriterType(@NotNull Map<String, Boolean> powerMap) {
+		this(powerMap, 0);
 	}
 
+	public WriterType(@NotNull Map<String, Boolean> powerMap, int powerLevel) {
+		this.powerMap = powerMap;
+		this.powerLevel = powerLevel;
+	}
+
+	@NotNull
 	public Map<String, Boolean> getPowerMap() {
 		return powerMap;
 	}
@@ -63,5 +76,12 @@ public class WriterType {
 
 	public boolean addPower(@NotNull @NonNls String power) {
 		return addRefuse(power);
+	}
+
+	@NotNull
+	@NonNls
+	@Override
+	public String toString() {
+		return Integer.toString(powerLevel);
 	}
 }
