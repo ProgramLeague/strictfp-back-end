@@ -31,3 +31,12 @@
 **若有相关技术问题，请在Slack组织中讨论。
 未加入组织的开发者请 [@Eldath](https://github.com/Ray-Eldath) 或 [@ice1000](https://github.com/ice1000)。
 Slack组织仅用于讨论技术性较强的问题，将会严格控制平均水平及交流内容，非技术问题请勿置于组织中讨论，谢谢合作。**
+
+## 部署步骤
+**警告：请严格按照以下部署步骤部署后端服务器，由不规范部署操作造成的错误，后端开发人员不负任何责任！** ~~（对你猜对了，就是在甩锅）~~
+1. ``clone``在Travis CI上的最新成功构建的源码；
+2. 修改 ``db.QuizFormPool`` 构造方法中的``formInts[]``数组为现存的答题分卷编号；
+3. 修改 ``tool.Constant static``块中的``DATABASE_HOST``为当前数据库的IP地址；  
+4. 在数据库上正确执行``res/strictfp.sql``中的指令；
+5. 测试能否运行``test.main.MainServerTest``和``test.servlet.AllServletTest``方法；
+6. 若能，请运行``main.MainServer``以配置服务器；若不能，请向后端开发人员反馈。

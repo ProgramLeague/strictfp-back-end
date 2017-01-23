@@ -65,7 +65,7 @@ public class User extends HttpServlet {
 			status.put("message", "Internal server error: " + re.getMessage());
 			// build object
 			jsonObject.put("meta", status);
-			jsonObject.put("data", Constant.JSON.PADDING);
+			jsonObject.put("data", Constant.PADDING);
 			//FIXME: replace with constant
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}

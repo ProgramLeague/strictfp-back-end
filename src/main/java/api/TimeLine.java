@@ -69,7 +69,7 @@ public class TimeLine extends HttpServlet {
 			status.put("extra", Constant.JSON.EMPTY_OBJECT);
 			status.put("security", Constant.JSON.EMPTY_OBJECT);
 			json.put("meta", status);
-			json.put("data", Constant.JSON.PADDING);
+			json.put("data", Constant.PADDING);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());

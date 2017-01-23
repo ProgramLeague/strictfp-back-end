@@ -1,5 +1,6 @@
 package db.obj;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Vector;
 
@@ -11,10 +12,24 @@ import java.util.Vector;
 public class Quiz {
 	private String question;
 	private Vector<QuizOption> optionVector;
+	private char answer;
+	private int id;
+	private QuizType qt;
 
-	public Quiz(String question, QuizOption... options) {
+	public Quiz(int id, QuizType qt, String question, char answer, QuizOption... options) {
 		this.question = question;
+		this.answer = answer;
+		this.id = id;
+		this.qt = qt;
 		Collections.addAll(this.optionVector, options);
+	}
+
+	public Quiz(int id, QuizType qt, String question, char answer, Collection<QuizOption> options) {
+		this.question = question;
+		this.answer = answer;
+		this.id = id;
+		this.qt = qt;
+		optionVector.addAll(options);
 	}
 
 	public String getQuestion() {
@@ -28,4 +43,17 @@ public class Quiz {
 	public Vector<QuizOption> getOptions() {
 		return this.optionVector;
 	}
+
+	public char getAnswer() {
+		return answer;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public QuizType getQt() {
+		return qt;
+	}
+
 }

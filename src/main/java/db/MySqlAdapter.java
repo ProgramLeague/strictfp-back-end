@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tool.Constant;
 
 import java.sql.*;
 
@@ -24,7 +25,7 @@ public class MySqlAdapter implements
 	@NotNull
 	@NonNls
 	private static final String DEFAULT_URL =
-			"jdbc:mysql://localhost:3306/strictfp?serverTimezone=UTC";
+			"jdbc:mysql://" + Constant.DATABASE_HOST + ":3306/strictfp?serverTimezone=UTC";
 	@NotNull
 	@NonNls
 	private static final String user = "root";

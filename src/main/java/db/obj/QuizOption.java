@@ -6,21 +6,16 @@ package db.obj;
  * @author Eldath
  */
 public class QuizOption {
-	private char option, answer;
+	private char option;
 	private String content;
 
-	public QuizOption(char option, String content, char answer) {
+	public QuizOption(char option, String content) {
 		this.option = option;
-		this.answer = answer;
 		this.content = content;
 	}
 
 	public char getOption() {
 		return option;
-	}
-
-	public char getAnswer() {
-		return answer;
 	}
 
 	public String getContent() {
