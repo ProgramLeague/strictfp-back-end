@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 public class MainServer {
 	public static void main(@NotNull @NonNls String[] args) throws Exception {
 		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties");
-		Server server = new Server(80);
+		Server server = new Server(233);
 		ServletContextHandler context =
 				new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/api/v0");

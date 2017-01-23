@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Class-Path: json-20160810.jar slf4j-log4j12-1.7.22.jar javax.activatio
+ n-1.1.0.v201105071233.jar websocket-common-9.4.0.v20161208.jar annota
+ tions-13.0.jar jetty-client-9.4.0.v20161208.jar javax.security.auth.m
+ essage-1.0.0.v201108011116.jar asm-tree-5.1.jar websocket-api-9.4.0.v
+ 20161208.jar log4j-api-2.7.jar websocket-server-9.4.0.v20161208.jar j
+ avax.servlet-api-3.1.0.jar javax.annotation-api-1.2.jar javax.mail.gl
+ assfish-1.4.1.v201005082020.jar http2-common-9.4.0.v20161208.jar java
+ x.transaction-api-1.2.jar log4j-1.2.17.jar jetty-servlets-9.4.0.v2016
+ 1208.jar jetty-security-9.4.0.v20161208.jar jetty-jaspi-9.4.0.v201612
+ 08.jar log4j-core-2.7.jar asm-commons-5.1.jar jetty-servlet-9.4.0.v20
+ 161208.jar websocket-servlet-9.4.0.v20161208.jar jetty-rewrite-9.4.0.
+ v20161208.jar jetty-webapp-9.4.0.v20161208.jar jsoup-1.10.2.jar mysql
+ -connector-java-6.0.5.jar javax.websocket-api-1.0.jar jetty-util-9.4.
+ 0.v20161208.jar asm-5.1.jar http2-client-9.4.0.v20161208.jar slf4j-ap
+ i-1.7.22.jar jetty-deploy-9.4.0.v20161208.jar jetty-server-9.4.0.v201
+ 61208.jar javax-websocket-server-impl-9.4.0.v20161208.jar jetty-http-
+ 9.4.0.v20161208.jar http2-server-9.4.0.v20161208.jar javax-websocket-
+ client-impl-9.4.0.v20161208.jar jetty-alpn-client-9.4.0.v20161208.jar
+  jetty-xml-9.4.0.v20161208.jar websocket-client-9.4.0.v20161208.jar h
+ ttp2-hpack-9.4.0.v20161208.jar jetty-annotations-9.4.0.v20161208.jar 
+ jetty-jndi-9.4.0.v20161208.jar jetty-quickstart-9.4.0.v20161208.jar j
+ etty-plus-9.4.0.v20161208.jar jetty-continuation-9.4.0.v20161208.jar 
+ jetty-jmx-9.4.0.v20161208.jar jetty-io-9.4.0.v20161208.jar
+Main-Class: main.MainServer
+

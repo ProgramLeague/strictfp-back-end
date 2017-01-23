@@ -36,7 +36,7 @@ public class User extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
 		try {
-			Author author = DatabaseOperator.getWriter(new Pair("name", "=" + name));
+			Author author = DatabaseOperator.getWriter(new Pair("username", "=" + name));
 			if (author == null) throw new RuntimeException("No such user.");
 			// get info
 			int Id = author.getId();
