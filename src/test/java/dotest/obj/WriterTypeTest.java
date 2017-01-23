@@ -1,5 +1,7 @@
-package db.obj;
+package dotest.obj;
 
+import db.obj.WriterType;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class WriterTypeTest {
 	@Test
 	public void fromInt() throws Exception {
-		assertEquals(0, WriterType.fromInt(0).getPowerLevel());
+		Assert.assertEquals(0, WriterType.fromInt(0).getPowerLevel());
 		assertEquals(1, WriterType.fromInt(1).getPowerLevel());
 	}
 

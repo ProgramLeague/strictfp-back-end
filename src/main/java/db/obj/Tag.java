@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Eldath
  */
+@SuppressWarnings("WeakerAccess")
 public class Tag {
 	@NotNull
 	@NonNls
@@ -22,5 +23,12 @@ public class Tag {
 	@Contract(value = " -> !null", pure = true)
 	public String getName() {
 		return name;
+	}
+
+	@NotNull
+	@NonNls
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

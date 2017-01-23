@@ -1,4 +1,4 @@
-package dotest;
+package dotest.obj;
 
 import db.obj.Article;
 import org.junit.Test;
