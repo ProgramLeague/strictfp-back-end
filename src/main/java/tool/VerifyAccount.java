@@ -42,6 +42,7 @@ public class VerifyAccount {
 		return instance;
 	}
 
+	//FIXME: 既然返回是布尔干嘛说是重要性。。直接checkIfIsIpInZhihu
 	public boolean verifyZhihuImportance(@NotNull @NonNls String username) {
 		try {
 			Document page = Jsoup.parse(
@@ -93,6 +94,7 @@ public class VerifyAccount {
 
 	public boolean verifyZhihuAccount(@NotNull @NonNls String username) {
 		return verify("https://www.zhihu.com/people/", username);
+		//FIXME: 由于严重违反知乎社区规范，该用户帐号已被停用。 这个是返回200的，测试账号fu-qian-yi-55
 	}
 
 	public boolean verifyStackOverFlowAccount(@NotNull @NonNls String username) {

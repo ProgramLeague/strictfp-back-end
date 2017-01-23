@@ -16,6 +16,9 @@ public class SignUp extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setHeader("Cache-Control", "no-cache");
+		resp.setHeader("Expires", "Tue, 17 Aug 1926 08:00:00");
+		resp.setHeader("Pragma", "no-cache");
 		super.doPost(req, resp);
 	}
 }
