@@ -6,6 +6,7 @@ import db.obj.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
+import tool.Constant;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -64,7 +65,7 @@ public class User extends HttpServlet {
 			status.put("message", "Internal server error: " + re.getMessage());
 			// build object
 			jsonObject.put("meta", status);
-			jsonObject.put("data", "_");
+			jsonObject.put("data", Constant.JSON.PADDING);
 			//FIXME: replace with constant
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}

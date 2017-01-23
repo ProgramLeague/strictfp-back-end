@@ -12,12 +12,15 @@ public class Constant {
 	public static final class JSON {
 		static {
 			EMPTY_OBJECT = new JSONObject();
+			PADDING = "_";
 			//TODO: add string _ as PADDING. - Akari
 			// frog? I don't understand what does 'PADDING' mean.
 			// +1s
 			//啊呀，PADDING就是那个占位符_啊。。这个东西听说大有用途。 - Akari
+			// advice accepted - Eldath
 		}
 
 		public static final JSONObject EMPTY_OBJECT;
+		public static final String PADDING;
 	}
 }

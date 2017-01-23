@@ -61,6 +61,7 @@ public class TimeLine extends HttpServlet {
 			json.put("data", articles);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (RuntimeException van) {
+			//PERFORMANCE♂ARTIST
 			// report error
 			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR + ".0"));
@@ -68,7 +69,7 @@ public class TimeLine extends HttpServlet {
 			status.put("extra", Constant.JSON.EMPTY_OBJECT);
 			status.put("security", Constant.JSON.EMPTY_OBJECT);
 			json.put("meta", status);
-			json.put("data", "_");
+			json.put("data", Constant.JSON.PADDING);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
