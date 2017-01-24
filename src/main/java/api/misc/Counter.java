@@ -1,6 +1,11 @@
 package api.misc;
 
+import db.DatabaseOperator;
+import db.obj.Article;
+import db.obj.Pair;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tool.Tools;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,12 +24,27 @@ public class Counter extends HttpServlet {
 			@NotNull HttpServletRequest req,
 			@NotNull HttpServletResponse resp
 	) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		String counterPoolId = req.getParameter("counterpool");
-		String counterId = req.getParameter("counterid");
-		String operation = req.getParameter("op");
+		int counterId = Tools.getValidNumber(req.getParameter("counterid"));
+		boolean operation = "+1s".equals(req.getParameter("op"));
+		if ("WR".equals(action)) {
+			DatabaseOperator.plus1s(counterId, operation);
+		} else if ("RD".equals(action)) {
+			Article article = DatabaseOperator.getArticle(new Pair("Id", "=" + counterId));
+			// response
+			if (article == null) {
+				// return error message: article not found!
+			} else {
+				// return up or down
+				// operation ? article.getUp() : article.getDown();
+			}
+		}
 	}
 
+	@Contract(pure = true)
 	private int doReadCounter() {
 		return 0;
 	}

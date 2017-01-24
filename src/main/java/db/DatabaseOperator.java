@@ -55,6 +55,21 @@ public class DatabaseOperator {
 		}
 	}
 
+	public static boolean plus1s(int articleId, boolean isPlus) {
+		Article article = getArticle(new Pair("Id", "=" + articleId));
+		if (article == null) return false;
+		DatabaseAdapter.currentlyUsingAdapterInstance().update(
+				"article",
+				new Pair[]{
+						isPlus
+								? new Pair("up", "=" + article.getUp() + 1)
+								: new Pair("down", "=" + article.getDown() + 1)
+				},
+				new Pair("Id", "=" + articleId)
+		);
+		return true;
+	}
+
 	@Nullable
 	public static Quiz getQuiz(Pair pair) {
 		try {
