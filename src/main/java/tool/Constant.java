@@ -28,7 +28,7 @@ public class Constant {
 			DATABASE_NAME = "jpXlFuhuWzzFfHThrYsD";
 		}
 
-		public static final int SERVER_PORT = 233;
+		public static final int SERVER_PORT = 80;
 
 		public static final String DATABASE_NAME;
 		public static final String DATABASE_HOST;
