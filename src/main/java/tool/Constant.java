@@ -25,21 +25,10 @@ public class Constant {
 	static {
 		PADDING = "_";
 		DATABASE_HOST = "localhost";
-		DATABASE_NAME = "jpXlFuhuWzzFfHThrYsD";
-		PATH_TO_BLOCK_LIST = System.getProperty("user.dir") + "/res/block_list.txt";
+		PATH_TO_BLOCK_LIST = "res\\block_list.txt";
 	}
 
 	public static final String PADDING;
 	public static final String DATABASE_HOST;
 	public static final String PATH_TO_BLOCK_LIST;
-	public static final String DATABASE_NAME;
-
-	public static final class SERVER {
-		static {
-			SERVER_PORT = 80;
-
-		}
-
-		public static final int SERVER_PORT;
-	}
 }
