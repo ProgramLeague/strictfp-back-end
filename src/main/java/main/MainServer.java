@@ -12,6 +12,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import tool.Constant;
 
 /**
  * Created by Eldath on 2017/1/17 0017.
@@ -23,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("WeakerAccess")
 public class MainServer {
 	public static void main(@NotNull @NonNls String[] args) throws Exception {
-		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties");
-		Server server = new Server(233);
+		PropertyConfigurator.configure(System.getProperty("user.dir") + "/log4j.properties");
+		Server server = new Server(Constant.SERVER.SERVER_PORT);
 		ServletContextHandler context =
 				new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/api/v0");

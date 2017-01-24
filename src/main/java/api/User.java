@@ -67,7 +67,6 @@ public class User extends HttpServlet {
 			// build object
 			jsonObject.put("meta", status);
 			jsonObject.put("data", Constant.PADDING);
-			//FIXME: replace with constant
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		// write object

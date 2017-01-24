@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'war'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -14,9 +15,9 @@ repositories {
 
 dependencies {
 	testCompile name: 'junit', group: 'junit', version: '4.11'
-	// https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all
 	compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
 	compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+	// https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all
 	compile group: 'org.eclipse.jetty.aggregate', name: 'jetty-all', version: '9.4.0.v20161208'
 	// https://mvnrepository.com/artifact/org.json/json
 	compile group: 'org.json', name: 'json', version: '20160810'
@@ -38,6 +39,12 @@ test {
 
 		//include all integration tests
 		// includeTestsMatching "*IntegTest"
+	}
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'main.MainServer'
 	}
 }
 

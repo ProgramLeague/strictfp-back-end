@@ -34,15 +34,15 @@ public class TimeLine extends HttpServlet {
 	protected void doGet(
 			@NotNull HttpServletRequest request,
 			@NotNull HttpServletResponse response
-	) throws IOException {
-		response.setCharacterEncoding("utf-8");
-		request.setCharacterEncoding("utf-8");
+	) {
 		LocalDate start = LocalDate.parse(request.getParameter("start"));
 		LocalDate end = LocalDate.parse(request.getParameter("end"));
 		JSONObject json = new JSONObject();
 		Vector<Article> articles = new Vector<>();
 		Map<String, Object> status = new HashMap<>();
 		try {
+			response.setCharacterEncoding("utf-8");
+			request.setCharacterEncoding("utf-8");
 			// get info
 			for (LocalDate nowDate = start;
 			     nowDate.isBefore(end) || nowDate.isEqual(end);
@@ -60,8 +60,8 @@ public class TimeLine extends HttpServlet {
 			json.put("meta", status);
 			json.put("data", articles);
 			response.setStatus(HttpServletResponse.SC_OK);
-		} catch (RuntimeException van) {
-			//PERFORMANCE♂ARTIST
+		} catch (Exception van) {
+			// PERFORMANCE♂ARTIST
 			// report error
 			LoggerFactory.getLogger(TimeLine.class).error("fatal error:", van);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR + ".0"));
@@ -72,15 +72,16 @@ public class TimeLine extends HttpServlet {
 			json.put("data", Constant.PADDING);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, van.toString());
 		}
 		// FIXME 非测试时移去注释
-		response.setContentType("application/json"); // specific content type
+		// response.setContentType("application/json"); // specific content type
 		try (ServletOutputStream out = response.getOutputStream()) { // standardize , normalize it's good! believe me =-=
 			out.write(json.toString().getBytes(StandardCharsets.UTF_8));
 			out.flush();
 			// out.close();
 			// TWR don't need close :)
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

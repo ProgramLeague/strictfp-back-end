@@ -5,12 +5,11 @@ import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 import tool.Constant;
 import tool.VerifyAccount;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,56 +38,64 @@ public class CheckCert extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(
-			@NotNull HttpServletRequest req,
-			@NotNull HttpServletResponse resp)
-			throws ServletException, IOException {
-		resp.setHeader("Cache-Control", "no-cache");
-		resp.setHeader("Expires", "Tue, 17 Aug 1926 08:00:00");
-		resp.setHeader("Pragma", "no-cache");
+	protected void doPost(@NotNull HttpServletRequest req, @NotNull HttpServletResponse resp) {
 		// init
-		ServletOutputStream sos = resp.getOutputStream();
 		Base64.Decoder decoder = Base64.getDecoder();
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();
-		// get info
-		String username = new String(
-				decoder.decode(req.getParameter("uname")),
-				StandardCharsets.UTF_8
-		);
-		String email = new String(
-				decoder.decode(req.getParameter("email")),
-				StandardCharsets.UTF_8
-		);
-		String zhihu_username = new String(
-				decoder.decode(req.getParameter("zhihu")),
-				StandardCharsets.UTF_8
-		);
-		String github_username = new String(
-				decoder.decode(req.getParameter("github")),
-				StandardCharsets.UTF_8
-		);
-		String stackoverflow_username = new String(
-				decoder.decode(req.getParameter("stackoverflow")),
-				StandardCharsets.UTF_8
-		);
-		String brief = new String(
-				decoder.decode(req.getParameter("brief")),
-				StandardCharsets.UTF_8
-		);
-		String introduce = new String(
-				decoder.decode(req.getParameter("introduce")),
-				StandardCharsets.UTF_8
-		);
-		// verify info
-		verify(username, email, zhihu_username, github_username, stackoverflow_username, brief, introduce);
-		status.put("code", String.valueOf(HttpServletResponse.SC_OK));
-		status.put("message", "verify user info successfully");
-		jsonObject.put("meta", status);
-		jsonObject.put("data", errorMessage);
-		sos.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
-		sos.flush();
-		sos.close();
+		try {
+			// resp.setHeader("Cache-Control", "no-cache");
+			// resp.setHeader("Expires", "Tue, 17 Aug 1926 08:00:00");
+			// resp.setHeader("Pragma", "no-cache");
+			// get info
+			String username = new String(
+					decoder.decode(req.getParameter("uname")),
+					StandardCharsets.UTF_8
+			);
+			String email = new String(
+					decoder.decode(req.getParameter("email")),
+					StandardCharsets.UTF_8
+			);
+			String zhihu_username = new String(
+					decoder.decode(req.getParameter("zhihu")),
+					StandardCharsets.UTF_8
+			);
+			String github_username = new String(
+					decoder.decode(req.getParameter("github")),
+					StandardCharsets.UTF_8
+			);
+			String stackoverflow_username = new String(
+					decoder.decode(req.getParameter("stackoverflow")),
+					StandardCharsets.UTF_8
+			);
+			String brief = new String(
+					decoder.decode(req.getParameter("brief")),
+					StandardCharsets.UTF_8
+			);
+			String introduce = new String(
+					decoder.decode(req.getParameter("introduce")),
+					StandardCharsets.UTF_8
+			);
+			// verify info
+			verify(username, email, zhihu_username, github_username, stackoverflow_username, brief, introduce);
+			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
+			status.put("message", "verify user info successfully");
+			jsonObject.put("meta", status);
+			jsonObject.put("data", errorMessage);
+		} catch (Exception e) {
+			LoggerFactory.getLogger(CheckCert.class).error("Exception thrown: ", e);
+			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
+			status.put("message", "verify user info failed");
+			jsonObject.put("meta", status);
+			jsonObject.put("data", Constant.JSON.EMPTY_OBJECT);
+		}
+		try (ServletOutputStream sos = resp.getOutputStream()) {
+			sos.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
+			sos.flush();
+			sos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void verify(
