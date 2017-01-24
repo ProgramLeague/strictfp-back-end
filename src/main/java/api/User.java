@@ -32,6 +32,7 @@ public class User extends HttpServlet {
 			@NotNull HttpServletRequest req,
 			@NotNull HttpServletResponse resp
 	) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		String name = req.getParameter("name");
 		JSONObject jsonObject = new JSONObject();
 		Map<String, String> status = new HashMap<>();

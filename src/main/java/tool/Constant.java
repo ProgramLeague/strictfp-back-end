@@ -25,8 +25,10 @@ public class Constant {
 	static {
 		PADDING = "_";
 		DATABASE_HOST = "localhost";
+		PATH_TO_BLOCK_LIST = "res\\block_list.txt";
 	}
 
 	public static final String PADDING;
 	public static final String DATABASE_HOST;
+	public static final String PATH_TO_BLOCK_LIST;
 }

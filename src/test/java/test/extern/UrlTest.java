@@ -1,5 +1,6 @@
 package test.extern;
 
+import db.DangerousWebsiteList;
 import org.jetbrains.annotations.TestOnly;
 import org.junit.Test;
 
@@ -19,6 +20,6 @@ public class UrlTest {
 	@Test
 	@TestOnly
 	public void testUrlToString() throws MalformedURLException {
-		System.out.println(new URL("https://github.com").toString());
+		DangerousWebsiteList.getInstance();
 	}
 }

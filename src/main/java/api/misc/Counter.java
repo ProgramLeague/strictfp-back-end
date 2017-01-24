@@ -19,6 +19,8 @@ public class Counter extends HttpServlet {
 			@NotNull HttpServletRequest req,
 			@NotNull HttpServletResponse resp
 	) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		String counterPoolId = req.getParameter("counterpool");
 		String counterId = req.getParameter("counterid");

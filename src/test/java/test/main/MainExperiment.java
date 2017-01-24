@@ -1,6 +1,7 @@
 package test.main;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  * Created by Eldath on 2017/1/21 0021.
@@ -12,8 +13,10 @@ public class MainExperiment {
 	// 绝对不准弄Test！！！
 	// 好好好 你牛逼你牛逼
 	public static void main(String[] args) throws IOException {
-		String test = "A.labnc";
-		System.out.println(test.charAt(0));
-		System.out.println(test.substring(2, test.length()));
+		String name = "www.baidu.com";
+		InetAddress[] addresses = InetAddress.getAllByName(name);
+		for (int i = 0; i < addresses.length; i++) {
+			System.out.println(name + "[" + i + "]: " + addresses[i].getHostAddress());
+		}
 	}
 }
