@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static tool.Tools.forceRun;
+
 /**
  * Translated from Frice-Engine
  * Created by ice1000 on 2016/8/20.
@@ -27,10 +29,8 @@ public class Configurations {
 	public Configurations(@NotNull File file) {
 		this.file = file;
 		properties = new Properties();
-		try {
-			properties.load(new FileInputStream(file));
-		} catch (IOException ignored) {
-		}
+		if (!file.exists()) forceRun(file::createNewFile);
+		forceRun(() -> properties.load(new FileInputStream(file)));
 	}
 
 	public Configurations(@NotNull @NonNls String file) {
