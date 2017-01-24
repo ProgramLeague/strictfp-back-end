@@ -25,15 +25,8 @@ public class MySqlAdapter implements
 	@NotNull
 	@NonNls
 	private static final String DEFAULT_URL =
-			"jdbc:mysql://" + Constant.SERVER.DATABASE_HOST + ":3306/" +
+			"jdbc:mysql://" + Constant.SERVER.DATABASE_HOST + ":" + Constant.SERVER.DATABASE_PORT + "/" +
 					Constant.SERVER.DATABASE_NAME + "?serverTimezone=UTC";
-	@NotNull
-	@NonNls
-	private static final String user = "root";
-
-	@NotNull
-	@NonNls
-	private static final String password = "root";
 
 	@NotNull
 	private final Statement statement;
@@ -44,7 +37,8 @@ public class MySqlAdapter implements
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, Constant.SERVER.DATABASE_USERNAME,
+					Constant.SERVER.DATABASE_PASSWORD);
 			connection.setAutoCommit(false);
 			statement = connection.createStatement();
 		} catch (Exception e) {
