@@ -16,7 +16,7 @@ public class VerifyAccountTest {
 		// test Zhihu
 		System.out.println("VerifyAccountTest start");
 		assertEquals(true, VerifyAccount.getInstance().verifyZhihuAccount("ice1000"));
-		assertEquals(false, VerifyAccount.getInstance().verifyZhihuAccount("BIASjgguay8723"));
+		assertEquals(false, VerifyAccount.getInstance().verifyZhihuAccount("fu-qian-yi-55"));
 		assertEquals(true, VerifyAccount.getInstance().verifyZhihuImportance("ice1000"));
 		System.out.println("└─Finish test Zhihu");
 		// test GitHub
