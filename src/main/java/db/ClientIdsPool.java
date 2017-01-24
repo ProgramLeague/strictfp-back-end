@@ -1,6 +1,8 @@
 package db;
 
 import db.obj.ClientIds;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -10,7 +12,9 @@ import java.util.HashMap;
  * @author Eldath
  */
 public class ClientIdsPool {
+	@NotNull
 	private HashMap<String, ClientIds> clientIdsMap = new HashMap<>();
+	@Nullable
 	private static ClientIdsPool instance = null;
 
 	public static ClientIdsPool getInstance() {

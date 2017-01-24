@@ -59,7 +59,7 @@ public class MySqlAdapter implements
 	}
 
 	@Override
-	public boolean insert(
+	public synchronized boolean insert(
 			@NotNull @NonNls String tableName,
 			@NotNull @NonNls String... value) {
 		// TODO unsafe , needs to be fixed - phosphorus15
@@ -74,7 +74,7 @@ public class MySqlAdapter implements
 	}
 
 	@Override
-	public boolean update(
+	public synchronized boolean update(
 			@NotNull @NonNls String tableName,
 			@NotNull Pair[] after,
 			@Nullable Pair... where) {
