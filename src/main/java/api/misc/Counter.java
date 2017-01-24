@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Eldath on 2017/1/21 0021.
@@ -30,16 +32,21 @@ public class Counter extends HttpServlet {
 		String counterPoolId = req.getParameter("counterpool");
 		int counterId = Tools.getValidNumber(req.getParameter("counterid"));
 		boolean operation = "+1s".equals(req.getParameter("op"));
+		Map<String, String> status = new HashMap<>();
 		if ("WR".equals(action)) {
 			DatabaseOperator.plus1s(counterId, operation);
+			resp.setStatus(HttpServletResponse.SC_OK);
+			// finished!
 		} else if ("RD".equals(action)) {
 			Article article = DatabaseOperator.getArticle(new Pair("Id", "=" + counterId));
 			// response
 			if (article == null) {
 				// return error message: article not found!
+				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			} else {
 				// return up or down
 				// operation ? article.getUp() : article.getDown();
+				resp.setStatus(HttpServletResponse.SC_OK);
 			}
 		}
 	}
