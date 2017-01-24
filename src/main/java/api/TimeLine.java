@@ -73,7 +73,7 @@ public class TimeLine extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			// return error messages
 		}
-		// FIXME 非测试时移去注释
+		// FIXME 非测试时移去注释 （配合Configuration System把这里设计的合理一点 - 磷）
 		// response.setContentType("application/json"); // specific content type
 		try (ServletOutputStream out = response.getOutputStream()) { // standardize , normalize it's good! believe me =-=
 			out.write(json.toString().getBytes(StandardCharsets.UTF_8));
