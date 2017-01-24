@@ -3,6 +3,7 @@ package api.misc;
 import db.DangerousWebsiteList;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 import tool.Constant;
 
 import javax.servlet.ServletException;
@@ -11,9 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 
@@ -64,30 +68,50 @@ public class SafeCheck extends HttpServlet {
 		// init
 		HashMap<String, String> status = new HashMap<>();
 		JSONObject jsonObject = new JSONObject();
+		JSONObject language = new JSONObject();
 		try {
 			String host = new URL(new String(Base64.getDecoder().decode(
 					req.getParameter("url")), StandardCharsets.UTF_8))
 					.getHost();
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "hazard query success");
-			if (DangerousWebsiteList.getInstance().isDanger(host)) {
-				jsonObject.put("en", EN_VERSION);
-				jsonObject.put("zh_CN", ZH_CN_VERSION);
+			// check if is danger
+			boolean isDanger = false;
+			ArrayList<String> allIP = getAllIP(host);
+			for (String thisIP : allIP) {
+				isDanger = DangerousWebsiteList.getInstance().isDanger(thisIP);
+				if (isDanger) break;
+			}
+			// build JSONObject
+			if (isDanger) {
+				language.put("en", EN_VERSION);
+				language.put("zh_CN", ZH_CN_VERSION);
 			} else {
-				jsonObject.put("en", "Jumping now...");
-				jsonObject.put("zh_CN", "正在跳转... ...");
+				language.put("en", "Jumping now...");
+				language.put("zh_CN", "正在跳转... ...");
 			}
 			jsonObject.put("meta", status);
+			jsonObject.put("data", language);
 			resp.setStatus(HttpServletResponse.SC_OK);
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
+			LoggerFactory.getLogger(SafeCheck.class).error("Exception was thrown", e);
 			status.put("code", String.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
-			status.put("message", "url invalid");
+			status.put("message", "exception was thrown");
 			jsonObject.put("data", Constant.JSON.EMPTY_OBJECT);
 			jsonObject.put("meta", status);
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		try (ServletOutputStream os = resp.getOutputStream()) {
 			os.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
+			os.flush();
 		}
+	}
+
+	private ArrayList<String> getAllIP(String host) throws UnknownHostException {
+		ArrayList<String> ips = new ArrayList<>();
+		InetAddress[] addresses = InetAddress.getAllByName(host);
+		for (InetAddress thisInetAddress : addresses)
+			ips.add(thisInetAddress.getHostAddress());
+		return ips;
 	}
 }

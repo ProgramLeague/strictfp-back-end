@@ -7,6 +7,5 @@ package test.servlet;
  */
 public class AllServletTest {
 	public static void main(String[] args) {
-		//FIXME 用JUnit把这个全API测试写了（注意一定断言）
 	}
 }
