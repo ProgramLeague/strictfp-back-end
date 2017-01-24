@@ -48,6 +48,12 @@ jar {
 	}
 }
 
+war {
+	manifest {
+		attributes 'Main-Class': 'main.MainServer'
+	}
+}
+
 jacocoTestReport {
 	reports {
 		xml.enabled true

@@ -20,13 +20,18 @@ public class Constant {
 	public static final class SERVER {
 		static {
 			DATABASE_HOST = "localhost";
-			DATABASE_NAME = "jpXlFuhuWzzFfHThrYsD";
+			DATABASE_NAME = "strictfp";
+			DATABASE_PORT = "3306";
+			DATABASE_PASSWORD = "root";
+			DATABASE_USERNAME = "root";
 		}
 
-		public static final int SERVER_PORT = 8888; //DEVELOPING USE, WHEN PUBLISH, CHANGE IT TO 80. - Akari
-
+		public static final int SERVER_PORT = 80;
 		public static final String DATABASE_NAME;
 		public static final String DATABASE_HOST;
+		public static final String DATABASE_PORT;
+		public static final String DATABASE_PASSWORD;
+		public static final String DATABASE_USERNAME;
 	}
 
 	static {
