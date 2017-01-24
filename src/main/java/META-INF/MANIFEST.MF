@@ -23,4 +23,3 @@ Class-Path: json-20160810.jar slf4j-log4j12-1.7.22.jar javax.activatio
  etty-plus-9.4.0.v20161208.jar jetty-continuation-9.4.0.v20161208.jar 
  jetty-jmx-9.4.0.v20161208.jar jetty-io-9.4.0.v20161208.jar
 Main-Class: main.MainServer
-

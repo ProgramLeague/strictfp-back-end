@@ -12,11 +12,6 @@ public class Constant {
 	public static final class JSON {
 		static {
 			EMPTY_OBJECT = new JSONObject();
-			//TODO: add string _ as PADDING. - Akari
-			// frog? I don't understand what does 'PADDING' mean.
-			// +1s
-			//啊呀，PADDING就是那个占位符_啊。。这个东西听说大有用途。 - Akari
-			// advice accepted - Eldath
 		}
 
 		public static final JSONObject EMPTY_OBJECT;
@@ -25,13 +20,19 @@ public class Constant {
 	public static final class SERVER {
 		static {
 			DATABASE_HOST = "localhost";
-			DATABASE_NAME = "jpXlFuhuWzzFfHThrYsD";
+			DATABASE_NAME = "strictfp";
+			DATABASE_PORT = "3306";
+			DATABASE_PASSWORD = "root";
+			DATABASE_USERNAME = "root";
 		}
 
 		public static final int SERVER_PORT = 80;
 
 		public static final String DATABASE_NAME;
 		public static final String DATABASE_HOST;
+		public static final String DATABASE_PORT;
+		public static final String DATABASE_PASSWORD;
+		public static final String DATABASE_USERNAME;
 	}
 
 	static {
