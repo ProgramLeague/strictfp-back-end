@@ -22,13 +22,23 @@ public class Constant {
 		public static final JSONObject EMPTY_OBJECT;
 	}
 
+	public static final class SERVER {
+		static {
+			DATABASE_HOST = "localhost";
+			DATABASE_NAME = "jpXlFuhuWzzFfHThrYsD";
+		}
+
+		public static final int SERVER_PORT = 233;
+
+		public static final String DATABASE_NAME;
+		public static final String DATABASE_HOST;
+	}
+
 	static {
 		PADDING = "_";
-		DATABASE_HOST = "localhost";
 		PATH_TO_BLOCK_LIST = "res\\block_list.txt";
 	}
 
 	public static final String PADDING;
-	public static final String DATABASE_HOST;
 	public static final String PATH_TO_BLOCK_LIST;
 }

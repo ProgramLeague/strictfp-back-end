@@ -25,7 +25,8 @@ public class MySqlAdapter implements
 	@NotNull
 	@NonNls
 	private static final String DEFAULT_URL =
-			"jdbc:mysql://" + Constant.DATABASE_HOST + ":3306/" + Constant.DATABASE_NAME + "?serverTimezone=UTC";
+			"jdbc:mysql://" + Constant.SERVER.DATABASE_HOST + ":3306/" +
+					Constant.SERVER.DATABASE_NAME + "?serverTimezone=UTC";
 	@NotNull
 	@NonNls
 	private static final String user = "root";
