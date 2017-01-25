@@ -19,14 +19,15 @@ public class Constant {
 
 	public static final class SERVER {
 		static {
-			DATABASE_HOST = "localhost";
-			DATABASE_NAME = "strictfp";
-			DATABASE_PORT = "3306";
-			DATABASE_PASSWORD = "root";
-			DATABASE_USERNAME = "root";
+			SERVER_PORT = Integer.parseInt(Configurations.getSharedInstance().query("SERVER_PORT"));
+			DATABASE_HOST = Configurations.getSharedInstance().query("DATABASE_HOST");
+			DATABASE_NAME = Configurations.getSharedInstance().query("DATABASE_NAME");
+			DATABASE_PORT = Configurations.getSharedInstance().query("DATABASE_PORT");
+			DATABASE_PASSWORD = Configurations.getSharedInstance().query("DATABASE_PASSWORD");
+			DATABASE_USERNAME = Configurations.getSharedInstance().query("DATABASE_USERNAME");
 		}
 
-		public static final int SERVER_PORT = 80;
+		public static final int SERVER_PORT;
 		public static final String DATABASE_NAME;
 		public static final String DATABASE_HOST;
 		public static final String DATABASE_PORT;
