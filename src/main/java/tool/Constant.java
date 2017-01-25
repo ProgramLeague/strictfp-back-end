@@ -37,7 +37,7 @@ public class Constant {
 
 	static {
 		PADDING = "_";
-		PATH_TO_BLOCK_LIST = "res/block_list.txt";
+		PATH_TO_BLOCK_LIST = Configurations.getSharedInstance().query("PATH_TO_BLOCK_LIST");
 	}
 
 	public static final String PADDING;

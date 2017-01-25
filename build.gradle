@@ -1,5 +1,5 @@
 group 'tech.program-league'
-version '1.0-SNAPSHOT'
+version '0.0.1-Pre-Alpha'
 
 apply plugin: 'java'
 apply plugin: 'jacoco'

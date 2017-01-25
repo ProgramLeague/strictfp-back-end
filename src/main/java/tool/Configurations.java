@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
@@ -30,7 +31,11 @@ public class Configurations {
 
 	@NotNull
 	public static Configurations getSharedInstance() {
-		if (sharedInstance == null) sharedInstance = new Configurations();
+		if (sharedInstance == null) try {
+			sharedInstance = new Configurations();
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 		return sharedInstance;
 	}
 
@@ -39,7 +44,7 @@ public class Configurations {
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
-	public Configurations() {
+	public Configurations() throws MalformedURLException {
 		this(new File("./res/config.properties"));
 	}
 
