@@ -40,3 +40,5 @@ build/
 .idea/dataSources/
 .idea/dictionaries/
 logs/
+/src/main/java/db/config/config.properties
+/src/main/java/tool/config/config.properties

@@ -4,6 +4,7 @@ import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tool.config.ConfigLoader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,7 +46,7 @@ public class Configurations {
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public Configurations() throws MalformedURLException {
-		this(new File("./res/config.properties"));
+		this(ConfigLoader.class.getResource("config.properties").getFile());
 	}
 
 	public Configurations(@NotNull File file) {
