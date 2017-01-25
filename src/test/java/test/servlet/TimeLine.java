@@ -17,7 +17,7 @@ public class TimeLine {
 	@Test
 	@TestOnly
 	public void test() throws IOException {
-		Connection con = Jsoup.connect("http://localhost/api/v0/timeline")
+		Connection con = Jsoup.connect("http://localhost:40000/strictfp/timeline")
 				.data("start", "2017-01-01")
 				.data("end", "2017-01-02").timeout(8000);
 		Document doc = con.get();
