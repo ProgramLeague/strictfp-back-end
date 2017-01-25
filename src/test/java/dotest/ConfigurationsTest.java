@@ -26,7 +26,7 @@ public class ConfigurationsTest {
 	@Test
 	public void query() throws Exception {
 		insert();
-		Configurations configurations = new Configurations("save.txt");
+		Configurations configurations = new Configurations("res/config.conf");
 		assertEquals("Eldath", configurations.query("name"));
 		assertEquals("Have sex with ice1000", configurations.query("dream"));
 	}

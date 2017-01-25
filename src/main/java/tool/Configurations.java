@@ -23,9 +23,22 @@ import static tool.Tools.forceRun;
 public class Configurations {
 	@NotNull
 	private final File file;
+	@NotNull
 	private final Properties properties;
+	@Nullable
+	private static Configurations sharedInstance;
+
+	@NotNull
+	public static Configurations getSharedInstance() {
+		if (sharedInstance == null) sharedInstance = new Configurations();
+		return sharedInstance;
+	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
+	public Configurations() {
+		this("res/config.conf");
+	}
+
 	public Configurations(@NotNull File file) {
 		this.file = file;
 		properties = new Properties();
