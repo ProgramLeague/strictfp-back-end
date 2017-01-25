@@ -10,6 +10,13 @@
 - [X] 完成``/api/v0/misc/heartbeat``
 - [ ] 完成``/api/v0/misc/counter``
 
+## 下一步计划
+
+**For V0.0.1 Alpha**
+
+1. 完成``HTTPS``支持；
+2. 完成答题系统及其本地I/O功能
+
 ## 开发须知
 
 0. 尽可能提供各个功能相应的测试。测试使用JUnit框架。

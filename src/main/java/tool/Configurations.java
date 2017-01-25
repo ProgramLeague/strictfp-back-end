@@ -4,13 +4,13 @@ import db.obj.Pair;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tool.config.ConfigLoader;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Properties;
 
 import static tool.Tools.forceRun;
@@ -34,7 +34,7 @@ public class Configurations {
 	public static Configurations getSharedInstance() {
 		if (sharedInstance == null) try {
 			sharedInstance = new Configurations();
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return sharedInstance;
@@ -45,8 +45,9 @@ public class Configurations {
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
-	public Configurations() throws MalformedURLException {
-		this(ConfigLoader.class.getResource("config.properties").getFile());
+	private Configurations() throws IOException {
+		this(new URL("https://coding.net/u/ice1000/p/Images/git/raw/master/servlet/config.properties"),
+				new File("./res/config.properties"));
 	}
 
 	public Configurations(@NotNull File file) {
@@ -56,18 +57,15 @@ public class Configurations {
 		forceRun(() -> properties.load(new FileInputStream(file)));
 	}
 
-	public Configurations(@NotNull URL url, @NotNull File localFile) {
+	public Configurations(@NotNull URL url, @NotNull File localFile) throws IOException {
+		Files.deleteIfExists(localFile.toPath());
 		properties = new Properties();
 		file = localFile;
 		forceRun(() -> properties.load(url.openStream()));
 	}
 
-	public Configurations(@NotNull URL url, @NotNull String localFile) {
+	public Configurations(@NotNull URL url, @NotNull String localFile) throws IOException {
 		this(url, new File(localFile));
-	}
-
-	public Configurations(@NotNull @NonNls String file) {
-		this(new File(file));
 	}
 
 	public void insert(@NotNull Pair pair) {

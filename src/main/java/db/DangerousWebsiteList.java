@@ -1,10 +1,8 @@
 package db;
 
 import org.slf4j.LoggerFactory;
-import tool.Constant;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -25,12 +23,14 @@ public class DangerousWebsiteList {
 	}
 
 	private DangerousWebsiteList() {
-		try (BufferedReader br = Files.newBufferedReader(Paths.get(Constant.PATH_TO_BLOCK_LIST))) {
-			String thisLine;
-			while ((thisLine = br.readLine()) != null)
+		try {
+			ArrayList<String> strings = new ArrayList<>(Files.readAllLines(Paths.get(
+					new URI("https://coding.net/u/ice1000/p/Images/git/raw/master/servlet/block_list.txt"
+					))));
+			for (String thisLine : strings)
 				list.add(thisLine);
-		} catch (IOException e) {
-			LoggerFactory.getLogger(DangerousWebsiteList.class).error("IO exception:", e);
+		} catch (Exception e) {
+			LoggerFactory.getLogger(DangerousWebsiteList.class).error("Exception:", e);
 		}
 	}
 

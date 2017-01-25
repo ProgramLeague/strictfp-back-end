@@ -42,8 +42,7 @@ public class MySqlAdapter implements
 			connection.setAutoCommit(false);
 			statement = connection.createStatement();
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("cannot connect to the database!");
+			throw new RuntimeException("cannot connect to the database!", e);
 		}
 	}
 
