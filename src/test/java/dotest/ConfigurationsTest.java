@@ -13,14 +13,13 @@ import static org.junit.Assert.assertEquals;
 public class ConfigurationsTest {
 	@Test
 	public void insert() throws Exception {
-		Configurations configurations = new Configurations("res/config.conf");
-		configurations.insert("DATABASE_HOST", "localhost");
-		configurations.insert("DATABASE_NAME", "strictfp");
-		configurations.insert("DATABASE_PORT", "3306");
-		configurations.insert("DATABASE_PASSWORD", "root");
-		configurations.insert("DATABASE_USERNAME", "root");
-		configurations.insert("SERVER_PORT", "30000");
-		configurations.insert("PATH_TO_BLOCK_LIST", "res/block_list.txt");
+		Configurations.getSharedInstance().insert("DATABASE_HOST", "localhost");
+		Configurations.getSharedInstance().insert("DATABASE_NAME", "strictfp");
+		Configurations.getSharedInstance().insert("DATABASE_PORT", "3306");
+		Configurations.getSharedInstance().insert("DATABASE_PASSWORD", "root");
+		Configurations.getSharedInstance().insert("DATABASE_USERNAME", "root");
+		Configurations.getSharedInstance().insert("SERVER_PORT", "30000");
+		Configurations.getSharedInstance().insert("PATH_TO_BLOCK_LIST", "res/block_list.txt");
 	}
 
 	@Test
