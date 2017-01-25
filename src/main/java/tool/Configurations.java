@@ -6,9 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tool.config.ConfigLoader;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
@@ -34,7 +32,7 @@ public class Configurations {
 	public static Configurations getSharedInstance() {
 		if (sharedInstance == null) try {
 			sharedInstance = new Configurations();
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return sharedInstance;
@@ -45,8 +43,8 @@ public class Configurations {
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
-	public Configurations() throws MalformedURLException {
-		this(ConfigLoader.class.getResource("config.properties").getFile());
+	public Configurations() throws IOException {
+		this(ConfigLoader.class.getResourceAsStream("./config.properties"));
 	}
 
 	public Configurations(@NotNull File file) {
@@ -68,6 +66,11 @@ public class Configurations {
 
 	public Configurations(@NotNull @NonNls String file) {
 		this(new File(file));
+	}
+
+	public Configurations(@NotNull InputStream is) throws IOException {
+		properties = new Properties();
+		properties.load(is);
 	}
 
 	public void insert(@NotNull Pair pair) {

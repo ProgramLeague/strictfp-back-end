@@ -1,4 +1,4 @@
-package dotest;
+package test;
 
 import org.junit.Test;
 import tool.Configurations;
