@@ -16,6 +16,7 @@ public class ConfigurationsTest {
 		Configurations.getSharedInstance().insert("DATABASE_HOST", "localhost");
 		Configurations.getSharedInstance().insert("DATABASE_NAME", "strictfp");
 		Configurations.getSharedInstance().insert("DATABASE_PORT", "3306");
+		System.out.println(Configurations.getSharedInstance().query("DATABASE_PORT"));
 		Configurations.getSharedInstance().insert("DATABASE_PASSWORD", "root");
 		Configurations.getSharedInstance().insert("DATABASE_USERNAME", "root");
 		Configurations.getSharedInstance().insert("SERVER_PORT", "30000");
@@ -25,9 +26,9 @@ public class ConfigurationsTest {
 	@Test
 	public void query() throws Exception {
 		insert();
-		Configurations configurations = new Configurations("res/config.conf");
-		assertEquals("Eldath", configurations.query("name"));
-		assertEquals("Have sex with ice1000", configurations.query("dream"));
+		Configurations configurations = Configurations.getSharedInstance();
+		assertEquals("3306", configurations.query("DATABASE_PORT"));
+//		assertEquals("Have sex with ice1000", configurations.query("dream"));
 	}
 
 }
