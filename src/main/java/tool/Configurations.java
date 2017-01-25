@@ -36,7 +36,7 @@ public class Configurations {
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public Configurations() {
-		this(new File(System.getProperty("user.dir") + "/res/config.conf"));
+		this(new File("./res/config.properties"));
 	}
 
 	public Configurations(@NotNull File file) {

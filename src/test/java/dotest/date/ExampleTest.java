@@ -1,4 +1,4 @@
-package test.date;
+package dotest.date;
 
 import org.junit.Test;
 

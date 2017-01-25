@@ -37,7 +37,7 @@ public class Constant {
 
 	static {
 		PADDING = "_";
-		PATH_TO_BLOCK_LIST = "res\\block_list.txt";
+		PATH_TO_BLOCK_LIST = "res/block_list.txt";
 	}
 
 	public static final String PADDING;

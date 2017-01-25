@@ -17,7 +17,7 @@ public class User {
 	@Test
 	@TestOnly
 	public void test() throws IOException {
-		Connection con = Jsoup.connect("http://localhost:233/api/v0/user").data("name", "\"Eldath\"").timeout(80000);
+		Connection con = Jsoup.connect("http://localhost:40000/api/v0/user").data("name", "\"Eldath\"").timeout(80000);
 		Document doc = con.get();
 		System.out.println(doc.text());
 	}
