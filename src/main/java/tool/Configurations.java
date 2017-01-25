@@ -50,10 +50,14 @@ public class Configurations {
 		forceRun(() -> properties.load(new FileInputStream(file)));
 	}
 
-	public Configurations(@NotNull URL url) {
+	public Configurations(@NotNull URL url, @NotNull File localFile) {
 		properties = new Properties();
-		file = null;
+		file = localFile;
 		forceRun(() -> properties.load(url.openStream()));
+	}
+
+	public Configurations(@NotNull URL url, @NotNull String localFile) {
+		this(url, new File(localFile));
 	}
 
 	public Configurations(@NotNull @NonNls String file) {
