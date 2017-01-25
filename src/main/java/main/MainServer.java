@@ -12,6 +12,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tool.Constant;
 
 /**
@@ -23,8 +25,12 @@ import tool.Constant;
  */
 @SuppressWarnings("WeakerAccess")
 public class MainServer {
+	private static Logger logger = LoggerFactory.getLogger(MainServer.class);
+
 	public static void main(@NotNull @NonNls String[] args) throws Exception {
 		PropertyConfigurator.configure(System.getProperty("user.dir") + "/log4j.properties");
+		logger.warn("StrictFP | Back-end");
+		logger.info("StrictFP Back-end is now running...");
 		Server server = new Server(Constant.SERVER.SERVER_PORT);
 		ServletContextHandler context =
 				new ServletContextHandler(ServletContextHandler.SESSIONS);

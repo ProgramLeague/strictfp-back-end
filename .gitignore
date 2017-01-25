@@ -19,6 +19,7 @@
 hs_err_pid*
 reports
 .gradle/
+res/config.conf
 .idea/libraries
 /.idea/workspace.xml
 /.idea/modules/strictfp-back-end_main.iml
