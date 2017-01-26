@@ -1,6 +1,7 @@
 group 'tech.program-league'
 version '0.0.1-Pre-Alpha'
 
+apply plugin: 'maven'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'war'
@@ -11,6 +12,23 @@ targetCompatibility = 1.8
 repositories {
 	jcenter()
 	mavenCentral()
+}
+
+task writeNewPom {
+	doLast {
+		pom {
+			project {
+				inceptionYear '2017'
+				licenses {
+					license {
+						name 'GNU GENERAL PUBLIC LICENSE, Version 2.0'
+						url 'https://www.gnu.org/licenses/gpl-2.0.txt'
+						distribution 'repo'
+					}
+				}
+			}
+		}.writeTo("$projectDir/pom.xml")
+	}
 }
 
 dependencies {
