@@ -29,6 +29,10 @@ public class QuizFormPool {
 		}
 	}
 
+	public HashMap<String, QuizForm> getAllQuizForm() {
+		return quizFormArrayList;
+	}
+
 	public QuizForm getQuizForm(@NotNull String name) {
 		return quizFormArrayList.get(name);
 	}

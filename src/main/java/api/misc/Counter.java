@@ -3,9 +3,9 @@ package api.misc;
 import db.DatabaseOperator;
 import db.obj.Article;
 import db.obj.Pair;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 import tool.Constant;
 import tool.Tools;
 
@@ -30,7 +30,6 @@ public class Counter extends HttpServlet {
 			@NotNull HttpServletRequest req,
 			@NotNull HttpServletResponse resp
 	) throws ServletException, IOException {
-		//FIXME 测试我就不写了，锅丢给冰冰~
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
@@ -44,10 +43,8 @@ public class Counter extends HttpServlet {
 			resp.setStatus(HttpServletResponse.SC_OK);
 			status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 			status.put("message", "operation successful");
-			status.put("extra", Constant.JSON.EMPTY_OBJECT);
-			status.put("security", Constant.JSON.EMPTY_OBJECT);
-			response.put("meta",status);
-			response.put("data",Constant.PADDING);
+			response.put("meta", status);
+			response.put("data", Constant.PADDING);
 			// finished!
 		} else if ("RD".equals(action)) {
 			Article article = DatabaseOperator.getArticle(new Pair("Id", "=" + counterId));
@@ -57,33 +54,28 @@ public class Counter extends HttpServlet {
 				status.put("message", "article not found");
 				status.put("extra", Constant.JSON.EMPTY_OBJECT);
 				status.put("security", Constant.JSON.EMPTY_OBJECT);
-				response.put("meta",status);
-				response.put("data",Constant.PADDING);
+				response.put("meta", status);
+				response.put("data", Constant.PADDING);
 				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			} else {
 				status.put("code", String.valueOf(HttpServletResponse.SC_OK));
 				status.put("message", "article found successfully");
-				status.put("extra", Constant.JSON.EMPTY_OBJECT);
-				status.put("security", Constant.JSON.EMPTY_OBJECT);
-				response.put("meta",status);
+				response.put("meta", status);
 				JSONObject inter = new JSONObject();
-				inter.put("value",operation?article.getUp():article.getDown());
-				response.put("data",inter);
+				inter.put("value", operation ? article.getUp() : article.getDown());
+				response.put("data", inter);
 				resp.setStatus(HttpServletResponse.SC_OK);
 			}
 		}
+		status.put("extra", Constant.JSON.EMPTY_OBJECT);
+		status.put("security", Constant.JSON.EMPTY_OBJECT);
 		// FIXME 非测试时移去注释 （配合Configuration System把这里设计的合理一点 - 磷）
 		// response.setContentType("application/json"); // specific content type
-		try (ServletOutputStream out = resp.getOutputStream()) { // standardize , normalize it's good! believe me =-=
+		try (ServletOutputStream out = resp.getOutputStream()) {
 			out.write(response.toString().getBytes(StandardCharsets.UTF_8));
 			out.flush();
-		}catch (IOException e){
-			e.printStackTrace();
+		} catch (IOException e) {
+			LoggerFactory.getLogger(Counter.class).error("IOException thrown: ", e);
 		}
-	}
-
-	@Contract(pure = true)
-	private int doReadCounter() {
-		return 0;
 	}
 }

@@ -17,6 +17,7 @@ repositories {
 task writeNewPom {
 	doLast {
 		pom {
+			//noinspection GroovyAssignabilityCheck
 			project {
 				inceptionYear '2017'
 				licenses {

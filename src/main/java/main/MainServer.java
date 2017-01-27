@@ -1,9 +1,10 @@
 package main;
 
-import api.Test;
 import api.TimeLine;
 import api.User;
 import api.auth.CheckCert;
+import api.misc.Counter;
+import api.misc.GetQuiz;
 import api.misc.Heartbeat;
 import api.misc.SafeCheck;
 import org.apache.log4j.PropertyConfigurator;
@@ -38,10 +39,11 @@ public class MainServer {
 		server.setHandler(context);
 		server.setStopAtShutdown(true);
 		// 像下面这行一样
+		context.addServlet(new ServletHolder(new GetQuiz()), "/misc/getquiz");
 		context.addServlet(new ServletHolder(new TimeLine()), "/timeline");
+		context.addServlet(new ServletHolder(new Counter()), "/misc/counter");
 		context.addServlet(new ServletHolder(new User()), "/user");
 		context.addServlet(new ServletHolder(new Heartbeat()), "/misc/heartbeat");
-		context.addServlet(new ServletHolder(new Test()), "/test");
 		context.addServlet(new ServletHolder(new SafeCheck()), "/misc/safecheck");
 		context.addServlet(new ServletHolder(new CheckCert()), "/auth/check_cert");
 		//
